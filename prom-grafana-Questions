@@ -1,4 +1,17 @@
 Prometheus Questions
+
+Prometheus Working== node-exporter give metrics---store on tsb-- share data with grfana-- gafana shows on dashboards-- alerts send
+Pull metrics from targets via node exportes.
+Store metrics in a time-series database.
+Evaluate alerts using predefined rules and forward to AlertManager.
+
+Grafana Working
+Connect data sources (e.g., Prometheus, InfluxDB).
+Visualize metrics using panels (graphs, tables).
+Trigger alerts based on thresholds and send notifications.
+
+
+
 What is Prometheus?
 A monitoring tool for collecting and querying time-series metrics.
 
