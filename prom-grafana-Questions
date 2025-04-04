@@ -1,0 +1,33 @@
+Prometheus Questions
+What is Prometheus?
+A monitoring tool for collecting and querying time-series metrics.
+
+What is PromQL?
+A query language for retrieving metrics from Prometheus.
+
+How does Prometheus collect data?
+It uses a pull-based model to scrape metrics from targets.
+
+What is AlertManager in Prometheus?
+It handles alerts and sends notifications based on rules.
+
+What are exporters in Prometheus?
+Tools that expose metrics from external systems for scraping.
+
+Grafana Questions
+What is Grafana?
+A visualization tool for creating dashboards from multiple data sources.
+
+How does Grafana integrate with Prometheus?
+Prometheus is added as a data source to visualize metrics.
+
+What are Grafana panels?
+Panels are visualization components in Grafana dashboards.
+
+How do you set up alerts in Grafana?
+Alerts are configured on panels based on thresholds or conditions.
+
+Can Grafana work without Prometheus?
+Yes, it supports other data sources like InfluxDB and Elasticsearch.
+
+These short answers are ideal for quick reference or interview preparation.
