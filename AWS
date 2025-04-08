@@ -1,0 +1,51 @@
+Elastic IP (EIP):
+EIP is region-specific.
+You can attach it even when the instance is running, so stopping the instance is not required.
+Requires Instance ID and Private IP from the instance.
+All machines or IPs in one VPC can communicate with each other within that VPC without internet, even if they are on different subnets.
+
+VPC:
+VPC is a private space within a cloud computing platform where you can securely run your applications and store data while having full control over the network and access permissions.
+Maximum 5 VPCs per region.
+Maximum 5 Elastic IPs per region.
+Once a VPC is created, you cannot change its CIDR block.
+Subnets within a VPC cannot overlap.
+
+Subnet:
+Short for "subnetwork," it is a smaller logical division of an IP network.
+Enhances network security by isolating different parts of a network, limiting the scope of potential security breaches, and providing better control over network access.
+Public subnet's traffic is routed to an Internet Gateway (IGW) via IP tables.
+Private subnet uses NAT for internet access (no IGW).
+Allowed block sizes are between /16 to /28.
+
+Reserved Subnet IPs:
+First four and last IP addresses of a subnet cannot be assigned:
+10.0.0.0: Network address.
+10.0.0.1: Reserved by AWS for the VPC router.
+10.0.0.2: Reserved by AWS as the IP address of the DNS server.
+10.0.0.3: Reserved for future use.
+10.0.0.255: Broadcast address.
+######################
+
+# Load Balancer Interview Notes
+
+# How to Load Balance Traffic:
+ With LB: Use a Load Balancer.
+ Without LB: Use Route 53's DNS failover feature to route traffic based on health checks.
+
+# Route 53 DNS Failover:
+ Automatically routes traffic away from unhealthy resources to healthy ones by monitoring the health of endpoints.
+
+# What is a Load Balancer and Types:
+ Load Balancer (LB): Distributes incoming traffic among multiple servers to prevent overload.
+ Application Load Balancer (ALB): Layer 7, supports host-based and path-based routing, ideal for microservices.
+ Network Load Balancer (NLB): Layer 4, handles high-performance TCP/UDP traffic with low latency.
+ Classic Load Balancer (CLB): Legacy option for basic load balancing across EC2 instances.
+
+# What is ELB:
+ ELB evenly distributes incoming traffic among servers for high availability.
+
+# Difference Between Internet-Facing and Internal ELB:
+ Internet-Facing ELB: Publicly accessible, routes traffic from the internet to backend targets, has public IPs/DNS names.
+ Internal ELB: Accessible only within the VPC, designed for internal applications, has private IPs/DNS names.
+
