@@ -1,0 +1,147 @@
+NOTES OF ABOVE ALL
+
+
+
+PROJECT—-ENV—-STAGE
+
+System Message==This message will be displayed at the top of the Jenkins main page. This can be useful for posting notifications to your users
+
+# of executors== no of job that can simultanaously run
+
+plugin configuration  == in CONFUGURE SYSTEM
+
+TOOL SATHI == GLOBAL TOOL CONF=== PLUGIN.JENKINS.IO..... HYA WEBSITE VAR PLUGIN MILATAT
+
+SECURITY—-CREATE USER & THEN
+MNG ROLES—
+CRED == CREDENTIAL VAR PERMISION
+AGENT == NODE VAR ACCESS
+JOB=  SAME
+RUN= SAME
+
+
+
+BUILD TRIGGER
+
+1) B T remotely—-
+-Build Authorization Token Root (BATR plugin  )
+-add token in build trigger section
+-plugin.jenkins.io——here serch above plugin—on that plugin we get URL in which u change JOBNAME & TOKEN NAME
+-curl url ——can be used in shell script or via command to run remotely
+
+2) B Affter other project build— give old pipeline name here so after that this job will run.
+
+3) Build periodically== H/15 * * * * =every 15 min
+
+4) poll SCM== H/15 * * * *
+                 same as above but it checks gitfor given time but triggers only if code is changed on git.
+
+5) git hook trigger== webhook
+
+
+
+#ENV VARS
+MNG JENKINS — SYSTEM — GLOBAL VARIABLE —ENV —-
+YACHYAT  ALL JOBS LA LAGNARE VARS DETA YETAT
+
+
+PARAMETERE===
+-USED ADD ENV VAR
+-USE TO GIVE RUN TIME VALUE BY USER
+-ABOVE STRING PARAMETER GIVEN
+-THEN BOOLEAN PARA WHERE
+ DEFAULT VALUE =TICK KELI =TRUE
+DEFAULT VALUE =TICK NAHI=FALSE GHETO
+
+1 STRING  eg. ${       }   this can beuse to fetch value in job like in terra
+2  BOOLEAN eg—above image TICK==True, UNTICK=False
+3 CHOICE
+4 PASSWORD PARA
+5 MULTILINE STRING
+6 FILE PARA—ssh+kubeconfig  uses
+
+
+TIMEOUT—
+BUILD ENV  —ABORT BUILD IF 
+Jenkins मध्ये timeout म्हणजे कामाची वेळ मर्यादित करणे, ज्यामुळे जर एखादे काम निश्चित वेळेत पूर्ण झाले नाही तर ते थांबवले जाते.
+
+BUILD ENV==ADD TIMESTAMP —टाइमस्टॅम्प म्हणजे विशिष्ट वेळ  दर्शवणारा डेटा.
+
+pipelinename—-general—-Execute concurrent builds if necessary==
+               same job che anek build start hotat (max executors set kelat tevde salag build suru hotat)
+
+pipelinename—-general—-retry count—3 ==
+           जर Git कोड पुल करताना त्रुटी आली, तर "retry" मध्ये दिलेल्या वेळेनुसार पुन्हा प्रयत्न करता.
+eg. git url wrong , jenkins not connect to git  then it will try  3 times to connect git  if 3 given in retry count. then give error in logs
+
+pipelinename—-general—-TROTTLE BUILD—
+         TIME / NO. OF BUILD == TIME AFTER WHICH NEXT BUILD CAN START
+          Eg. img made 1 minute divided by 3 == 20 sec so if 1st build start now then after every 20 sec  u can go for 2nd build
+
+
+single command —-
+  sh ' date'
+
+multiple commands—-
+sh '''
+date
+pwd
+whoami
+'''
+
+
+gaurav gyan 42 vid
+         jar file kontya build che ahe tyala tya build cha number dya mhanje ky error ala tar kalel.
+
+
+
+
+parameters {
+string (                     name: 'person',    defaultValue: 'Saurav Sharma',    description: "Who are you?")
+
+booleanParam(    name: 'isMale',     defaultValue: true,                            description: "hi")
+
+choice(                     name: 'City',          choices: ['Jaipur', 'Pune'],                description: "hi")
+}
+
+
+##paraname (name: '             ' ,  defaultValue/choices:                   , description:'           ')
+
+
+
+
+input{
+message  "                  "      #message  "   HA PROMPT AS QUESTION DISATO     "   
+ok "                "                     ok "   ITHE LIHALELE +  ABORT — U CAN SELECT     "
+}
+
+
+
+post{
+always{}
+success{}
+failure{}
+}
+
+
+master-slave agent setup
+master var jenkins taka
+slave var java , mvn ...taka
+shh-keygen kara  —- kontyahi node var
+pvt key jenkins-console var taka
+public key slavechya authorised_keys mde taka
+
+
+Number of executors—-2
+              maximum number of concurrent builds that Jenkins may perform on this node
+
+Remote root directory—- /home/ubuntu/opt/jenkins
+               - folder on slave node, 
+               -give that folder chmod755 /opt/jenkins
+
+
+LABELS—-
+                - Labels (or tags) are used to group multiple agents into one logical group.eg=O.S(linux/window) , CPU(large/medium/small)
+
+java available==
+alternavives —config java
