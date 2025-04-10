@@ -1,0 +1,133 @@
+
+
+
+chmod
+usermod -aG G U
+chown U G
+
+ system configuration Linux     —    /etc
+
+7. What is Pull requests?
+Pull Requests:
+             DEVELOPERS— IN  GitHub  feature for proposing  and merging code changes.
+
+MANAGER / SENIOR DEVELOPER —code review, suggest changes or errors to be fix, integration of changes.
+
+Workflow: Branch, make changes, create PR, review, merge.
+
+
+git remote set -url https://<token>@<url>
+
+ git config===name and email
+
+git commit==snapshot of the changes and stores them in the Git repository's history. 
+
+
+
+ Stored in ~/.gitconfig.
+Set global user name:
+git config --global user.name "Global User"
+git config --global user.email "global@example.com"
+
+
+git pull
+— to update your local repository with changes made by others on the remote repo
+
+git fetch 
+—-Purpose: Downloads the latest metadata (commits, branches, tags) from the remote repository.
+Functionality: It retrieves updates from the remote but does not modify your working directory or current branch. This allows you to review changes before deciding to merge them into your local branch.
+
+
+git status:
+ current state of the repository, including
+ tracked and 
+untracked files, and 
+any changes to be committed.
+
+
+git log’: 
+  history of commits in the repository
+ commit messages,
+ authors, dates, and
+ commit IDs.
+
+
+forking is copying
+
+ git merge when you want to
+1— PRESERVE COMPLETE HISTORY 
+creates extra commit
+
+ git rebase when you want 
+1—clean,LINEAR HISTORY without merge commits,
+
+
+
+check after git merge …where merging is correctly or not?
+
+—Perform the Merge:
+git checkout main
+git merge feature-branch
+
+—Check the Merge Status:
+git status
+If there are no conflicts, Git will complete the merge and display a success message.
+
+—Review the Commit History:
+git log --graph --oneline --all
+
+Example output:
+*   abcdef1 (HEAD -> main) Merge branch 'feature-branch'
+|\
+| * 1234567 (feature-branch) Feature commit
+* | abcdef0 Previous commit
+
+—Inspect the Working Directory:
+git status
+Ensure there are no remaining conflicts or unmerged files.
+
+
+release branch
+          - dedicated branch created from the development branch to prepare for a software release, allowing for final testing and bug fixes while preventing new feature additions
+          - merged back into the main branch and the develop branch, and it is typically tagged with a version number.
+           -then release branch gets deleted.
+
+hotfix branch
+            Hotfix branches are created from the main branch to quickly fix critical bugs in production.
+
+
+
+git tag= 
+
+label on particular commit
+2 types —1 annotated  2 simple
+
+git show <tagname>
+Example: git show v1.0
+This command displays the details of the commit that the specified tag points to, including the commit message and changes.
+
+git tag <tagname>
+Example: git tag v1.0
+
+git reset = used to undo changes in a Git repo
+git reset commit-id  ==git reset —mixed commit-id
+delete above commits after this but changes are in working dir
+git reset —soft commit-id
+delete above commits after this but changes are in staging area
+git reset —hard commit-id
+delete above commits after this but changes are removed from stage and working area both
+Use caution with --hard, as it permanently discards uncommitted changes.
+
+
+git revert <commit-id>
+##sudo it creates new commit
+####it puts head on before commit to id in command
+##no direct impact on the remote repository until the changes are pushed——git push <remote> <branch>
+safe for public branches since it does not rewrite history
+If conflicts arise during the revert process, they must be resolved before pushing the changes to the remote repository 
+It is advisable to communicate with your team before reverting commits that have been pushed, especially in collaborative environments
+
+
+
+
+
