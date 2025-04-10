@@ -29,15 +29,14 @@ BUILD TRIGGER
 -plugin.jenkins.io——here serch above plugin—on that plugin we get URL in which u change JOBNAME & TOKEN NAME
 -curl url ——can be used in shell script or via command to run remotely
 
-2) B Affter other project build— give old pipeline name here so after that this job will run.
+2) Build periodically== H/15 * * * * =every 15 min
 
-3) Build periodically== H/15 * * * * =every 15 min
-
-4) poll SCM== H/15 * * * *
+3) poll SCM== H/15 * * * *
                  same as above but it checks gitfor given time but triggers only if code is changed on git.
 
-5) git hook trigger== webhook
+4) git hook trigger== webhook
 
+5) B Affter other project build— give old pipeline name here so after that this job will run.
 
 
 #ENV VARS
