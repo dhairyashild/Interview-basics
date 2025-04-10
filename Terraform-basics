@@ -1,0 +1,432 @@
+terraform {                                    #TBBKRD
+  backend "s3" {
+    bucket
+
+aws_s3_bucket
+ bucket= 
+acl=
+versioning {
+server_side_encryption_configuration {
+
+aws_dynamodb_table
+
+resource "random_id" "server" {
+  byte_length = 8
+}
+
+resource "aws_s3_object" "object" {
+  bucket = aws_s3_bucket.example.id
+  key    = "ganja"
+  source = "C:/Users/dhair/OneDrive/Desktop/TERRAFORM/S3/backend.tf"
+
+
+4—Environment Variables:
+-export TF_VAR_filename="pet.txt"
+
+unset aws_access_key_id    # removes it
+
+
+calling variable value
+ instance_type = var.instance_types[0]    OR
+${var.username[0]}                 # change index number if list isthere
+
+
+rsource "GitHub_repository" "myrepo"
+
+filename = "${path.module}/foo.bar"
+
+resource "tls_private_key" "rsa-4096-example" {
+
+
+
+
+resource "local_file" "foo" {
+  content  =  tls_private_key.rsa-4096-example.private_key_pem####COPY NAME FROM ABOVE AND ADD private_key_pem
+  filename = "pvt_key"              # filename = "${path.module}/foo.bar" —-this was line which i copy from terra
+}
+
+
+resource "aws_key_pair" "deployer" {
+public_key_openssh ----shevati lava
+
+terraform taint aws_instance.myinstance
+
+user_data = base64encode(<<-EOF  
+user_data = file("${path.module}/script.sh")
+check logs (e.g., /var/log/cloud-init.log) on the instance for troubleshooting.
+
+${path.module}       ========== same folder
+
+snap install kubectl --classic
+
+provider "aws" {
+  alias  = "us_west"
+  region = "us-west-2"
+}
+
+resource "aws_instance" "east_instance" {
+  ami           = "ami-12345678"
+  instance_type = "t2.micro"
+  provider      = aws.us_east                      ###add provider = aws.ALIAS   # no alpviram         
+}
+
+terraform.lock.hcl         ## delete this file if want to update provider version
+
+Create a New Profile:
+aws configure --profile [profile_name]
+List All Profiles:
+cat ~/.aws/credentials
+Use a Specific Profile:
+aws s3 ls --profile [profile_name]
+Set Default Profile Temporarily:
+export AWS_PROFILE=[profile_name]
+Check Current Profile:
+echo $AWS_PROFILE
+
+If you want to delete an instance without —target
+-Remove from State: 
+terraform state rm aws_instance.example["instance_key"]
+Replace "instance_key" with the key of the instance you want to remove.
+-Apply Changes:
+terraform apply
+
+
+.tf code test
+terratest 
+tflint
+
+terraform module registry == public  registry where provider and community share modules
+
+terra destroy --target=aws_instance.myec2
+
+terra for infra
+ansible for configuration and service
+
+TERRA BLUE GREEN DEPLOYMENT===
+-ADD 2 TG 
+-1 FOR BLUE INFRA
+-2 FOR GREEN INFRA SERVER
+-3 SWITCH
+
+multicloud==
+need provider for each cloud
+and creds
+
+junior deletes statefiel
+import every resource
+create again terra aply
+When using remote state, Terraform does not maintain a local state file by default. 
+Instead, it stores the state information in a remote data store, which can be accessed by multiple users or systems. 
+However, you can still pull the state locally if needed using the terraform state pull command, but this is typically for temporary access or manual modifications.
+
+
+MY ERROR IN 
+COUNT—- i use var.name to get number insead of giving direct value like 3 
+FOR_EACH —- i use list(string) instead of set(string) / map(string)
+- to pull its value i use var.name instead of each value
+
+
+give name -1  name-2 name-3 must be with count angument---
+name= "name-${count.index+1}  " 
+ ####+1 add so number start from 1 not 0. and need ${}
+
+count =4
+filename= var.filename[count.index]            
+or
+count =length(var.filename)
+filename= var.filename[count.index]
+
+resource "null_resource" " {}
+trigger {id= timestamp()}           # instance id
+provisioner
+-run 1 st only then run only if trigger value changes
+- Null means resource does not exists on any cloud aws, azure gcp ....
+- execute shell , ansible playbook , local m/c commands
+
+
+TERRA IMPORT
+
+SINGLE RESOUREC===
+disaster recovery
+1——-resource "aws_instance" "example" {}
+2——--terraform import aws_instance.example i-1234567890abcdef0
+3——Verify State: After importing, run terraform plan
+-single resource import
+
+MULTIPLE==
+1—-import {
+  to = "aws_instance.example_ec2"
+  id = "i-0abcd1234efgh5678"  # Replace with your EC2 instance ID
+}
+2———-RESOURCE BLOCKS
+resource "aws_instance" "example_ec2" {}
+3———-terraform plan -generate-config-out=ImportResources.tf
+4 Review the Generated Configuration: ImportResources.tf
+5 copy code into main.tf from ImportResources.tf if u want
+6 Deleting ImportResources.tf after verification and running terraform apply ensures that your infrastructure remains consistent without duplicating resource definitions
+7 terraform apply -auto-approve
+
+key        = "path/to/your/${terraform.workspace}/terraform.tfstate"
+
+<<EOT                    CORRECT
+<<---EOT                 NO NEED HYPHEN
+
+KEY PAIR===
+resource "aws_key_pair" "deployer" {
+resource "tls_private_key" "rsa-4096-example" {
+resource "local_file" "foo" {
+
+
+vpc_security_group_ids:   launching instances in a non-default VPC.
+terraform taint aws_instance.myinstance
+it will mark this ec2 as tainted mean damaged and recreate it again when u teraform apply command agin 
+use this in dev stage mostly
+Undo: Use terraform untaint <resource_name>
+
+
+user_data = file("${path.module}/script.sh")
+user_data = file("script.sh")
+ABOVE BOTH CODELINES SAME
+
+
+resource "aws_instance" "web" {
+  ami             = data.aws_ami.ubuntu.id
+  instance_type   = "t2.micro"
+  key_name        = aws_key_pair.deployer.key_name
+  security_groups = [aws_security_group.allow_tls.id]
+  tags = {
+    Name = "jenkins"
+  }
+  provisioner "file" {
+  source      = "C:/users/dhair/Downloads/ganja"
+  destination = "/home/ubuntu/ganja"
+
+  connection {
+    type     = "ssh"
+    user     = "ubuntu"
+    # private_key_pem = "C/users/dhair/Downloads/terraform-key.pem"  
+    private_key =  file("C:/users/dhair/Downloads/terraform-key.pem")  
+    host     = self.public_ip
+  }
+}
+
+provisioner "remote-exec" {
+  inline = [
+    "sudo apt-get update -y",
+    "sudo apt-get install docker.io -y",
+  ]
+  connection {
+    type        = "ssh"
+    user        = "ubuntu" # Assuming a standard Ubuntu AMI
+    private_key = "/c/Users/dhair/Downloads/terraform-key.pem" # Adjust path if needed
+    host        = self.public_ip
+  }
+}
+  subnet_id = aws_subnet.pub_sub_2.id
+}
+
+
+ERROR SOLUTION----
+file provisioner made
+1--  GIVE   C:/        everywhere to get file from pc root
+2-- destination = "/home/ubuntu/ganja"  --local la file nav kahihi aso pan /home/ubuntu/ nantar je dilay tyach name chi file banate ec2  var
+remote made
+1--  "              "   ,              Every command inverted commamade + end la comma
+
+
+
+
+
+
+
+
+### for copy local script , and run
+
+resource "aws_instance" "web" {
+  # ...
+
+  provisioner "file" {
+    source      = "script.sh"
+    destination = "/tmp/script.sh"
+  }
+
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /tmp/script.sh",
+      "/tmp/script.sh args",
+    ]
+  }
+}
+
+
+#inline == to give command direct
+
+#scripts== to give bash scripts start with #!/bin/bash
+
+
+
+
+
+
+string{"ajit1, aj2, wina}  alphanumeric
+number
+bool
+list——list(string) / list(number)
+map——map(string)  / map(number)
+set ==list but no duplicate value   —-set(string) / set(number)
+objects 
+tuple—-can use string, number, bool all datatype in combine with tuple
+
+
+SUMMERY OF RUNTIME VARIABLE 
+1) Command Line (-var, -var-file)=
+terraform apply -var="instance_type=t2.micro" ####LASTLA  -var= "x=y"
+2) *.auto.tfvars
+3) terraform.tfvars
+4) *.tfvar        (dev.tfvar)
+5) Environment Variables (export TF_VAR_instance_type=t2.micro)####export la no symbol
+
+
+
+
+state drifr and mv
+
+resource in AWS changed. How can you find out who did this?--- cloudtrail
+
+ou made a module. One Terraform code uses that module. But, now, you improved that module, but the "caller" code is not compatible with the new version of the module. How can you have both versions of the module in use?
+----- You can have verions on your modules
+
+
+why remote backend--
+state lock 
+security from hacker
+
+how multiple resource u  make
+before version .13 they use count
+but now they use for each
+
+Protect Sensitive Data: Mark variables (e.g., passwords, API tokens) as sensitive to prevent them from
+ appearing in CLI output or logs, reducing the risk of accidental exposure
+variable "db_password" {
+  type        = string
+  sensitive   = true
+}
+
+Why would you need "data" resources in Terraform?
+Answer: To refer to resources that already exists in AWS. For example, list of AMIs in a region.
+
+If you are asked to implement Terraform in a team or company where they have never used Terraform, what issues might you solve pre-emptively?
+Set standars and best practices before you start coding. 
+Also, you many want to import existing resources in Terraform before you start.
+
+You are going to deploy similar resources in Development, Staging and Prod environments. 
+no hard-coded variables and use .tfvars file per environment.
+
+Can a module call another module?
+Answer: Yes, it is not recommended
+
+Which folder caches module codes locally?
+Answer: .terraform
+
+
+What negative impact does it have if you remove .terraform folder?
+Answer: None. Terraform will simply download everything when you run terraform init command
+
+
+Does Terraform have built-in functions?
+Answer: Yes. Many. e.g. csvdecode.
+
+How can you pass csv an argument to a module?
+ Answer:  Use csvdecode function. That will read a csv file into a List of Maps. 
+You can pass that directly to a module that accepts List of Maps (One input Variable)
+
+
+Using Terraform , you have deployed 6 resources in AWS. However, a developer deleted on of them via AWS Console. Turns out that , that resource was not needed any way. How can you make your terraform code and terraform state sync up now?
+Answer: 1. terraform state rm resource_name &
+        2. remove the relevant part of the code that creates the deleted resource
+
+How would switch between versions of Terraform?
+Answer:
+  mac brew install tfenv
+  tfenv (switches between many versions super easily.)
+
+  There are other ways , as well (e.g. using containers and aliases)
+
+terraform fmt
+
+Terraform init command do?
+Answer: Pulls in any refernced modules
+
+Answer: Yes. tflint (open source)
+
+Answer: Yes. tfsec
+
+
+How do you upgrade the version or providers and plugins and modules?
+Answer: terraform init -upgrade
+
+terraform apply. What will happen?
+Answer: terraform will run terraform plan anyway before running terraform apply
+
+Besides terraform.tfvars file, which other files does terraform load for variable values?
+Answer: *.auto.tfvars
+
+
+create ssh key using terraform:
+ tls_private_key
+
+. What is "Dynamic Block" in Terraform?
+Answer: It is kind of like a for loop.
+
+
+During terraform plan , a resource is successful (i.e. there are no issues with terraform plan),
+but fails during provisioning (i.e. during "apply") , what happens to the resource in terraform state?
+Answer: It is marked as "tainted"
+
+user is using terraform version 0.11 or above?
+Answer
+terraform { required_version = "~> 0.11" }
+
+Can you use filter inside a data block?
+Answer: Yes.
+
+
+Which will tell terraform to look for all module source lines and retrieves the module codes and report errors if can't find them ?
+Answer: terraform get
+
+
+If a null resource takes no action, what could possibly a use case for it?
+null has trigger which made it  special
+any changes to the contents of the Kubernetes config file or Kubernetes YAML
+ will cause the command to rerun.
+
+
+You want to run terraform plan. However, you want to point to a non-default state file. How?
+Answer: -state=PATH
+
+If you want 2 identical aws provider sections, then you have use :
+ Answer:  alias keyword on the 2nd one.
+
+Where is local copy of the modules saved?
+Answer: .terraform folder
+
+
+Is there way to automatically create a Readme.md file based on your terraform code?
+Answer:  terraform-docs markdown . >> README.md
+  terraform-docs is an open source tool.
+
+
+Which workspace do you work in by default?
+Answer: default
+100. How do you know which workspaces you have in the first place?
+Answer: terraform workspace list
+
+
+
+
+
+
+
+
+
+
