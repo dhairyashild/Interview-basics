@@ -1,0 +1,102 @@
+SonarQube
+              -  is an open-source platform for continuous inspection of code quality.
+               - It supports static code analysis to find bugs,code smells &security  vulnerabilities  in various 
+programming languages.
+
+###Why Use SonarQube?
+ Improves code quality
+ Detects security vulnerabilities.
+ identifies potential security risks such as SQL injection( attacker can manipulate SQL 
+queries executed by  app) and hardcoded credentials...
+
+###SonarQube Components
+1) SonarQube Server:
+manages the UI,
+Default Path: /opt/sonarqube/
+port=9000
+
+2) SonarQube Scanner:
+      - tool that performs static code analysis and sends results back to server.
+      - static code analysis==scans codebase for issues such as bugs, vulnerabilities, and code smells
+
+3) SonarQube Database: 
+       PostgreSQL ha sang    , MySQL, or Oracle
+
+###install sonar requirements
+-2 GB of RAM
+-Install Java
+-Create the sonaradmin user
+-Open port 9000 for SonarQube
+ IP:9000
+
+##jenkins
+Plugins -> Install 'SonarQube Scanner'
+add a new SonarQube server with its URL and authentication token
+
+stages {
+ stage('Code Analysis') {
+ steps {
+ withSonarQubeEnv('SonarQube') {                  ###this line automatic gets token
+ sh 'mvn clean verify sonar:sonar'
+ }
+
+###Quality profiles
+          collections of rules that define coding standards and best practices for a specific programming language.
+1. Default Profiles:
+       Each language has a default Quality Profile, often named "Sonar way," which cannot be edited.
+2 Customization:
+       Users can create custom Quality Profiles by copying the default profile
+       We can make custome profile set as default
+
+###QUALITY GATES
+                                     checkpoint in a project to ensure specific quality criteria are met before moving to the next phase, preventing issues and ensuring standards.
+There is deafult quality gate 
+create new gates 
+add condition
+Dupliacte line 1st condition
+adding bugs and vulnerabilty condn
+apply it to project
+
+###security
+Enable ldap
+sso authentication
+
+
+Security -->users
+Create user
+First he was not authorized to access to login
+go security -----> global permisiion u can add user level permission
+So add group level permssion go security ---. Group ----> any user added will be by default 
+sonar-users(default) 
+group created 
+add members 
+add analysers members to dev group
+go security ----> group level permisiion add whatever permission
+
+10. Troubleshooting Common Issues
+• Scanner Fails with Memory Issues: Increase the Xmx memory allocation for the scanner:
+export SONAR_SCANNER_OPTS="-Xmx512m"
+
+• Database Connectivity Issues: Check database settings in sonar.properties and 
+verify the database is running.
+
+
+
+
+
+
+
+
+devops shack sonarqube advanced extra points
+
+-sonarqube community edition perform code check on only 1 branch only.
+It is designed to analyze only one branch at a time, and it treats all analyses as if they are for the "main branch." This means:
+If you analyze a feature branch, the results will overwrite the previous analysis from the main branch (or any other branch you analyzed earlier).
+
+###to work with sonar u need 2 things 
+1) server-url  
+SYSTEM——— add sonarserverurl:9000  /  lb:9000 if on k8s
+
+ 2) credentials
+on sonar-server—-security—-token—-add this token
+SYSTEM——— add server-authentication-token—-as secret text(sonar-token)
