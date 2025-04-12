@@ -421,7 +421,9 @@ Answer: default
 100. How do you know which workspaces you have in the first place?
 Answer: terraform workspace list
 
-
+# Terraform graph 
+terraform graph -type=apply | dot -Tpng -o graph.png
+terraform graph -type=apply | dot -Tpdf -o graph.pdf
 
 
 
