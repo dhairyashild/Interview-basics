@@ -1,0 +1,6 @@
+               .war                                                                      .JAR
+
+.war: Typically associated with monolithic applications.                         .jar: Commonly used for microservices.
+
+require full application server (like Tomcat or Jetty)                            Smaller  docker images
+within the Docker image, leading to larger image sizes
