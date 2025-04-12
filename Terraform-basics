@@ -1,4 +1,4 @@
-terraform {                                    #TBBKRD
+terraform {                             #TBBKRD    # cant use variable in provider block as it starts 1 st in code then vars
   backend "s3" {
     bucket
 
