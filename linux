@@ -14,6 +14,7 @@ journalctl -u docker.service
 
 
 EBS =Disk Storage
+lsblk
 df -h
 du -sh /path/to/directory
 
