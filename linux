@@ -15,6 +15,10 @@ journalctl -u docker.service
 
 EBS =Disk Storage
 lsblk
+sudo file -s /dev/xvdbz   ----(/dev/xvdbz: data   ==mean no filesystem)   /    (/dev/xvdbz: linux .....   ==mean fs is already created)
+sudo mkfs -t ext4 /dev/xvdbz     ----create fs ot type ext4
+sudo mount /dev/xvdbz /home/ubuntu/myebs
+resize2fs /dev/xvdbz      ----for only increase ebs   ---(growpart /dev/xvdbz  ---apply this if u increase root ebs)
 df -h
 du -sh /path/to/directory
 
