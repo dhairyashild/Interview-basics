@@ -425,6 +425,104 @@ Answer: terraform workspace list
 terraform graph -type=apply | dot -Tpng -o graph.png
 terraform graph -type=apply | dot -Tpdf -o graph.pdf
 
+#####################################################
+link-    https://livingdevops.com/devops/20-scenario-based-terraform-questions-with-answers-for-devops-interviews/
+
+
+corrupted state file?
+# if s3 exists
+-s3  = If using remote state storage like S3, you can restore from a previous version.
+
+# If no s3 backup exists:
+-terraform refresh  ==Run terraform refresh to update state with real infrastructure state
+-terraform import ==Use terraform import to bring existing resources back under Terraform management
+
+
+
+How do I ensure I don’t accidentally delete something in Terraform?
+-prevent_destroy = true in lifecycle blocks to protect = critical resources
+-terraform plan = before applying and carefully review the planned changes, especially deletions. 
+-separate state files = For critical infrastructure,use separate state files & implement strict access controls by IAM roles
+-Set up mandatory code reviews in your CI/CD pipeline for any infrastructure changes.
+-##For our most critical infrastructure, we implement a “breakglass” procedure where emergency changes require approval from multiple team leads, and changes are tracked in a dedicated audit system.
+
+
+
+weekly automated drift detection job that:
+
+-terraform plan = Runs against all environments
+-terraform import/refresh =When manual changes are made, use terraform import to bring resources under Terraform management, or terraform refresh to update state.
+-documentation & report man changes to infra team via jira ==Sends reports of any drift to the infrastructure team
+-Generates Jira tickets for reconciliation of any manual changes
+-##Tracks drift metrics over time to identify problematic areas
+
+
+What are the benefits of organizing a Terraform project using modules/workspaces?
+module  ==code reuse
+
+w/s== 
+-code reuse and ensuring consistency.
+-multiple env (dev, staging, prod) with same code while 
+-keeping their states separate 
+
+-Our module structure typically follows:
+terraform/
+├── modules/
+│   ├── networking/
+│   ├── database/
+│   └── compute/
+├── environments/
+│   ├── dev/
+│   ├── staging/
+│   └── production/
+└── global/
+    ├── iam/
+    └── dns/
+
+
+ How do you manage secrets in Terraform?
+
+-External secret storage:
+ We use HashiCorp Vault or AWS Secrets Manager to store sensitive values, retrieving them at runtime using data sources
+-Sensitive marking: We use the sensitive = true attribute for outputs containing sensitive data.
+-CI/CD integration: Our pipeline securely injects secrets during deployment without persisting them.
+-Encrypted state: We ensure remote state is encrypted at rest using server-side encryption in S3 
+
+
+How do you implement multi-region, multi-account architecture in Terraform?
+
+1)  multi-region==Provider aliases handle multiple regions:
+
+provider "aws" {
+  region = "us-east-1"
+}
+provider "aws" {
+  alias  = "west"
+  region = "us-west-2"
+}
+
+2) multiple accounts: Assume role functionality manages 
+provider "aws" {
+  region = "us-east-1"
+  assume_role {
+    role_arn = "arn:aws:iam::ACCOUNT_ID:role/OrganizationAccountAccessRole"
+  }
+}
+
+#####################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
