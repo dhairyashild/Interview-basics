@@ -40,20 +40,20 @@ resource "tls_private_key" "rsa-4096-example" {                                 
 
 
 
-resource "local_file" "foo" {                                                                                                local_file
+resource "local_file" "foo" {                                                                                             local_file
 
   content  =  tls_private_key.rsa-4096-example.private_key_pem####COPY NAME FROM ABOVE AND ADD private_key_pem
   filename = "pvt_key"              # filename = "${path.module}/foo.bar" —-this was line which i copy from terra
 }
 
 
-resource "aws_key_pair" "deployer" {                                                                                      aws_key_pair
-public_key_openssh ----shevati lava                                                                                     public_key_openssh
+resource "aws_key_pair" "deployer" {                                                                                 aws_key_pair
+public_key_openssh ----shevati lava                                                                                  public_key_openssh
 
 terraform taint aws_instance.myinstance
 
 user_data = base64encode(<<-EOF  
-user_data = file("${path.module}/script.sh")                                                               file("${path.module}/script.sh")
+user_data = file("${path.module}/script.sh")                                                            file("${path.module}/script.sh")
 check logs (e.g., /var/log/cloud-init.log) on the instance for troubleshooting.
 
 ${path.module}       ========== same folder
@@ -65,7 +65,7 @@ provider "aws" {
   region = "us-west-2"
 }
 
-resource "aws_instance" "east_instance" {                                                                                  instance
+resource "aws_instance" "east_instance" {                                                                             instance
   ami           = "ami-12345678"
   instance_type = "t2.micro"
   provider      = aws.us_east                      ###add provider = aws.ALIAS   # no alpviram         
