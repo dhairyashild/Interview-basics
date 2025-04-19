@@ -2,7 +2,7 @@ terraform {                             #TBBKRD    # cant use variable in provid
   backend "s3" {
     bucket
 
-aws_s3_bucket
+aws_s3_bucket                                                                                   bucket
  bucket= 
 acl=
 versioning {
@@ -10,18 +10,18 @@ server_side_encryption_configuration {
 
 aws_dynamodb_table
 
-resource "random_id" "server" {
+resource "random_id" "server" {                                                                 random_id
   byte_length = 8
 }
 
-resource "aws_s3_object" "object" {
+resource "aws_s3_object" "object" {                                                              object
   bucket = aws_s3_bucket.example.id
   key    = "ganja"
   source = "C:/Users/dhair/OneDrive/Desktop/TERRAFORM/S3/backend.tf"
 
 
 4—Environment Variables:
--export TF_VAR_filename="pet.txt"
+-export TF_VAR_filename="pet.txt"                                                               export TF_VAR_
 
 unset aws_access_key_id    # removes it
 
@@ -31,28 +31,29 @@ calling variable value
 ${var.username[0]}                 # change index number if list isthere
 
 
-rsource "GitHub_repository" "myrepo"
+rsource "GitHub_repository" "myrepo"                                                           GitHub_repository
 
-filename = "${path.module}/foo.bar"
+filename = "${path.module}/foo.bar"                                                             "${path.module}/foo.bar"
 
-resource "tls_private_key" "rsa-4096-example" {
-
-
+resource "tls_private_key" "rsa-4096-example" {                                                  tls_private_key
 
 
-resource "local_file" "foo" {
+
+
+resource "local_file" "foo" {                                                                                                local_file
+
   content  =  tls_private_key.rsa-4096-example.private_key_pem####COPY NAME FROM ABOVE AND ADD private_key_pem
   filename = "pvt_key"              # filename = "${path.module}/foo.bar" —-this was line which i copy from terra
 }
 
 
-resource "aws_key_pair" "deployer" {
-public_key_openssh ----shevati lava
+resource "aws_key_pair" "deployer" {                                                                                      aws_key_pair
+public_key_openssh ----shevati lava                                                                                     public_key_openssh
 
 terraform taint aws_instance.myinstance
 
 user_data = base64encode(<<-EOF  
-user_data = file("${path.module}/script.sh")
+user_data = file("${path.module}/script.sh")                                                               file("${path.module}/script.sh")
 check logs (e.g., /var/log/cloud-init.log) on the instance for troubleshooting.
 
 ${path.module}       ========== same folder
@@ -64,7 +65,7 @@ provider "aws" {
   region = "us-west-2"
 }
 
-resource "aws_instance" "east_instance" {
+resource "aws_instance" "east_instance" {                                                                                  instance
   ami           = "ami-12345678"
   instance_type = "t2.micro"
   provider      = aws.us_east                      ###add provider = aws.ALIAS   # no alpviram         
