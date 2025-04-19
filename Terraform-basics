@@ -511,16 +511,28 @@ provider "aws" {
 }
 
 #####################################################
+### OLD NOTES POINTS FROM VPC 
+
+- ${   } =  interpolation karay he 2 lagat only
+
+SUBNET
+-availability_zone       = data.aws_availability_zones.available_zones.names[0]       --U add this in subnet 
+-map_public_ip_on_launch = true  / flase  --->Bydefault FALSE so as per public subnet true and pvt false  
+
+RT
+-pub rt with                 gateway_id = aws_internet_gateway.gw.id
+-pvt rt with                 gateway_id = aws_nat_gateway.example.id
+-cidr_block = "10.0.1.0/24"          #####  "0.0.0.0/0" kara for both nat amd igw 
 
 
+# To ensure proper ordering, it is recommended to add an explicit dependency
 
-
-
-
-
-
-
-
+VPC-- Add below 2 urself
+-enable_dns_hostnames = true
+-instance_tenancy     = "default" /"dedicated" / "hosts"  
+"default"-----VPC share physical hardware with other AWS customers with isolation
+"dedicated": all EC2 instances launched within this VPC will run on hardware dedicated solely to your AWS account.
+"host": launch EC2 instances onto Dedicated Hosts, which are physical servers fully dedicated to your use.
 
 
 
