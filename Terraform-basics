@@ -8,7 +8,7 @@ acl=
 versioning {
 server_side_encryption_configuration {
 
-aws_dynamodb_table
+aws_dynamodb_table                                                                              dynamodb_table
 
 resource "random_id" "server" {                                                                 random_id
   byte_length = 8
