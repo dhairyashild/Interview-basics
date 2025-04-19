@@ -535,7 +535,7 @@ VPC-- Add below 2 urself
 "host": launch EC2 instances onto Dedicated Hosts, which are physical servers fully dedicated to your use.
 
 
-
+-gateway_id = "aws_internet_gateway.gw.id"     ---whenever u get other resource name then put it in "double inverted comma"
 
 
 
