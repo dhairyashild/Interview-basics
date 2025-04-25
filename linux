@@ -1,3 +1,28 @@
+##################################                    TROUBLESHOOT               #################################
+1)  DISK SPACE FULL
+
+Check disk usage: 
+df -h 
+
+Find TOP 10 large files: 
+du -sh /* | sort -hr | head -10
+
+Clean Up Package Cache:-- [/var/cache/apt/archives/] dir grow large, especially if you frequently install and upgrade S/W.Commands delets .deb files download with s/w downloads.
+sudo apt clean
+
+Remove Unused Packages:
+sudo apt autoremove
+----------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------
 FINAL NOTES LINUX INTERVIEW
 PORTS OPEN
 lsof -i :8080
