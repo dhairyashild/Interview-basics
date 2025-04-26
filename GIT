@@ -24,11 +24,15 @@ git commit==snapshot of the changes and stores them in the Git repository's hist
 
 
 
- Stored in ~/.gitconfig.
+### Stored in ~/.gitconfig.
 Set global user name:
 git config --global user.name "Global User"
-git config --global user.email "global@example.com"
+git config --global user.name           === to check
+DHAIRYASHIL DESAI
 
+git config --global user.email "global@example.com"
+git config --global user.email
+dhairyashild300@gmail.com
 
 git pull
 — to update your local repository with changes made by others on the remote repo
