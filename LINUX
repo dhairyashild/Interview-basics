@@ -1,0 +1,144 @@
+##################################                    TROUBLESHOOT               #################################
+1)  DISK SPACE FULL
+
+Check disk usage: 
+df -h 
+
+Find TOP 10 large files: 
+du -sh /* | sort -hr | head -10
+
+Clean Up Package Cache:-- [/var/cache/apt/archives/] dir grow large, especially if you frequently install and upgrade S/W.Commands delets .deb files download with s/w downloads.
+sudo apt clean
+
+Remove Unused Packages:
+sudo apt autoremove
+----------------------------------------------------------------
+2)  High CPU Usage
+
+Identify culprit process: 
+top
+
+Kill process: 
+kill -9 <PID>                      # -9  = by force
+
+--------------------------------------------------
+1) Service Not Starting
+
+Check service logs: 
+sudo journalctl -xe | grep service-name 
+
+Restart the service: 
+sudo systemctl restart service-name
+------------------------------------------------
+4) Port Conflicts
+
+--Identify the conflicting process: 
+sudo netstat -tulnp | grep <port-number> 
+sudo lsof -i :<port>
+
+--Kill the process or reconfigure services.
+sudo kill -9 <PID>
+-------------------------------------------------------------------
+User Management Issues 
+
+--User Cannot Run sudo Commands 
+● user is not in the sudoers file error. 
+Solution= Add user to the sudo group: 
+sudo usermod -aG sudo username 
+
+--User Cannot Write to a Directory 
+● Permission denied error. 
+Solution: --Change ownership: 
+sudo chown username:groupname /path/to/directory 
+
+--Set proper permissions: 
+sudo chmod 755 /path/to/directory
+--------------------------------------------
+DOCKER ISSUES
+
+-docker logs container_id 
+-sudo systemctl restart docker 
+-docker system prune -a
+------------------------------------------------------------------------------------------------------------------------------------------
+FINAL NOTES LINUX INTERVIEW
+PORTS OPEN
+lsof -i :8080
+lsof
+sudo netstat -tuln | grep 8080
+
+
+find / -name "filename" 
+
+JOURNALCTL
+information from the system's service log files 
+sudo journalctl -u jenkins
+journalctl -u jenkins.service
+journalctl -u docker.service
+
+
+####################################
+                EBS =Disk Storage
+
+lsblk
+sudo file -s /dev/xvdbz   ----(/dev/xvdbz: data   ==mean no filesystem)   /    (/dev/xvdbz: linux .....   ==mean fs is already created)
+sudo mkfs -t ext4 /dev/xvdbz     ----create fs ot type ext4
+sudo mount /dev/xvdbz /home/ubuntu/myebs
+resize2fs /dev/xvdbz      ----for only increase ebs   ---(growpart /dev/xvdbz  ---apply this if u increase root ebs)
+df -h
+du -sh /path/to/directory
+#####################################
+                   RAM
+
+-ram = for t2.micro 1gb
+
+1) free -h            
+ -----------####  check LAST available=549 Mi is imp
+               total        used        free      shared  buff/cache   available
+Mem:           957Mi       407Mi       153Mi       932Ki       571Mi       549Mi
+
+
+2) cat /proc/meminfo
+MemTotal:         980376 kB
+MemFree:          156736 kB
+MemAvailable:     562876 kB    #### this is imp..  ---MemAvailable =MemFree + cache
+.....
+###########################################3
+                      CPU  (vCPU = 1 for t2.micro )
+
+nproc                   --------   give Vcpu 
+htop                    ---------   to check percentage usage of cpu
+################################################
+tar -cvzf archive.tar.gz file1 file2
+Creates a .tar.gz compressed archive containing file1 and file2.
+tar -cvzf archive.tar.gz directory_name
+Compresses an entire directory into a .tar.gz file.
+
+ tar cvzf archive.tar.gz /path/to/directory 
+tar xvzf archive.tar.gz
+
+
+zip archive.zip file1.txt file2.txt
+unzip archive.zip
+
+cat /etc/os-release
+
+ps -aux
+top
+kill  pid
+
+userdel devops  ——-> to delete user and delete related files
+
+groupdel devops
+
+ipconfig    /    ip a      ===give pvt ip that bind to ec2 pub ip
+
+free -h             —- ram
+lscpu               —-gives cpu 
+
+nginx
+apt-get install nginx -y
+service nginx status        ===active
+cd /var/www/html/index.html
+curl localhost             ===give welcome to nginx page code
+echo "welcome to my web" > index.html
+curl localhost             ===give welcome to my web
