@@ -1,11 +1,12 @@
 git clone pub-url
 git status
-git add .
+git add .                                                                                                 git restore --staged <file>
 git commit -m "message"
+git log --name-omly         ========= give commit id & file added with it no need other comand like log and other
 git remote add origin url   =========git remote -v  made disnara url hi command set karato
 git remote set-url https://token@url
 git push origin main 
-git pull o      m
+git pull origin main 
 
 
 
