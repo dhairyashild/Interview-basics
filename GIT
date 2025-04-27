@@ -1,11 +1,16 @@
+git clone pub-url
+git status
+git add .
+git commit -m "message"
+git remote add origin url   =========git remote -v  made disnara url hi command set karato
+git remote set-url https://token@url
+git push origin main 
+git pull o      m
 
 
 
-chmod
-usermod -aG G U
-chown U G
 
- system configuration Linux     —    /etc
+
 
 7. What is Pull requests?
 Pull Requests:
@@ -132,6 +137,8 @@ If conflicts arise during the revert process, they must be resolved before pushi
 It is advisable to communicate with your team before reverting commits that have been pushed, especially in collaborative environments
 
 
-
-
+chmod
+usermod -aG G U
+chown U G
+ system configuration Linux     —    /etc
 
