@@ -3,8 +3,13 @@ NOTES OF GAURAV SERIES ALL
 
 
 PROJECT—-ENV—-STAGE
+4vid-build quque and build executors status -- show job running or not 
 
-System Message==This message will be displayed at the top of the Jenkins main page. This can be useful for posting notifications to your users
+cat /etc/passwd   ------jenkins user we get , this made automatic from jenkins installation
+
+PIPE-NAME 11    =======he uper-right chya search box made taka -- direct tya n0. chya job var jato
+
+System Message==This mesesage will be displayed at the top of the Jenkins main page. This can be useful for posting notifications to your users
 
 # of executors== no of job that can simultanaously run
 
