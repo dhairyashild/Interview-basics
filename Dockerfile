@@ -32,3 +32,60 @@ ENV SPRING_PROFILES_ACTIVE=prod
 
 # Define the command to run the application
 CMD ["java", "-jar", "app.jar"]
+
+
+
+sudo usermod -aG docker $USER                ---permission denied error solved
+newgrp docker                                -- Force group changes to apply      
+groups                                      -------Verify user all groupnames
+
+
+
+
+
+# ===== CONTAINERS =====
+docker run -d -p HOST:CONTAINER --name <name> <image>  # Run detached + port mapping
+docker ps -a                  # List all containers
+docker stop <container>       # Stop container
+docker rm <container>         # Delete container
+docker logs -f <container>    # Tail logs
+docker exec -it <container> sh  # Enter shell
+
+
+
+# ===== VOLUMES =====
+docker volume ls              # List volumes
+docker volume rm <volume>     # Delete volume
+
+# ===== NETWORKING =====
+docker network ls             # List networks
+docker inspect <container> | grep IPAddress  # Get container IP
+
+# ===== SHORTCUTS =====
+docker stop $(docker ps -aq)  # Stop ALL containers
+docker rm $(docker ps -aq)    # Delete ALL containers
+
+
+docker network create mynet     # Create bridge network, then only below command work
+docker run --network=<network> <image>  # Run container in a network  
+
+-container on same network ping eachother with conr-name no need ip
+
+bridge: Default (isoled containers, internal IPs).
+host: Shares host’s network (no isolation, fast).
+none: No networking (for security/testing).
+overlay: For multi-host Swarm clusters.
+
+
+
+- Dockerfile - which layer u change command after that all layers created again before that layer only cached.
+
+
+
+
+
+
+
+
+
+
