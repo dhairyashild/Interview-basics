@@ -1,3 +1,13 @@
+                               ### devops pro notes
+
+.git = hidden with history and config
+git merge main                             ---------if remote main branch ahead than urs then use
+github---brache--new ---brach source(main) ==u can give which branch u want as base branch main or other
+PR ---NEW PR -- COMPARE CHANGES --- base=main(hechyat merge karto karan ha base)   & compare == hi merge karaychi ahe  --create PR
+git reset -- local env varach  -- it removes wrong files
+git revert -- github var NEW commit creates without deleting wrong commit
+-----------------------------------------------------------
+
 git clone pub-url
 git status
 git add .                                                                                                 git restore --staged <file>
@@ -34,6 +44,7 @@ git commit==snapshot of the changes and stores them in the Git repository's hist
 Set global user name:
 git config --global user.name "Global User"
 git config --global user.name           === to check
+git config --list
 DHAIRYASHIL DESAI
 
 git config --global user.email "global@example.com"
