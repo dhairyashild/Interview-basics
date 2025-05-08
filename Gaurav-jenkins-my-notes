@@ -150,6 +150,9 @@ LABELS—-
 java available==
 alternavives —config java
 
+# slave add"--
+java install
+remote directory must created before
 
 ## upstream and downstream jobs in jenkins
 
