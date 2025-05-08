@@ -149,3 +149,9 @@ LABELS—-
 
 java available==
 alternavives —config java
+
+
+## upstream and downstream jobs in jenkins
+
+- Upstream Job (1st job): A job that triggers another job.
+- Downstream Job (2nd job): A job that is triggered by another job.
