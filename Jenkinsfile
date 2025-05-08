@@ -25,3 +25,28 @@ pipeline {
         }
     }
 }
+
+###########################################################################################################################################
+
+## upstream and downstream jobs in jenkins
+
+- Upstream Job (1st job): A job that triggers another job.
+- Downstream Job (2nd job): A job that is triggered by another job.
+
+
+pipeline{
+    agent any
+    stages{
+        stage("first job"){
+            steps{
+                echo "hi1"
+            }
+        }
+        stage("2 job"){
+            steps{
+                build 'p2'                          ## here p2 is my another pipeline name
+            }
+        }
+        }
+    }
+
