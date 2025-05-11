@@ -1,3 +1,24 @@
+### steps to follow while writing code
+
+00-providers.tf
+(Terraform + provider requirements, AWS config)
+
+01-backend.tf
+*(S3/DynamoDB remote state setup - partial config)*
+
+02-variables.tf
+(Input variable declarations with validation)
+
+03-locals.tf
+(Computed values, naming conventions, tags)
+
+04-Infrastructure Modules
+
+05-outputs.tf
+
+######################################################################
+
+
 terraform {                             #TBBKRD    # cant use variable in provider block as it starts 1 st in code then vars
   backend "s3" {
     bucket
