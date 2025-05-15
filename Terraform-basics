@@ -557,7 +557,12 @@ VPC-- Add below 2 urself
 
 
 -gateway_id = aws_internet_gateway.gw.id    ---whenever u use other resource name then DONT put it in "double inverted comma"
+--------
 
+
+terraform init -migrate-state
+===-migrate-state flag tells Terraform to take the state data from where it was previously stored 
+   -and move it to the location defined by your updated backend configuration.
 
 
 
