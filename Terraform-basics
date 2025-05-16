@@ -31,7 +31,7 @@ server_side_encryption_configuration {
 
 aws_dynamodb_table                                                                              dynamodb_table
 
-resource "random_id" "server" {                                                                 random_id
+resource "random_id" "server" {                                                                 random_id.server.hex
   byte_length = 8
 }
 
