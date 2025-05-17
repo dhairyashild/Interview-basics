@@ -21,7 +21,7 @@ terraform -v
 Terraform v1.12.0                     =======latest
 https://releases.hashicorp.com/terraform/
 
-terraform {                             #TBBKRD    # cant use variable in provider block as it starts 1 st in code then vars
+terraform {                             BKRDE   # cant use variable in provider block as it starts 1 st in code then vars
   backend "s3" {
     bucket
 
