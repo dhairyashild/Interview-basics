@@ -154,3 +154,10 @@ usermod -aG G U
 chown U G
  system configuration Linux     —    /etc
 
+
+# DANGER ZONE
+Change visibility - pvt to pub repo
+Disable branch protection rules --
+Transfer ownership-- to another user or to an organization
+Archive this repository
+Delete this repository
