@@ -80,12 +80,54 @@ overlay: For multi-host Swarm clusters.
 
 - Dockerfile - which layer u change command after that all layers created again before that layer only cached.
 
+#########################################MY PDF NOTES
+LIB-predefined code 
+dependency-s/w component need for program
+
+physical server
+vm- 1 server with virtulized OS
+container use- dependency and env conflict solve
+adv- reuse & light weight
+
+Now if you want to see the difference between the basic image and the changes on it  
+# docker diff container_name 
+Now create image of this container  
+# docker commit newcontainer_name image_name 
+
+ADD: similar to copy but it provides a feature to download files from internet, also extract file at 
+docker image side.
+
+To create image out of Dockerfile 
+# docker build -t myfile .
+
+1) Now share volume with another container 
+Container to container 
+# docker run -it --name container2 (new) --privileged=true -–volumesfrom container1 ubuntu
+# docker run -it --name C2 --privileged=true --volumes-from C1 ubuntu /bin/bash
+privileged=true   ----- mean have right to add/delete data
+volumes-from C1 ----- share from c1 with c2
+
+Now create volume by using command: 
+#docker run -it --name container3 -v /volume2 ubuntu /bin/bash 
+
+2)   share volume between host (ec2) to container only via 
+docker run -it --name c3 -v /home/ubuntu:/testvolume --privileged=true ubuntu /bin/bash
+
+# docker run -td --name techserver -p 80:80 ubuntu 
+
+6)    docker inspect container name/id  --------get details about container eg. container IP , network,...
+
+7)   docker logs container name/id  ----logs
+
+CONCLUSION-- 1) U cant use same host port
+                           2) U can use same conainer port
 
 
+ docker run -p 8080:80 -p 8443:443 my-container
 
+ docker port <container_name_or_id> ---------see active ports
 
-
-
-
-
+ Dockerfile- instructions - Docker image
+ Docker image - template  code+ dependencies-run application.
+ container-  running instance of a Docker image 
 
