@@ -1,6 +1,26 @@
-NOTES OF GAURAV SERIES ALL
+http://url:8080/github-webhook/
 
+TROTTLE BUILD—minimum time between builds
 
+Execute concurrent builds if necessary
+               same job che anek build start hotat (max executors set kelat tevde salag build suru hotat)
+
+1. Long Build Time--Use parallel stages
+2.. Jenkins Slaves --Check SSH keys, firewall, ,Jenkins master logs
+3. Missing credentials or wrong ID ==="Manage Jenkins → Credentials", 
+pass correct ID
+4. Plugin Issues (Missing, Conflicts, Errors) 
+Check “Updates”--Update/downgrade plugin
+
+5. Environment Variable Not Recognized --
+syntax
+Access using ${VAR_NAME} or env.VAR_NAME 
+
+7. Jenkins Workspace Full
+cleanup
+
+8.  Pipeline Stuck at Certain Stage --Check if stage has input block
+9.  Email Notifications Not Working -- check smtp setting
 
 PROJECT—-ENV—-STAGE
 4vid-build quque and build executors status -- show job running or not 
