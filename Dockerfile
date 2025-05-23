@@ -2,8 +2,17 @@ docker run -d ubuntu sleep infinity
 
 docker run -d -p 8080:80 nginx
 
+# VOLUMEMOUNT
+docker run -d -v myvol:/app nginx        --- after -v if / not used then its VOLUME-mount but / used like below its called BIND-mount
+sudo ls /var/lib/docker/volumes
+===  myvol
 
-# Multi-stage build for optimized image size
+# BIND MOUNT
+docker run -it -p 8080:8000 -v /home/buntu/app:/app nginx /bin/bash
+
+
+
+# MULTI-STAGE build for optimized image size
 
 # Build Stage
 FROM maven:3.8.6-jdk-11 AS build           #  AS    
