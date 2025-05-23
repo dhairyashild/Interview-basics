@@ -1,4 +1,6 @@
+docker run -d ubuntu sleep infinity
 
+docker run -d -p 8080:80 nginx
 
 
 # Multi-stage build for optimized image size
