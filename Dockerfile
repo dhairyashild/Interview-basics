@@ -1,15 +1,15 @@
-RUN mvn clean package -DskipTests is the preferred choice because it create deployable artifact without  installing it to local Maven repo (~/.m2/repository).
 
 
 
 # Multi-stage build for optimized image size
 
 # Build Stage
-FROM maven:3.8.6-jdk-11 AS build                                    #  AS    
+FROM maven:3.8.6-jdk-11 AS build           #  AS    
 WORKDIR /app
 COPY pom.xml .
 COPY src ./src
-RUN mvn clean package -DskipTests
+RUN mvn clean package -DskipTests          # preferred choice because it create deployable artifact without installing it to local Maven repo (~/.m2/repository).
+
 
 # Runtime Stage
 FROM amazoncorretto:11-alpine
