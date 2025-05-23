@@ -34,6 +34,17 @@ ENV SPRING_PROFILES_ACTIVE=prod
 CMD ["java", "-jar", "app.jar"]
 
 
+addgroup -S mygroup          -S =--system , 
+-Use: create a system group used for system services or applications rather than interactive user logins.
+-They usually Group IDs below a certain number (e.g., 1000).
+
+adduser -S myuser -G mygroup          
+-When used with adduser, it creates system user. 
+-specifies secondary groups that new user should member of.
+
+&&:
+Purpose: logical AND
+Use: It chains commands together.1st command only execute if command before && completes successfully (returns exit code of 0). 
 
 sudo usermod -aG docker $USER                ---permission denied error solved
 newgrp docker                                -- Force group changes to apply      
