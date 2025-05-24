@@ -21,15 +21,21 @@ terraform -v
 Terraform v1.12.0                     =======latest
 https://releases.hashicorp.com/terraform/
 
+Classless Inter-Domain Routing
+
 terraform {                             BKRDE   # cant use variable in provider block as it starts 1 st in code then vars
   backend "s3" {
-    bucket
+    bucket=
+    key    =
+    region  =
+    dynamodb_table=
+    encrypt  = true
 
 aws_s3_bucket                                                                                   bucket
  bucket= 
 acl=
 versioning {
-server_side_encryption_configuration {
+server_side_encryption_configuration {                 --- if above encrypt= true given then not need this arg here
 
 aws_dynamodb_table                                                                              dynamodb_table
 
