@@ -4,4 +4,86 @@ EACh engine has different configuration while create like 1 give multi-az , othe
 
 sudo apt-get install mysql-client -y
 
-mysql -h ENDPOINT-URL -u USERNAME  -p PASSWORD
+mysql -h ENDPOINT-URL -u USERNAME  -p                       ---- before this open mysql 3306 port open
+PASSWORD
+
+
+php-mysql   package for php & db connect 
+jdbc driver         for java & db connect asto.
+
+show databases
+create databases
+
+135 READ REPLICA
+
+- cant create(write) on db after ssh on ec2
+- cross region replication u can give while creating
+- u can icrease its cpu power while creating
+
+136 multi az setup 
+
+- extra rds created as standby -- when 1 st not respond due to os patching/memory full/rebooting then standby db respond
+
+
+
+138 -- amazon aurora   -  its ecs which autoscale as per need start from 10 gb can be upto 128 TB
+mysql aurora - 5 times fast than normal mysql db
+postgresql aurora - 3 times fast
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
