@@ -1,0 +1,7 @@
+for rds multiple engines -- mysql postgreSQL ....
+
+EACh engine has different configuration while create like 1 give multi-az , other not give this.
+
+sudo apt-get install mysql-client -y
+
+mysql -h ENDPOINT-URL -u USERNAME  -p PASSWORD
