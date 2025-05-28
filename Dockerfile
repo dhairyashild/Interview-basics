@@ -153,3 +153,19 @@ CONCLUSION-- 1) U cant use same host port
  Docker image - template  code+ dependencies-run application.
  container-  running instance of a Docker image 
 
+ 
+
+# Docker: Run command from outside
+docker exec <container-name-or-id> <command>
+
+# Docker: Enter inside container (new process)
+docker exec -it <container-name-or-id> bash
+
+# Docker: Attach to main process of container
+docker attach <container-name-or-id>
+
+# Kubernetes: Run command from outside
+kubectl exec <pod-name> -- <command>
+
+# Kubernetes: Enter inside container
+kubectl exec -it <pod-name> -- bash
