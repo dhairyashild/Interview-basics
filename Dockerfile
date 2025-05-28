@@ -4,6 +4,7 @@ docker run -it -p 8080:8000 -p 80:80 -v /home/ubuntu/app:/app --network=<network
 commit  --
 diff
 build -t
+port 
 
 docker run -d ubuntu sleep infinity
 
