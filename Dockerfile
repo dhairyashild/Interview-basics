@@ -1,14 +1,40 @@
+# COMLPETE DOCKER IN 1 COMMAND
+docker run -it -p 8080:8000 -p 80:80 -v /home/ubuntu/app:/app --privileged=true nginx /bin/bash
+
+
 docker run -d ubuntu sleep infinity
 
-docker run -d -p 8080:80 nginx
+docker run -d -p 80:80 nginx
 
 # VOLUMEMOUNT
-docker run -d -v myvol:/app nginx        --- after -v if / not used then its VOLUME-mount but / used like below its called BIND-mount
+docker run -d -v myvol:/app -p HOST:CONTAINER nginx        --- after -v if / not used then its VOLUME-mount but / used like below its called BIND-mount
 sudo ls /var/lib/docker/volumes
 ===  myvol
 
 # BIND MOUNT
-docker run -it -p 8080:8000 -v /home/buntu/app:/app nginx /bin/bash
+docker run -it -v /home/buntu/app:/app nginx /bin/bash
+
+ 
+######################################################################
+EXEC     === ONLY RUN COMMAND K8S+DOCKER
+EXEC -IT ==== ENTER IN K8S+DOCKER
+
+# Docker: Run command from outside
+docker exec <container-name/id> <command>
+docker exec e5 ls
+
+# Docker: Enter inside container (new process)
+docker exec -it <container-name/id> /bin/bash            (     /bin/bash         bash       donhi chalate bash la slash nahi)
+
+# Docker: Attach to main process of container
+docker attach <container-name-or-id>
+
+# Kubernetes: Run command from outside
+kubectl exec <pod-name> -- <command>
+
+# Kubernetes: Enter inside container
+kubectl exec -it <pod-name> -- bash
+##########################################################################
 
 
 
@@ -43,6 +69,10 @@ ENV SPRING_PROFILES_ACTIVE=prod
 
 # Define the command to run the application
 CMD ["java", "-jar", "app.jar"]
+
+
+To create image out of Dockerfile 
+# docker build -t myfile .
 
 
 addgroup -S mygroup          -S =--system , 
@@ -119,8 +149,7 @@ Now create image of this container
 ADD: similar to copy but it provides a feature to download files from internet, also extract file at 
 docker image side.
 
-To create image out of Dockerfile 
-# docker build -t myfile .
+
 
 1) Now share volume with another container 
 Container to container 
@@ -137,15 +166,13 @@ docker run -it --name c3 -v /home/ubuntu:/testvolume --privileged=true ubuntu /b
 
 # docker run -td --name techserver -p 80:80 ubuntu 
 
-6)    docker inspect container name/id  --------get details about container eg. container IP , network,...
+6)    docker inspect container name/id            --------get details about container eg. container IP , network,...
 
-7)   docker logs container name/id  ----logs
+7)   docker logs container name/id                ----logs
 
 CONCLUSION-- 1) U cant use same host port
                            2) U can use same conainer port
 
-
- docker run -p 8080:80 -p 8443:443 my-container
 
  docker port <container_name_or_id> ---------see active ports
 
@@ -153,19 +180,3 @@ CONCLUSION-- 1) U cant use same host port
  Docker image - template  code+ dependencies-run application.
  container-  running instance of a Docker image 
 
- 
-
-# Docker: Run command from outside
-docker exec <container-name-or-id> <command>
-
-# Docker: Enter inside container (new process)
-docker exec -it <container-name-or-id> bash
-
-# Docker: Attach to main process of container
-docker attach <container-name-or-id>
-
-# Kubernetes: Run command from outside
-kubectl exec <pod-name> -- <command>
-
-# Kubernetes: Enter inside container
-kubectl exec -it <pod-name> -- bash
