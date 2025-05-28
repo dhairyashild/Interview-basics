@@ -1,6 +1,9 @@
 # COMLPETE DOCKER IN 1 COMMAND
-docker run -it -p 8080:8000 -p 80:80 -v /home/ubuntu/app:/app --privileged=true nginx /bin/bash
+docker run -it -p 8080:8000 -p 80:80 -v /home/ubuntu/app:/app --network=<network> --privileged=true nginx /bin/bash
 
+commit  --
+diff
+build -t
 
 docker run -d ubuntu sleep infinity
 
