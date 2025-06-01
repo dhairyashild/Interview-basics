@@ -22,22 +22,24 @@ Kill process:
 kill -9 <PID>                      # -9  = by force
 
 --------------------------------------------------
-1) Service Not Starting
+1) Service Not Starting        
 
 Check service logs: 
 sudo journalctl -xe | grep service-name 
 
 Restart the service: 
 sudo systemctl restart service-name
+
+sudo systemctl (status /start /stop /restart)  (svc-name)
 ------------------------------------------------
 4) Port Conflicts
 
 --Identify the conflicting process: 
-sudo netstat -tulnp | grep <port-number> 
-sudo lsof -i :<port>
+sudo lsof -i :<port>                                
 
---Kill the process or reconfigure services.
+--Kill the process / stop services.
 sudo kill -9 <PID>
+sudo systemctl stop svc-name
 -------------------------------------------------------------------
 User Management Issues 
 
@@ -63,8 +65,8 @@ DOCKER ISSUES
 FINAL NOTES LINUX INTERVIEW
 PORTS OPEN
 lsof -i :8080
-lsof
-sudo netstat -tuln | grep 8080
+
+sudo netstat -tuln | grep 8080             ---  use above lsof not this
 
 
 find / -name "filename" 
