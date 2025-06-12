@@ -1,16 +1,16 @@
                                ### devops pro notes
 
-.git = hidden with history and config
-git merge main                             ---------if remote main branch ahead than urs then use
-github---brache--new ---brach source(main) ==u can give which branch u want as base branch main or other
+.git = hidden with branch, config &  history 
+git merge main              ---------if remote main branch ahead than urs then use
+github---branch--new ---brach source(main) ==u can give which branch u want as base branch main or other
 PR ---NEW PR -- COMPARE CHANGES --- base=main(hechyat merge karto karan ha base)   & compare == hi merge karaychi ahe  --create PR
-git reset -- local env varach  -- it removes wrong files
+git reset -- local env varach  -- it removes wrong commits 
 git revert -- github var NEW commit creates without deleting wrong commit
 -----------------------------------------------------------
 
 git clone pub-url
 git status
-git add .                                                                                                 git restore --staged <file>
+git add .                                ----      git restore --staged <file>
 git commit -m "message"
 git log --name-omly         ========= give commit id & file added with it no need other comand like log and other
 git remote add origin url   =========git remote -v  made disnara url hi command set karato
