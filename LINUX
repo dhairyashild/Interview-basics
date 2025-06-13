@@ -25,7 +25,7 @@ kill -9 <PID>                      # -9  = by force
 1) Service Not Starting        
 
 Check service logs: 
-sudo journalctl -xe | grep service-name 
+sudo journalctl -u SVC-NAME
 
 Restart the service: 
 sudo systemctl restart service-name
