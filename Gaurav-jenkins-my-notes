@@ -1,12 +1,12 @@
 http://url:8080/github-webhook/
 
-TROTTLE BUILD—minimum time between builds
+TROTTLE BUILD—minimum time for next builds
 
 Execute concurrent builds if necessary
-               same job che anek build start hotat (max executors set kelat tevde salag build suru hotat)
+               same job build multiple times (max executors set kelat tevde salag build suru hotat)
 
 1. Long Build Time--Use parallel stages
-2.. Jenkins Slaves --Check SSH keys, firewall, ,Jenkins master logs
+2.. Jenkins Slaves --Check SSH keys, firewall-22, ,Jenkins master logs
 3. Missing credentials or wrong ID ==="Manage Jenkins → Credentials", 
 pass correct ID
 4. Plugin Issues (Missing, Conflicts, Errors) 
