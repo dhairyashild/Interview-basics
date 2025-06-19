@@ -182,3 +182,121 @@ remote directory must created before
               build 'pipeline2-name'              #########     build '   ' --this is upstram pipe and name in here' ' = downstream job
             }
 
+
+
+stage('catch error stage '){
+            steps{
+                catchError(message: 'stage failed') {
+                    sh 'hello'
+    }
+            }
+        }
+
+
+failure {
+            emailext(
+                subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' - Failed",
+                body: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' has failed. Check the details at: ${env.BUILD_URL}",
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+                to: 'bhushandesai84@gmail.com,dhairyashild300@gmail.com'
+            )
+        }
+
+
+retry count ,3.14 3 times he tried after he gives fail error
+steps {
+        retry(count: 3) {
+            sh 'deploy-script.sh'
+        }
+
+
+23
+1.20 timeout , 
+agent any
+    options {
+        timeout(time: 30, unit: 'MINUTES')  // Aborts the whole pipeline after 30 minutes
+    }
+    stages 
+
+24 
+timestamp 1.24 
+ options {
+        timestamps()
+    }
+
+if else in scripting language
+stage('Example') {
+            steps {
+                script {
+                    if (env.BRANCH_NAME == 'main') {
+                        echo 'Hello from main branch'
+                    } else {
+                        echo "Hello from ${env.BRANCH_NAME} branch!"
+                    }
+
+
+definitions
+-  What is Jenkins?
+Open-source automation tool for CICD
+- Benefits?
+Early bug detection,
+ automatic build reports,
+ LDAP integration.
+
+-  Maven?
+Build tool 
+
+-  Stage 
+A logical division within a pipeline, representing a major phase 
+
+-  Step
+An individual task within a stage, 
+
+-  upstream job -->  triggers another job (downstream) as part of a build chain,
+
+-  multibranch--> A Jenkins project type that automatically creates and manages pipelines for each branch
+-  post--> A section in a Jenkins Pipeline that defines actions to be performed after the main pipeline stages, such as always, success, or failure.
+-  input message -->  A step in a Jenkins Pipeline that pauses execution and prompts users for input or approval before proceeding.
+
+-  Executor =  resource on node that runs  single build at a time
+
+-  Agent
+A machine or container that connects to the Jenkins controller and executes tasks as directed.
+
+-  Controller (formerly Master)
+ coordinates builds and manages agents
+
+-  workspace
+Directory on a node where Jenkins performs builds and stores files
+
+-  Declarative Pipeline
+simpler, structured syntax for defining pipeline
+
+-  Scripted Pipeline
+ defining pipelines using Groovy
+
+-  Trigger
+ EVENT or action that starts a build or pipeline
+-  Plugin-->  ADDON that adds  functionality 
+-  Node Label --> TAG assigned to nodes to control where jobs run
+-  Continuous Integration (CI) --> The practice of automatically integrating code changes and running tests.
+-  Continuous Delivery (CD)--> The process of automatically preparing code for deployment, requiring manual approval before production.
+-  Continuous Deployment -->The process of automatically deploying every validated change to production without manual intervention
+
+- Groovy? --> Jenkins scripting language.
+
+-  Parameters?
+Inputs to customize builds.
+
+-  What are the types of Jenkins Pipelines?
+FREESTYLE, Pipeline, and Multibranch Pipeline
+
+-  What is a node block in Jenkins Pipeline?
+A node block specifies on which agent  pipeline or stage will run.
+
+-  What is the role of the post section in a declarative pipeline?
+The post ssection defines actions to run after the pipeline or stage completes, such as notifications
+
+-  shared libraries
+reusable scripts that can be used across multiple Jenkins pipelines.
+
