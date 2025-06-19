@@ -152,6 +152,9 @@ CANT DELETE W/S U CURRENTLY ON
 Remote State: Storing state file in a shared, remote location.
 cidr =Classless Inter-Domain Routing
 
+terra apply -target='aws_instance.<resource_name>'
+
+
 
 terraform {                             BKRDE   # cant use variable in provider block as it starts 1 st in code then vars
   backend "s3" {                          backend "local" {   path = "lacal dir path where store us tfstate" }
@@ -706,3 +709,72 @@ terraform init -migrate-state
 
 - PACKER =  cli tool for build AWS AMI  for based on templates
 
+DRIFT-
+1. What is Terraform Drift?
+occurs when the actual infra differs from state defined in Terraform configuration or the state file.
+
+2. How do you detect drift in Terraform?
+Run terraform plan             (compares desired state vs. actual state).
+Use terraform refresh         to sync the state file with real-world resources.
+Integrate drift detection in CI/CD pipelines.
+Tools like Driftctl, Terraform Cloud, or AWS Config can automate detection.
+
+3. What causes infrastructure drift?
+Manual changes via cloud console/CLI.
+External processes (auto-scaling, cloud provider updates).
+State file corruption or misalignment.
+
+4 How do you fix drift once detected?
+terraform import                    to bring unmanaged resources under Terraform control.
+terraform apply -refresh-only       to update state without changes.
+Destroy and recreate resources if necessary.
+
+5. Can you ignore drift for certain resources?
+ASG- Set ignore_changes on desired_capacity if using dynamic scaling.
+EC2- User Data/AMI updates not tracked in Terraform -Use ignore_changes for volatile attributes (e.g., ami, user_data).
+SG - Use separate SGs for Terraform vs. AWS-managed rules.
+AWS S3 Buckets
+Manual bucket policy/ACL changes.
+Versioning/encryption enabled outside Terraform.---Enable S3 bucket versioning IN terra
+
+-resource "aws_instance" "example" {
+  lifecycle {
+    ignore_changes = [tags, ami]  # Prevents drift on these attributes
+  }
+}
+
+How to Prevent AWS Drift?
+✅ Enforce "No Manual Changes" policy (RBAC, AWS IAM boundaries).
+✅ Use Remote State (S3 + DynamoDB locking) to avoid state corruption.
+✅ Enable AWS Config to track configuration changes.
+✅ Run terraform plan in CI/CD before deployments.
+✅ Use ignore_changes for volatile AWS-managed attributes.
+
+
+terraform show        ---> Displays the latest state stored in the default state file.
+
+To list resources currently managed by Terraform, use:
+terraform state list             like aws_instance.<resource-name>
+terraform state show             Displays detailed information about a specific resource 
+terraform state mv              dangerous dont use it unless very  much need 
+Moves a resource from one address in the state file to another.
+terraform state mv [options] <source> <destination>
+
+
+we can give terraform.workspace like that if we want ---> "${terraform.workspace}"
+LockId is must otherwise it will not allow state locking
+
+if u dont give versions then auto version  will be applied , and version will be lock when we init , (~> 5.0) from 5.0.0 up to (but not including) 6.0.0 . aws current provider version 5.81
+consistent and predictable behavior  by locking the versions of Terraform provider
+When a provider version changes ---> terraform init -upgrade.
+after terr init terraform.lock.hcl and .terraform file created
+
+aliases --> interacting with multiple accounts, regions, or configurations within the same cloud provider.
+null resource without triggers only once with triggers also u can give instance_id type or if u want to run always then give timestamp
+if we want give different values to different environment like dev , qa etc then use it but it will change statefile
+sensitive = true in outut hidden to prevent accidental exposure
+how to use for loop in terraform
+we use manually created own modules
+terra plan also locks statefile , can disable this locking behavior with the -lock=false
+T plan do not create new statefile
+If versioning is enabled on your S3 bucket, each time you run terraform apply, a new version of the state file is created, 
