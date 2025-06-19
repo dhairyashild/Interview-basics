@@ -573,7 +573,7 @@ terraform init -migrate-state
    -and move it to the location defined by your updated backend configuration.
 
 
-
+PACKER =  cli tool for build AWS AMI  for based on templates
 
 
 
