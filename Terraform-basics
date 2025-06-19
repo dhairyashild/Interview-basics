@@ -17,14 +17,144 @@
 05-outputs.tf
 
 ######################################################################
+IAC - Practice of mng infra as code
+why terra- iac   multicloud   hcl -simple
+terra ur use = ec2 eks  s3 vpc 
 terraform -v
 Terraform v1.12.0                     =======latest
 https://releases.hashicorp.com/terraform/
 
-Classless Inter-Domain Routing
+Provider: Plugin to interact with cloud or service APIs (AWS, Azure, etc.).
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "~> 5.0"
+    }
+  }
+}
+
+# AWS provider configuration
+provider "aws" {
+  region = "us-west-2"
+}
+# Helm provider configuration (for deploying to Kubernetes)
+provider "helm" {
+  kubernetes {
+    host                   = aws_eks_cluster.example.endpoint
+    cluster_ca_certificate = base64decode(aws_eks_cluster.example.certificate_authority.data)
+    exec {
+      api_version = "client.authentication.k8s.io/v1beta1"
+      args        = ["eks", "get-token", "--cluster-name", aws_eks_cluster.example.name]
+      command     = "aws"
+    }
+  }
+}
+
+provisioner = feature to execute command and scripts on resources already created
+USEC- RUN SHELL       2 FILE COPY
+LOCAL = COMMAND    = run commands or scripts on the machin = use- 1 run shell 2 ansible playbook run
+
+REMOTE= INLINE["   "]  = to execute commands/Shell-scripts on a remote resource  
+                                  run shell/install software nginx/apache2
+resource "aws_instance" "web" {
+  ami           = "ami-0c55b159cbfafe1f0"
+  instance_type = "t2.micro"
+  key_name      = "my-key"
+
+  # local-exec: Runs on your local machine
+  provisioner "local-exec" {
+    command = "echo ${self.public_ip} > instance_ip.txt"
+  }
+
+  # remote-exec: Runs on the remote EC2 instance
+  provisioner "remote-exec" {
+    inline = [
+      "sudo yum update -y",
+      "sudo yum install -y nginx"
+    ]
+
+    connection {
+      type        = "ssh"
+      user        = "ec2-user"
+      private_key = file("~/.ssh/id_rsa")
+      host        = self.public_ip
+    }
+  }
+}
+
+
+ provisioner "file" {
+    source      = "./myapp.conf"       # local file 
+    destination = "/etc/myapp.conf"    # remote location
+    connection { ssh 4 lines
+}
+}
+Resource: Declares infrastructure component (VM, DB, etc.).
+
+Module: Reusable CODE of Terraform configurations.
+PUB - avail on registry
+PVT - company module
+ROOT - DIR terra confi directly applied
+CHILD- that called from root
+module "vpc_mod"{
+source= "./path"
+versions= "   "
+}
+
+
+State File= JSONFILE Stores current state of managed infrastructure.
+TRACKES STATES
+IDEMPOTENCY - AVOID REPEAT CREATION
+CREATE& DELETE IN ORDER
+
+- To restore your Terraform state from a backup file
+mv terraform.tfstate.backup terraform.tfstate
+terraform init
+terraform plan
+Rename backup to state file, then init and plan
+
+conf file = .tf file
+conf dir = dir with .tf files
+
+T refresh = read current infra & update tfstate only  ( not conf file/ infra)
+
+T import = bring manualy created existing infra state-file
+        =Rebuild state when state file is lost or corrupted, allowing for recovery of existing resources without starting from scratch.
+process - provider + conf file + init + import +plan to check must not add new ?
+1——Write the Resource Block: 
+resource "aws_instance" "example" {
+}
+2——--terraform import aws_instance.example i-1234567890abcdef0
+3——Verify State: After importing, run terraform plan
+Backend: Where Terraform stores state (local, S3, Azure Blob, etc.).
+
+Plan: Preview of changes Terraform will make.
+
+Apply: Executes changes to reach desired infrastructure state.
+
+Destroy: Removes all managed infrastructure.
+
+Variable: parameterize Input value for configuration (string, number, etc.).
+
+Output: Display Value retrieved  from resource.
+
+Workspace: feature allows work with multi env with same conf files
+terraform apply --auto-approve -var "file=dev.tfvars"
+USE - ENV COLLZB , PARALLEL WORK ENV
+    - SEPARETE STATEFILE + TFVARS FILE
+
+terra workspace  LIST 
+                NEW PROD
+                SELECT PROD
+CANT DELETE W/S U CURRENTLY ON
+
+Remote State: Storing state file in a shared, remote location.
+cidr =Classless Inter-Domain Routing
+
 
 terraform {                             BKRDE   # cant use variable in provider block as it starts 1 st in code then vars
-  backend "s3" {
+  backend "s3" {                          backend "local" {   path = "lacal dir path where store us tfstate" }
     bucket=
     key    =
     region  =
@@ -48,6 +178,7 @@ resource "aws_s3_object" "object" {                                             
   key    = "ganja"
   source = "C:/Users/dhair/OneDrive/Desktop/TERRAFORM/S3/backend.tf"
 
+LOCAL BACKEND =Custom path/workspace	Customization, workspace management
 
 4—Environment Variables:
 -export TF_VAR_filename="pet.txt"                                                               export TF_VAR_
@@ -573,7 +704,5 @@ terraform init -migrate-state
    -and move it to the location defined by your updated backend configuration.
 
 
-PACKER =  cli tool for build AWS AMI  for based on templates
-
-
+- PACKER =  cli tool for build AWS AMI  for based on templates
 
