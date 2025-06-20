@@ -778,3 +778,9 @@ we use manually created own modules
 terra plan also locks statefile , can disable this locking behavior with the -lock=false
 T plan do not create new statefile
 If versioning is enabled on your S3 bucket, each time you run terraform apply, a new version of the state file is created, 
+
+
+Terraform vars (variables) are for external inputs (CLI,env-variables, .tfvars files),making configurations reusable across environments.
+Locals (local values) are for internal computations within a module, reducing code duplication and improving readability.
+In DevOps on AWS, vars allow for easy environment-specific changes (e.g., EC2 instance types per environment), 
+while locals help maintain consistent naming conventions or complex calculations for AWS resources within a single module.
