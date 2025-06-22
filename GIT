@@ -18,6 +18,11 @@ git remote set-url https://token@url
 git push origin main 
 git pull origin main 
 
+-upstream branch = remote linked branch
+-तुमची स्थानिक 'main' ब्रांच रिमोट 'origin' सोबत लिंक केलेली नाही.
+तिला लिंक करण्यासाठी, 
+git push --set-upstream origin main 
+
 
 
 
