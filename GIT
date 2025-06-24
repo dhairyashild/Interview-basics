@@ -39,7 +39,7 @@ Workflow: Branch, make changes, create PR, review, merge.
 
 git remote set -url https://<token>@<url>
 
- git config===name and email
+git config===name and email
 
 git commit==snapshot of the changes and stores them in the Git repository's history. 
 
@@ -56,13 +56,14 @@ git config --global user.email "global@example.com"
 git config --global user.email
 dhairyashild300@gmail.com
 
-git pull
+
+git fetch —- Downloads the remote changes & update in remote repository(origin/master), without merge in local (master)
+
+git checkout master
+git merge origin/master
+
+git pull === above 2  commands given together
 — to update your local repository with changes made by others on the remote repo
-
-git fetch 
-—-Purpose: Downloads the latest metadata (commits, branches, tags) from the remote repository.
-Functionality: It retrieves updates from the remote but does not modify your working directory or current branch. This allows you to review changes before deciding to merge them into your local branch.
-
 
 git status:
  current state of the repository, including
@@ -94,6 +95,7 @@ check after git merge …where merging is correctly or not?
 —Perform the Merge:
 git checkout main
 git merge feature-branch
+git checkout origin/master     == origin mean remote chi repo
 
 —Check the Merge Status:
 git status
@@ -143,6 +145,18 @@ delete above commits after this but changes are in staging area
 git reset —hard commit-id
 delete above commits after this but changes are removed from stage and working area both
 Use caution with --hard, as it permanently discards uncommitted changes.
+
+
+
+GIT STASH:-   temporarily saves your uncommitted work.
+
+git stash: न-कमिट केलेले बदल तात्पुरते साठवते.
+git stash list: सर्व साठवलेल्या बदलांची यादी दाखवते.
+git stash apply stash@{1}: विशिष्ट स्टॅशमधील बदल लागू करते, पण तो स्टॅश तसाच ठेवते.
+git stash pop: सर्वात नवीन स्टॅश बदल लागू करते आणि तो स्टॅश लिस्टमधून काढून टाकते. pop = apply + drop
+git stash drop stash@{1}: एक विशिष्ट स्टॅश (उदा. stash@{1}) कायमस्वरूपी काढून टाकते.
+git stash clear: सर्व स्टॅश कायमस्वरूपी काढून टाकते.
+
 
 
 git revert <commit-id>
