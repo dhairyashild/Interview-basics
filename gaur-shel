@@ -1,20 +1,20 @@
 ##########################SARANSH
-${var} use this instaed of $var ,{} help to concat any word  , myvar must be at left and it value on right            == var notes
-read -p "    " -s password                               =input notes
+${var} use instaed of $var ,{} help to concat any word  ,myvar must be at left and it value on right ,no space on either side of =          (VAR NOTES)
+read -p "    " -s password                               (INPUT NOTES)
 command line args        ${0}  ${1}  
 ---------------------------------------------------------------------------------------------------
 # VARIABLE
 
-1- var="program"     --- no space on either side of =
-   VAR="hi"          --- var & VAR have different
+1- var="program"                  ## no space on either side of =
+   VAR="hi"                       ## var & VAR have different
 
 2- $var and ${var}     both are correct to call var value but use ${var} because u can add(cocat) any value to it 
 var="program"
-echo${var}-ing       ================ 
+echo${var}-ing                     ## 
 programing
 
 3- system var  
-env                    ==this command show all system var in linux
+env                                ## this command show all system var in linux
 -----------------------------------------------------------------------------------
 # INPUT
 
