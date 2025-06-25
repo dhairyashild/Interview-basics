@@ -1,0 +1,138 @@
+##########################SARANSH
+${var} use this instaed of $var ,{} help to concat any word  , myvar must be at left and it value on right            == var notes
+read -p "    " -s password                               =input notes
+command line args        ${0}  ${1}  
+---------------------------------------------------------------------------------------------------
+# VARIABLE
+
+1- var="program"     --- no space on either side of =
+   VAR="hi"          --- var & VAR have different
+
+2- $var and ${var}     both are correct to call var value but use ${var} because u can add(cocat) any value to it 
+var="program"
+echo${var}-ing       ================ 
+programing
+
+3- system var  
+env                    ==this command show all system var in linux
+-----------------------------------------------------------------------------------
+# INPUT
+
+read 
+read -p " message as prompt"  varname
+
+#!/bin/bash
+read name
+read -p "give password " -s password            # -s do not show password while u type it on prompt
+echo "my name ${name}"
+echo "my pass ${password} "
+--------------------------------------------------------------------------------
+
+COMMAND LINE ARGS GIVING  =
+
+#!/bin/bash
+name=${3}
+
+echo ${0}
+echo ${1}
+echo ${2}
+echo "${name}"
+=================
+./script.sh hi bi  shy                     =========== 
+0           1   2  3
+script.sh 
+hi 
+bi
+shy
+--------
+#!/
+echo $1 
+.....
+echo $11
+echo "$11"
+.scipt.sh 1 2 .... 10 51 52 53
+  0       1 2         11 12 13
+========o/p
+11      #for $11    == because $11 it considers $11=$1concat1            #########
+51      #for ${11}   == so use {} for variable calling                   #########
+      
+-----------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
