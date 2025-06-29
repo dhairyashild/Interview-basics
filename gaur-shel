@@ -1,4 +1,7 @@
-##########################SARANSH
+##########################        SARANSH         ###########################
+<< disclaimer
+disclaimer
+
 ${var} use instaed of $var ,{} help to concat any word  ,myvar must be at left and it value on right ,no space on either side of =          (VAR NOTES)
 15 unset name        /name=      BOTH USED TO UNSET VAR ,  radonly varname    THIS FIX VALUE OF VAR PERMENENT
 
@@ -24,7 +27,24 @@ function-nav
 echo $? 
 0    / 127    / 1        #PREVIOUS COMMAND SUCCESS=0 OR FAILED=127 OR NOT GET WORD IN FILE=1
 
+26
+if COMMAND                 #THIS COMMAND SUCCESS & GIVE 0 AS O/P
+then                       # THEN ONLY RUN BELOW COMMANDS
+Command 1
+command 2 
+fi
 
+27  if[] then     elif[] then      else fi
+number=5
+if [ $number -eq 5 ]         # [ SPACE NEED IN SQUARE BRACKET BEFORE AND AFTER CONDITION SPACE  ]
+then
+echo "number is eq 5"
+elif [ $number -gt 5 ]       # -eq/-ne=equal/not, -gt/lt=greater-than/less , -ge/-le=greater than or equal to / less&equal
+then
+echo "wrong"
+else                          # If neither of the above conditions are true
+    echo "The number is greater than 5."
+fi
 
 
 ---------------------------------------------------------------------------------------------------
@@ -143,7 +163,7 @@ sadasdasdas
 adasdasdas: command not found 
 echo $? 
 127
-
+---------------------------------------------
 
 
 
