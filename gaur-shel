@@ -1,10 +1,28 @@
 ##########################SARANSH
 ${var} use instaed of $var ,{} help to concat any word  ,myvar must be at left and it value on right ,no space on either side of =          (VAR NOTES)
+15 unset name        /name=      BOTH USED TO UNSET VAR ,  radonly varname    THIS FIX VALUE OF VAR PERMENENT
+
 read -p "    " -s password                               (INPUT NOTES)
 command line args        ${0}=script.sh    ${1} =1st arg 
-14-date&time=${date +"%D-%T"}    echo "date&time" -- ASSIGN COMAND O/P AS VAR
 
+14-ASSIGN COMAND O/P AS- variable1=$(  )       echo"${  }"         --declare by round bracket and call by curly like how we call any other var
 
+16
+echo "${string^}"  /  echo "${string,}"  # Output upper 1st word: my / My   
+echo "${string^^}" /  echo "${string,,}" # # Output full: MY NAME IS GAURAV / my name is gaurav
+
+17 GIVE DEFAULT VALUE TO VAR  === name=${name:-World}              VAR1=${VARNAME:-VAR-DEFAULT-VALUE}
+
+18 ARITHMETIC SYNTAX     "$((a+b))"
+
+21 function function-nav(){
+command in fuction
+}
+function-nav
+
+25 SUCCESS/FAILED
+echo $? 
+0    / 127    / 1        #PREVIOUS COMMAND SUCCESS=0 OR FAILED=127 OR NOT GET WORD IN FILE=1
 
 
 
@@ -66,22 +84,65 @@ echo "$11"
 -----------------------------------------------------------------------------------
 14 ASSIGN COMAND O/P AS VAR
 
-#!/binbash
-current_dir="pwd"
-echo "current_dir"
-date&time=${date +"%D-%T"}
-echo "date&time"
+#!/bin/bash
+command=$(date +%D-%T)
+echo "${command}"
 
 ./script.sh ==========
 /home/ubuntu
 25/6/2025 10:23:16
+----------------------------------------
+15 UNSET VAR
 
+name="ram"
+readonly name                
+name="sham"
+unet name
+----------------------------------
+16
+string="my name is Gaurav"
 
+# Capitalize the first letter                                   # Lowercase the first letter
+echo "${string^}"  # Output: My name is Gaurav                  echo "${string,}"  # Output: my name is Gaurav
 
+# Capitalize all letters                                        # Lowercase all letters
+echo "${string^^}" # Output: MY NAME IS GAURAV                  echo "${string,,}" # Output: my name is gaura
 
+# Get the length of the string
+echo "length of string variable is ${#string}" # Output: length of string variable is 17
+-----------------------------
+echo "$((a+b))"
+echo "$((a-b))"
+echo "$((a*b))
+echo \$ ((a / b)) ^ 2 \#5/6
+echo "$((a%b))"
+echo s ((2 ^ 3)) ^ prime prime \#2^ * 2^ * 2
+((a++))\# a = a + 1
+echo $a
 
+--------------------------------
+21=FUNCTION ==
+- 1 st declare variable then give function as best practice to write shell
+- 
+function configuration(){
+#configurations code
+echo "configcodel"
+echo "configcode2"
+function2-nav                # # THIS IS THE SECOND FUNCTION, WHICH WILL BE CALLED BY THE FIRST ONE.
 
+}
+configuration       #THIS CALLS FUNCTION
+----------------------------
+25 - command sucess / fail
 
+ls 
+echo $? 
+0 
+
+sadasdasdas
+adasdasdas: command not found 
+echo $? 
+127
 
 
 
