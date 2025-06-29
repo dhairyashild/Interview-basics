@@ -2,6 +2,13 @@
 << disclaimer
 disclaimer
 
+-sed -i  's/old-value/new-value/g' filenav
+
+-cat>>file1
+line1
+line2
+ctrl+d
+
 ${var} use instaed of $var ,{} help to concat any word  ,myvar must be at left and it value on right ,no space on either side of =          (VAR NOTES)
 15 unset name        /name=      BOTH USED TO UNSET VAR ,  radonly varname    THIS FIX VALUE OF VAR PERMENENT
 
