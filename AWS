@@ -2,6 +2,8 @@ Network Address Translation
 
 Classless Inter-Domain Routing
 
+listener port 80 redirect to 
+         port 443 to target group
 
 Elastic IP (EIP):
 EIP is region-specific.
