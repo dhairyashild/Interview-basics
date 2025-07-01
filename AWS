@@ -54,3 +54,29 @@ First four and last IP addresses of a subnet cannot be assigned:
  Internet-Facing ELB: Publicly accessible, routes traffic from the internet to backend targets, has public IPs/DNS names.
  Internal ELB: Accessible only within the VPC, designed for internal applications, has private IPs/DNS names.
 
+whichmetric get automatic and which metric need to set up just names onnly which required for devops must need names to tell in interview
+
+
+आपोआप मिळणारे मेट्रिक्स (Auto-collected metrics):
+
+CPUUtilization (CPU वापर)
+
+NetworkIn (इनबाउंड नेटवर्क ट्रॅफिक)
+
+NetworkOut (आउटबाउंड नेटवर्क ट्रॅफिक)
+
+DiskReadBytes, DiskWriteBytes (डिस्क I/O)
+
+DiskReadOps, DiskWriteOps (डिस्क ऑपरेशन्स)
+
+सेटअप करावे लागणारे मेट्रिक्स (Metrics needing setup - DevOps साठी आवश्यक):
+
+MemoryUtilization (मेमरी वापर)
+
+DiskUtilization (फाइलसिस्टम डिस्क वापर)
+
+SwapUtilization (स्वॅप वापर)
+
+ProcessCount (चालू प्रोसेसची संख्या)
+
+Application-specific metrics (तुमच्या ॲप्लिकेशनचे कस्टम मेट्रिक्स, उदा. रिक्वेस्ट पर सेकंड, क्यू लेन्थ)
