@@ -1,3 +1,8 @@
+Network Address Translation 
+
+Classless Inter-Domain Routing
+
+
 Elastic IP (EIP):
 EIP is region-specific.
 You can attach it even when the instance is running, so stopping the instance is not required.
