@@ -51,6 +51,29 @@ provider "helm" {
   }
 }
 
+prevent_destroy =
+
+-जर तुम्ही Terraform EC2 मध्ये prevent_destroy = true जोडले, तर ते terraform destroy कमांडपासून संरक्षित होते.
+-prevent_destroy = true असलेले रिसोर्स डिस्ट्रॉय करण्यासाठी, तुम्हाला आधी Terraform कॉन्फिगुरेशनमधून prevent_destroy = true ही लाईन काढून टाकावी लागेल 
+आणि मग पुन्हा terraform apply चालवावे लागेल. त्यानंतर तुम्ही terraform destroy वापरू शकता.
+-दुसरा मार्ग म्हणजे, स्टेटमधून मॅन्युअली रिसोर्स काढून टाकणे (terraform state rm <resource_address>), परंतु याची शिफारस केली जात नाही कारण यामुळे स्टेट फाईलमध्ये विसंगती निर्माण होऊ शकते.
+
+create_before_destroy 
+-प्रामुख्याने रिसोर्स बदलताना (replacing resource) डाउनटाइम कमी करण्यासाठी वापरले जाते.
+
+IGNORE CHANGES--
+ lifecycle {
+    ignore_changes = [instance_type, tags["Owner"]] # येथे 'instance_type' आणि 'tags.Owner' दुर्लक्ष केले जातील
+  }
+}
+-वरील कोडमध्ये, आपण instance_type ला ignore_changes लिस्टमध्ये ठेवले आहे.
+-जर तुम्ही my_server इन्स्टन्सचा प्रकार AWS कन्सोलमधून t2.small मध्ये बदलला,tags.Owner (टॅग) मॅन्युअली बदलला, तर Terraform ते देखील दुर्लक्षित करेल.
+-आता तुम्ही पुन्हा terraform plan किंवा terraform apply चालवल्यास, Terraform instance_type मध्ये झालेल्या बदलाकडे दुर्लक्ष करेल.
+
+Terraform t2.small ला t2.micro मध्ये परत बदलण्याचा प्रयत्न करणार नाही, कारण तुम्ही त्याला सांगितले आहे की या ॲट्रिब्यूटमधील बदलांची काळजी करू नका.
+-ignore_changes चा वापर जपून करावा, कारण यामुळे Terraform च्या स्टेट (state) आणि प्रत्यक्षात असलेल्या इन्फ्रास्ट्रक्चरमध्ये विसंगती येऊ शकते.
+
+
 provisioner = feature to execute command and scripts on resources already created
 USEC- RUN SHELL       2 FILE COPY
 LOCAL = COMMAND    = run commands or scripts on the machin = use- 1 run shell 2 ansible playbook run
