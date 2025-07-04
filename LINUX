@@ -22,6 +22,32 @@ Kill process:
 kill -9 <PID>                      # -9  = by force
 
 --------------------------------------------------
+ RAM
+
+-ram = for t2.micro 1gb
+
+1) free -h            
+ -----------####  check LAST available=549 Mi is imp
+               total        used        free      shared  buff/cache   available
+Mem:           957Mi       407Mi       153Mi       932Ki       571Mi       549Mi
+
+
+2) cat /proc/meminfo
+MemTotal:         980376 kB
+MemFree:          156736 kB
+MemAvailable:     562876 kB    #### this is imp..  ---MemAvailable =MemFree + cache
+.....
+
+3) top 5 processes by memory usage
+ 
+ps aux --sort=-%mem | head -n 5
+ps aux        =   lists all processes
+--sort=-%mem  =   sorts by memory usage (descending).
+head -n 5     =   top 5.
+
+sudo kill -9 pid     ---kill high usage 
+------------------------------------------------------------------------------
+
 1) Service Not Starting        
 
 Check service logs: 
@@ -89,21 +115,7 @@ resize2fs /dev/xvdbz      ----for only increase ebs   ---(growpart /dev/xvdbz  -
 df -h
 du -sh /path/to/directory
 #####################################
-                   RAM
 
--ram = for t2.micro 1gb
-
-1) free -h            
- -----------####  check LAST available=549 Mi is imp
-               total        used        free      shared  buff/cache   available
-Mem:           957Mi       407Mi       153Mi       932Ki       571Mi       549Mi
-
-
-2) cat /proc/meminfo
-MemTotal:         980376 kB
-MemFree:          156736 kB
-MemAvailable:     562876 kB    #### this is imp..  ---MemAvailable =MemFree + cache
-.....
 ###########################################3
                       CPU  (vCPU = 1 for t2.micro )
 
