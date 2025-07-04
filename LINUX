@@ -164,7 +164,10 @@ find /path -iname "filename"                    -iname for capital/small bagat n
 awk command is used for text processing
 awk '{print $1}' filename
 
-
+Command	Use (1 line difference)
+cat      	----Shows entire file content at once.
+head -5	  ----Shows first 5 lines of the file.
+less	    -----Opens file for scrollable viewing page by page.
 
 
 
