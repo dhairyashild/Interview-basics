@@ -1,14 +1,47 @@
+#####     SERVICE  COMMANDS
+Check if service is Active   I-A/L-U-F
+systemctl is-active nginx                                ===o/p=== inactive       
+systemctl list-unit-files| grep -i nginx.service         ===o/p=== docker.service          enabled          enabled
+                                                         ===o/p=== BLANK message if service not there
+
+List all unit files	include service , socket , mount
+- systemctl list-unit-files	                               ----- Lists all available services/units with = ENABLED / DISABLED
+- systemctl list-unit-files| grep -i ${service}.service    ----- gives 1 svc-name with = ENABLED / DISABLED
+      
+
+- systemctl start/stop/restart/status  nginx
+- systemctl enable/disable nginx
+
+# Show failed services	
+- systemctl --failed
+
+
+#######################################################################################################################################
 1) CHECK SERVICE ACTIVE OR NOT
 
 #!/bin/bash
 service=$1
-if systemctl is-active --quiet "$service"          #  its o/p is 0/nonzero
+if systemctl is-active --quiet "$service"        #  its o/p is 0/nonzero , because --quiet convert active/inactive into success/failure
 then
   echo "$service is active"
 else
   echo "$service is inactive"
 fi
 ---------------------------------------------------
+
+
+#!/binbash
+service=$1
+if ! systemctl list-unit-files| grep -i ${service}.service          #
+then
+echo "${service} not available , please install "
+sudo apt-get update -y
+sudo apt-get install -y "$service"
+fi
+---------------------------------------------------
+
+
+
 2) check if a file or directory exists
 
 #!/bin/bash
