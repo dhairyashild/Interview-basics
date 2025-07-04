@@ -169,8 +169,12 @@ cat      	----Shows entire file content at once.
 head -5	  ----Shows first 5 lines of the file.
 less	    -----Opens file for scrollable viewing page by page.
 
+--------------------
+hostname
+===========ubuntu-ip-172-31-45-123                     LINUX TYPE DEYO
 
-
+whoami
+=========== ubuntu                                     USER DETO
 
 
 
