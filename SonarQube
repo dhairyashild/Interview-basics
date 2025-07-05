@@ -1,3 +1,29 @@
+#########    MAVEN      ##############
+
+
+-build tool based on project object model
+-developer give source code + test cases + pom.xml
+-mvn read pom.xml , validates dependecy locally/ download from web 
+-src folder = main folder (java code) + test folder (for test)
+-pom.xml = 
+organisation id
+project name
+dependecy list = junit , sql-connector 
+
+
+#LIFECYCLE MVN = Creates following folder in target/
+validate = check project correct and have all info
+compile  = compile code=  /class
+test     = run tests   /surefire-reports
+package  = package code = /.jar /.war
+verify= verifypackage is real
+install= install on local repo
+deploy= on remote repo
+
+MVN PROFILE = Set multiple configuration for different env
+
+########################################################################################################################################
+
 SonarQube
               -  is an open-source platform for continuous inspection of code quality.
                - It supports static code analysis to find bugs,code smells &security  vulnerabilities  in various 
@@ -103,22 +129,20 @@ SYSTEM——— add server-authentication-token—-as secret text(sonar-token)
 -----------------------------------------------------------------------------
 LINKEDIN IMP
 
- each metric (ideal value in brackets) as a quick byte.
 
 → Code Coverage Percentage (> 80%): 
 Ensures a high proportion of your code is tested, reducing bugs. 
-
-→ Technical Debt Ratio (< 5%): 
-Measures how much code needs refactoring for maintainability. 
 
 → Number of Bugs (Ideally 0): 
 Counts coding errors needing fixes for functional integrity. 
 
 → Security Vulnerabilities (Minimal): 
 Identifies potential security risks needing attention. 
+eg. sql njection risk
 
 → Code Smells Count (Minimal): 
 Detects 'smelly' code that may need improvement for better readability. 
+-eg. unused var
 
 → Duplications Percentage (< 3%): 
 Highlights repeated code blocks that should be simplified. 
