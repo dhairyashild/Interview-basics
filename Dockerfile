@@ -183,4 +183,29 @@ CONCLUSION-- 1) U cant use same host port
  Dockerfile- instructions - Docker image
  Docker image - template  code+ dependencies-run application.
  container-  running instance of a Docker image 
+#################################################################################
+# Node.js ॲपसाठी बेस इमेज
+FROM node:20-alpine
+
+WORKDIR /app
+COPY package*.json ./
+RUN npm install #### बॅकएंड डिपेंडेंसी इन्स्टॉल करा
+COPY . . #### संपूर्ण Node.js कोड कॉपी करा
+
+EXPOSE 3000 #### ॲप्लिकेशन ज्या पोर्टवर चालू आहे तो एक्सपोज करा
+CMD ["node", "server.js"] #### तुमच्या ॲपची मुख्य एंट्री पॉइंट फाइल (उदा. app.js किंवा index.js)
+
+
+FROM node:20-alpine #### Base Node.js image
+WORKDIR /app #### Set the working directory
+COPY package*.json ./ #### Copy package files
+RUN npm install #### Install dependencies
+COPY . . #### Copy application code
+RUN npm run build #### Build the React app
+
+RUN npm install -g serve #### Install 'serve' globally to serve static files
+EXPOSE 3000 #### Expose port 3000 (default for 'serve')
+CMD ["serve", "-s", "build", "-l", "3000"] #### Serve the built assets
+
+
 
