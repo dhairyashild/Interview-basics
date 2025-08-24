@@ -300,3 +300,101 @@ The post ssection defines actions to run after the pipeline or stage completes, 
 -  shared libraries
 reusable scripts that can be used across multiple Jenkins pipelines.
 
+
+build after other projects are built  , other project will start to build 
+ stage('Trigger Downstream') {
+      steps {
+        build job: 'downstream-job-name'
+      }
+
+jenkins Pipeline you can give a timeout option for a specific stage
+1.20 timeout , 
+agent any
+    options {
+        timeout(time: 30, unit: 'MINUTES')  // Aborts the whole pipeline after 30 minutes
+    }
+
+
+
+execute concurrent build if necessary , means build parallel jobs depending on no. of executors
+stage('parallel tasks'){
+    parallel{
+    stage('stage1'){steps{echo"1st parallel jobs"}}
+    stage('stage2'){steps{echo"1st parallel jobs"}}
+    }} depending upon number of executors
+
+
+retry count ,3.14 3 times he tried after he gives fail error
+steps {
+        retry(count: 3) {
+            sh 'deploy-script.sh'
+        }
+
+
+use custom workspace
+1.29 workspace path ——> /var/lib/jenkins/workspace/<job-name> —-> jenkins make seperate workspace for eaach job
+
+
+mailor plugin first
+
+
+failure {
+            emailext(
+                subject: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' - Failed",
+                body: "Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]' has failed. Check the details at: ${env.BUILD_URL}",
+                recipientProviders: [[$class: 'DevelopersRecipientProvider']],
+                to: 'bhushandesai84@gmail.com,dhairyashild300@gmail.com'
+            )
+        }
+
+
+how to deploy blue green 
+rollback is easy & 0 downtime 
+57:16 added jenkins parameter paremeter{choice{name:'deploy_env', choices:['blue','green'],description:''}}
+1.06:06 if params.DEPLOY_ENV==BLUE—> DEPLOYMENT FILE = BLUE-DEPLOYMENT-FILE.YAML
+
+
+
+upload s3 backup of jenkins===== https://www.youtube.com/watch?v=9bjNxaQH89Y&t=641s
+install aws-cli 
+3.31 s3 publisher plugin
+4.30 amazon s3 profiles :—> give credentials —> profile name —> access key —> secret key —> 
+5.10 createe user group in aws named s3G —> select s3 amazon fullaccess 
+su - jenkins 
+zip -r jenkinsBackup .zip jenkins
+
+
+
+sakshi daily activities of devops in jenkins 
+1)  check daily failed build or not?
+2)  build taking longer time why?
+3)  maintenance/script issue 
+4)  jenkins agent perfroming correctly or not?
+5)  creds rotated & backups / plugins ok? , 
+6)  collaborate with developer
+7)  logs ok 
+
+
+-  What is a node block in Jenkins Pipeline?
+A node block specifies on which agent  pipeline or stage will ru
+
+
+-  update the values and helm install 
+-  helm upgrade <release-name> . <chart-name> -f values.yaml
+-  Verify the Updated Values —-> helm get values <release-name> -o yaml
+                                        helm upgrade my-app ./my-chart --set replicaCount=5
+
+
+sakshi daily activities
+1)  cluster maintenance , pod maintenance 
+2)  update 
+3)  helm charts working fine 
+4)  any isssue then rollbacks are working fine
+5)  terraform script to create k8s cluster improve 
+6)  volume & logging happened properly 
+7) lgging happened carefully 
+8) collaborate with developers & if issue in app code
+
+helm upgrade <release-name> <chart-name> --set config.config1=newvalue
+
+
