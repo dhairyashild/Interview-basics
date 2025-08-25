@@ -1,0 +1,14 @@
+learn
+- redis
+- docker and k8s
+- message queues
+- elastic search
+- websockets
+- distributed tracing
+- logging and monitoring
+- concurrency and race conditions
+- load balancers and circuit breakers
+
+you'll thank yourself later 😉 
+
+The best part is you can use docker to spin up local containers and write scripts to simulate how they handle scale and what are there limits wrt your hardware.
