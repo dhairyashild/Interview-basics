@@ -181,7 +181,7 @@ Container to container
 privileged=true   ----- mean have right to add/delete data
 volumes-from C1 ----- share from c1 with c2
 
-Now create volume by using command: 
+Create volume by using command on host & container with same name:/volume2 on EC2 will be accessible inside the container at /volume2
 #docker run -it --name container3 -v /volume2 ubuntu /bin/bash 
 
 2)   share volume between host (ec2) to container only via 
