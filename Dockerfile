@@ -11,10 +11,10 @@ ONLY ENTRYPOINT-- IT WILL RUN
 ONLY CMD-- IT WILL RUN
 BOTH USED == ENTRYPOINT sets main executable (e.g., java -jar), while CMD provides OVERIDABLE arguments 
 RUN executes commands at build time to create image layers, while ENTRYPOINT and CMD define what runs in the container at runtime
-
+########################################################################################################################################
 
 # COMLPETE DOCKER IN 1 COMMAND
-docker run -it -p 8080:8000 -p 80:80 -v /home/ubuntu/app:/app --network=<network> --privileged=true nginx /bin/bash
+docker run -it -p 8080:8000 -p 80:80 -v /home/ubuntu/app:/app --network=<network> --privileged=true nginx 
 
 commit  --
 diff
@@ -31,9 +31,13 @@ sudo ls /var/lib/docker/volumes
 ===  myvol
 
 # BIND MOUNT
-docker run -it -v /home/buntu/app:/app nginx /bin/bash
+docker run -it -v /home/buntu/app:/app nginx 
+###########################################################################
+ # when use /bin/bash or bash 
+1- avoid using bash
+2-/bin/bash only with docker exec 
+3- normally not need anything at end to run normal container
 
- 
 ######################################################################
 EXEC     === ONLY RUN COMMAND K8S+DOCKER
 EXEC -IT ==== ENTER IN K8S+DOCKER
