@@ -34,7 +34,7 @@ sudo ls /var/lib/docker/volumes
 docker run -it -v /home/buntu/app:/app nginx 
 ###########################################################################
  # when use /bin/bash or bash 
-1- avoid using bash
+1- avoid using bash in docker but use -- bash for pod
 2-/bin/bash only with docker exec 
 3- normally not need anything at end to run normal container
 
