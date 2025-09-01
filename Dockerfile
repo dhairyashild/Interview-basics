@@ -1,3 +1,6 @@
+CMD == command/args overidable , 
+ENTRYPOINT  == fixed command
+
 CMD         == default command/args (e.g. CMD ["java", "-jar", "app.jar"]), overridable at runtime
 ENTRYPOINT  == sets a fixed command, treating extra args as parameters to it. 
 When would you use ENTRYPOINT over CMD== to always run java -jar app.jar ,ensuring consistency.
