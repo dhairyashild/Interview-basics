@@ -6,6 +6,19 @@ aws iam
 Secrets Manager
 Security Group Rules: Restrict network access to Jenkins, EKS nodes, and databases at the firewall level.
 
+Artifacts:Produced files from build pipelines 
+JARs, 
+Docker images
+
+SATS and DATS:
+ System Acceptance Tests (SATS) validate overall requirements; Data Acceptance Tests (DATS) verify data integrity and formats.
+
+Finding errors in pipelines:
+Jenkins dashboards and alert integrations.
+Review pipeline logs, 
+job status, and error messages; 
+
+
 
 
 TROTTLE BUILD—minimum time for next builds
