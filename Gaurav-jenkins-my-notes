@@ -1,5 +1,13 @@
 http://url:8080/github-webhook/
 
+jenkins cicd seuriry?
+sonarqube
+aws iam
+Secrets Manager
+Security Group Rules: Restrict network access to Jenkins, EKS nodes, and databases at the firewall level.
+
+
+
 TROTTLE BUILD—minimum time for next builds
 
 Execute concurrent builds if necessary
