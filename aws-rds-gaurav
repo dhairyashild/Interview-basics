@@ -34,7 +34,74 @@ postgresql aurora - 3 times fast
 
 
 
+################################gpt 
 
+Java बेस्ड एप्लिकेशनमध्ये AWS RDS जोडण्यासाठी आणि EKS मध्ये वापरण्यासाठी आवश्यक संसाधने आणि माहिती खालीलप्रमाणे आहे:
+
+EKS Resource ज्यात RDS info द्यायचा:
+Kubernetes Secret: RDS डेटाबेसचा username आणि password सुरक्षित ठेवण्यासाठी (kubectl create secret generic).
+
+ConfigMap किंवा Deployment YAML:
+
+RDS endpoint (DNS name)
+
+पोर्ट (default 3306 MySQL साठी)
+
+डेटाबेस नाव
+
+यूजरनेम आणि पासवर्ड (की Secret मधून रिट्रीव केला जातो)
+
+Deployment Resource: Java app च्या कंटेनर मध्ये JDBC URL मध्ये हा RDS endpoint, पोर्ट आणि username/password ऐड करणे.
+
+RDS संबंधित माहिती (required):
+RDS Endpoint URL (e.g., mydb.xxxx.region.rds.amazonaws.com)
+
+पोर्ट नंबर (MySQL साठी 3306)
+
+डेटाबेस नाव
+
+यूजरनेम
+
+पासवर्ड (हे सुरक्षिततेसाठी Kubernetes Secret मध्ये ठेवा)
+
+स्टेप्स (संक्षेप):
+AWS मध्ये RDS इंस्टन्स तयार करा (MySQL/PostgreSQL, etc.)
+
+RDS ची Endpoint URL, पोर्ट, username,password मिळवा
+
+EKS मध्ये Secret तयार करा पासवर्डसाठी:
+
+text
+kubectl create secret generic rds-secret --from-literal=username=youruser --from-literal=password=yourpassword
+Deployment YAML मध्ये env vars किंवा configmap मध्ये RDS config भरा:
+
+text
+env:
+  - name: RDS_ENDPOINT
+    value: your-rds-endpoint.amazonaws.com
+  - name: RDS_PORT
+    value: "3306"
+  - name: RDS_DB_NAME
+    value: yourdbname
+  - name: RDS_USERNAME
+    valueFrom:
+      secretKeyRef:
+        name: rds-secret
+        key: username
+  - name: RDS_PASSWORD
+    valueFrom:
+      secretKeyRef:
+        name: rds-secret
+        key: password
+Java app मध्ये JDBC connection स्ट्रिंग कशी ठेवायची:
+
+text
+jdbc:mysql://<RDS_ENDPOINT>:<PORT>/<DB_NAME>
+Java कोडमध्ये Datasource किंवा JDBC driver वापरून कनेक्शन सेट करा
+
+Pod मध्ये kubectl apply -f deployment.yaml करून deploy करा
+
+हे मुख्य points EKS मध्ये RDS जोडण्यासाठी लागतात.
 
 
 
