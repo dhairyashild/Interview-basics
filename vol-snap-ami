@@ -1,0 +1,113 @@
+
+VOLUME  ——> ACTION
+
+1- create       /     2- delete
+
+3- modify
+
+4- attach      /     5-detach   
+
+6- create snap
+
+7- create snap lifecycle policy
+OR EBS——>LIFECYCLE MANAGER
+
+
+
+
+
+
+###################################################################################################################################
+SNAP — RECYCLE BIN —-EBS/AMI CHA—-10 DAY (KARAN 10D MDE CHUK KALATE)- CREATE RETENTION RULE
+#################sudo 
+snap —> action— >
+
+1-Create volume from snapshot  —> enter az
+
+u can increase size 
+but u can change az 
+but u can't change region here for this u have to use COPY SNAP
+
+
+2- Create image from snapshot —> 
+
+Architecture 86*64
+EBS —> u can change SIZE and volume type (gp2/3 ....)
+
+3- snap —> action—>  copy snap —-> enter destination region
+
+4- snap —-> action —>snap setting —>  modify permission —>  add acoount —> enter account id
+
+(copy  snap  —> change region 
+modify permission —> share with other accounts)
+
+
+5- Recycle bin for ami & snap
+Retention rules—with time upto which deleted item must keep1 to 365 days
+
+Recycle bin —-resstore any deleted snap/ami
+
+
+
+
+###################################################################################################################################
+
+
+
+
+AMI—ACTION—-
+
+COPY —SHARE WITH REGION
+
+EDIT AMI PERMI—- SHARE WITH AWS ACOOUNTS
+
+DELETE AMI—DEREGISTER AMI —-THEN DELETE SNAP
+###################################################################################################################################
+create snap —> tags 
+
+
+purchase reserve instance for  1-3 years so u will get discount 
+use spot instance for non production 
+autoscale
+aws calculator
+create ebs with minimum size we can increase ebs but can't reduce it 
+release elastic ip 
+delete ami and snapsshot
+reduce instance size
+Implement CloudWatch and AWS Budgets for Cost Monitoring
+aws budget
+upgrade rds and k8 version 
+old version can cost a lot
+###################################################################################################################################
+COST REDUCTION  --- RESERVE1-3YR , SPOT FOR NONPROD , RELEASE UNWANTED AMI/SNAP/EIP, UPDATED EKS-HPA+AUTOSCALER/RDS , 
+
+
+
+purchase RESERVE instance for  1-3 years so u will get discount 
+use spot instance for non production 
+autoscale
+aws calculator
+create ebs with minimum size we can increase ebs but can't reduce it 
+release elastic ip 
+delete ami and snapsshot
+reduce instance size
+Implement CloudWatch and AWS Budgets for Cost Monitoring
+aws budget
+upgrade rds and k8 version 
+old version can cost a lot
+
+
+###################################################################################################################################
+
+###################################################################################################################################
+
+###################################################################################################################################
+
+###################################################################################################################################
+
+###################################################################################################################################
+
+###################################################################################################################################
+
+###################################################################################################################################
+
