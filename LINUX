@@ -16,7 +16,7 @@ sudo apt autoremove
 2)  High CPU Usage
 
 Identify culprit process: 
-top
+htop                                                                             lscpu
 
 Kill process: 
 kill -9 <PID>                      # -9  = by force
