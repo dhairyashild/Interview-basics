@@ -2,7 +2,7 @@
 
 
 -build tool based on project object model
--developer give source code + test cases + pom.xml
+-developer give source code + test cases + pom.xml(dependency required list)
 -mvn read pom.xml , validates dependecy locally/ download from web 
 -src folder = main folder (java code) + test folder (for test)
 -pom.xml = 
