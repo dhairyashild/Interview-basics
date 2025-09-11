@@ -25,7 +25,7 @@ MVN PROFILE = Set multiple configuration for different env
 ########################################################################################################################################
 
 SonarQube
-              -  is an open-source platform for continuous inspection of code quality.
+              -  is an open-source platform for static code analysis.
                - It supports static code analysis to find bugs,code smells &security  vulnerabilities  in various 
 programming languages.
 
