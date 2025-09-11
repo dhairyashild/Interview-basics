@@ -75,7 +75,7 @@ stages {
        We can make custome profile set as default
 
 ###QUALITY GATES
-                                     checkpoint in a project to ensure specific quality criteria are met before moving to the next phase, preventing issues and ensuring standards.
+                Condition in a project to ensure specific quality criteria are met before moving to the next phase, preventing issues and ensuring standards.
 There is deafult quality gate 
 create new gates 
 add condition
