@@ -24,7 +24,15 @@ REMEMBER SARANSH== describe pod for mount path + storage class & provisioner che
 
 
 
+how to change the instance type in an EKS cluster? 
+  REMEMBER --- new nodegroup --- old cordon ten drain -- 
 
+we cant do for running k8s node so create new nodegroup with required instance type
+Modify the managed node group's configuration to specify the new instance type (via AWS Console, CLI, or IaC).
+EKS automatically starts a rolling update – it launches new nodes with the new instance type.
+EKS cordons and drains the old nodes, gracefully evicting pods to the new nodes without downtime.
+Old instances are terminated after being successfully drained.
+Requirement: Pods must have resource requests/limits defined for the scheduler to bin-pack them correctly onto the new nodes.
 
 
 
