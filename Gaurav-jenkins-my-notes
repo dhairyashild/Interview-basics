@@ -418,4 +418,9 @@ sakshi daily activities
 
 helm upgrade <release-name> <chart-name> --set config.config1=newvalue
 
+##############################################   EXTRA NOTES FOR GPT & OTHER     ################################################
 
+
+Q---Automatically Update Jenkins Location URL 
+1) After EC2 Reboot (Dynamic Public IP Support)--THERE SI SCRIPT U MUST RUN TO AUTO UPDATE NEW IP BUT USE BELOW METHOD NOT THIS 
+2) best solution is use elastic ip for jenkins
