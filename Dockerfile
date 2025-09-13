@@ -1,3 +1,11 @@
+Q. Difference between a Multistage Dockerfile and a Distroless Dockerfile 1 LINE
+A Multistage Dockerfile uses multiple FROM statements to separate build and runtime environments for a smaller image, 
+while a Distroless Dockerfile is a single, final runtime stage that contains only the application and its absolute runtime dependencies, 
+stripping out even the OS shell and package manager.
+################################################
+
+
+
 CMD == command/args overidable , 
 ENTRYPOINT  == fixed command
 
