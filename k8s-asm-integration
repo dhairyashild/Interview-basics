@@ -1,0 +1,137 @@
+---
+# Prerequisites: 
+# 1. AWS EKS Cluster with IAM OIDC Provider configured
+# 2. AWS Secrets Manager Secret named 'my-java-db-secret' with keys 'username' and 'password'
+# 3. EKS Cluster has AWS Secrets & Config Provider (CSI Driver) installed
+# 4. IAM Role with necessary permissions to access the secret
+
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: myapp-sa
+  namespace: production
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/myapp-secrets-access-role
+---
+apiVersion: secrets-store.csi.x-k8s.io/v1
+kind: SecretProviderClass
+metadata:
+  name: aws-asm-secrets
+  namespace: production
+spec:
+  provider: aws
+  secretObjects:
+  - secretName: my-java-db-secret
+    type: Opaque
+    data:
+    - objectName: "username"
+      key: db_user
+    - objectName: "password" 
+      key: db_pass
+  parameters:
+    objects: |
+      - objectName: "arn:aws:secretsmanager:us-east-1:123456789012:secret:my-java-db-secret-ABC123"
+        objectType: "secretsmanager"
+        objectAlias: "username"
+      - objectName: "arn:aws:secretsmanager:us-east-1:123456789012:secret:my-java-db-secret-ABC123"
+        objectType: "secretsmanager"
+        objectAlias: "password"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: java-app
+  namespace: production
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: java-app
+  template:
+    metadata:
+      labels:
+        app: java-app
+    spec:
+      serviceAccountName: myapp-sa
+      containers:
+      - name: java-app
+        image: 123456789012.dkr.ecr.us-east-1.amazonaws.com/my-java-app:latest
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - name: secrets-store-inline
+          mountPath: "/mnt/secrets"
+          readOnly: true
+        env:
+        - name: DB_USERNAME_FILE
+          value: "/mnt/secrets/username"
+        - name: DB_PASSWORD_FILE
+          value: "/mnt/secrets/password"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "500m"
+        livenessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        readinessProbe:
+          httpGet:
+            path: /actuator/health
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
+      volumes:
+      - name: secrets-store-inline
+        csi:
+          driver: secrets-store.csi.k8s.io
+          readOnly: true
+          volumeAttributes:
+            secretProviderClass: "aws-asm-secrets"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: java-app-service
+  namespace: production
+spec:
+  selector:
+    app: java-app
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
+
+#######################################################################
+# Required IAM Policy for myapp-secrets-access-role:
+
+
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Effect": "Allow",
+            "Action": [
+                "secretsmanager:GetSecretValue",
+                "secretsmanager:DescribeSecret"
+            ],
+            "Resource": "arn:aws:secretsmanager:us-east-1:123456789012:secret:my-java-db-secret-ABC123"
+        }
+    ]
+}
+
+#######################################################################
+
+Setup Instructions:
+Replace all placeholders (123456789012, us-east-1, my-java-db-secret-ABC123) with your actual values
+
+Deploy to your EKS cluster: kubectl apply -f production-deployment.yaml
+
+Verify secrets are mounted: kubectl exec -it <pod-name> -n production -- cat /mnt/secrets/username
