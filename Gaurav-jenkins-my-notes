@@ -424,3 +424,120 @@ helm upgrade <release-name> <chart-name> --set config.config1=newvalue
 Q---Automatically Update Jenkins Location URL 
 1) After EC2 Reboot (Dynamic Public IP Support)--THERE SI SCRIPT U MUST RUN TO AUTO UPDATE NEW IP BUT USE BELOW METHOD NOT THIS 
 2) best solution is use elastic ip for jenkins
+
+
+####################################SLAVE NODE SET UP
+SLAVE NODE SET UP
+
+1)  CREATE master jenkins is in prod and jenkins agent is in 4 clusters (dev,stage, preprod , prod ) 
+  - connect master with slave by ip ,  so we should do vpc peering or transit gateway ,
+   each cluster will have diffrent aws creds and kubeconfig
+
+2)   jenkins agent will have assume role ,docker aws cli and helm installed 
+
+-  master is in prod environment cluster , 4 cluster is in 4 diff account  
+-  rather than using parameter multibranch pipeline is better --> Account and cluster isolation,
+   Security separation --> limited accidental deloyments 
+
+
+
+
+Prerequisites on Jenkins slave node to run those commands, numbered for clarity.
+
+Java Runtime Environment (JRE): Required to run the Jenkins agent itself.
+Terraform CLI: The binary must be installed and available on the system PATH.
+AWS CLI Version 2: Essential for executing any aws commands and for IAM-based authentication.
+kubectl: The Kubernetes command-line tool, configured with the correct context for your EKS cluster (configuration can be dynamic within the pipeline).
+Helm CLI: The package manager for Kubernetes, required to run helm commands.
+Docker Engine: Required to build, pull, and push container images. The Jenkins user must have permission to run Docker commands.
+Maven: Must be installed and configured on the PATH for building Java applications.
+SonarScanner CLI: Required to perform code analysis and send results to the SonarQube server. (Often used as a Maven plugin, but the CLI is more flexible).
+JFrog CLI (Optional but Recommended): Simplifies interaction with Artifactory for uploading build artifacts, resolving dependencies, and managing Docker registries.
+
+####################################
+
+111 jenkins agent error solutins? ==Agent disconnected  / Authentication failed
+-Agent disconnected —firewall blocking port (master 8080 & slave 22)      +     Relaunch agent
+- Authentication failed — Wrong or missing credentials
+-Mark this node temporarily offline and again relaunch
+- agetns logs -- gives ConnectionRefusedException + OutOfMemoryError + ....
+
+REMEMBER SARANSH --- LOGS  + RELANUCH AGENT + PORT 22 + JAVA INSTALLED + RAM(OOM)
+####################################
+101. troubleshoot Jenkins “Out of Memory” errors? 
+Answer: 
+Increase JVM heap size (-Xmx), 
+clean old builds, 
+archive artifacts to external storage
+
+#################################### 
+REMEMBER ===POST { failure{ emailext(subject + body +  recipientProviders: + to  )}+ success+    always{cleanWs()}
+
+
+  post {
+        always {
+            cleanWs() // Clean workspace
+            // Archive important logs
+            archiveArtifacts artifacts: '**/target/*.log, **/terraform/*.log', allowEmptyArchive: true
+        }
+        success {
+            // Success Notification
+            emailext (
+                subject: "SUCCESS: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
+                body: """Build and Deployment to PROD was successful.
+                Image: ${ECR_REPO_URI}:${IMAGE_TAG}
+                Build URL: ${env.BUILD_URL}""",
+                to: 'devops-team@yourcompany.com'
+            )
+        }
+        failure {
+            // Failure Notification
+            emailext (
+                subject: "FAILED: ${env.JOB_NAME} [${env.BUILD_NUMBER}]",
+                body: """Build or Deployment failed. Please investigate.
+                Build URL: ${env.BUILD_URL}console""",
+                to: 'bhushandesai84@gmail.com,dhairyashild300@gmail.com,devops-alerts@yourcompany.com'
+            )
+        }
+    }
+
+
+https://plugins.jenkins.io/email-ext/
+
+####################################
+
+
+####################################
+
+
+
+
+####################################
+
+
+
+
+####################################
+
+
+
+
+####################################
+...
+.
+
+
+
+
+####################################
+
+
+
+
+
+####################################
+
+
+
+
+####################################
