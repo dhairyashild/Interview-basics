@@ -32,53 +32,26 @@ First four and last IP addresses of a subnet cannot be assigned:
 10.0.0.2: Reserved by AWS as the IP address of the DNS server.
 10.0.0.3: Reserved for future use.
 10.0.0.255: Broadcast address.
-######################
-
-# Load Balancer Interview Notes
-
-# How to Load Balance Traffic:
- With LB: Use a Load Balancer.
- Without LB: Use Route 53's DNS failover feature to route traffic based on health checks.
-
-# Route 53 DNS Failover:
- Automatically routes traffic away from unhealthy resources to healthy ones by monitoring the health of endpoints.
-
-# What is a Load Balancer and Types:
- Load Balancer (LB): Distributes incoming traffic among multiple servers to prevent overload.
- Application Load Balancer (ALB): Layer 7, supports host-based and path-based routing, ideal for microservices.
- Network Load Balancer (NLB): Layer 4, handles high-performance TCP/UDP traffic with low latency.
- Classic Load Balancer (CLB): Legacy option for basic load balancing across EC2 instances.
-
-# What is ELB:
- ELB evenly distributes incoming traffic among servers for high availability.
-
-# Difference Between Internet-Facing and Internal ELB:
- Internet-Facing ELB: Publicly accessible, routes traffic from the internet to backend targets, has public IPs/DNS names.
- Internal ELB: Accessible only within the VPC, designed for internal applications, has private IPs/DNS names.
-
-whichmetric get automatic and which metric need to set up just names onnly which required for devops must need names to tell in interview
 
 
-आपोआप मिळणारे मेट्रिक्स (Auto-collected metrics):
+######################        
+REMEMBER   === RM REMOVE FILE IN S3  , RB DELETE FULL BUCKET
 
-CPUUtilization (CPU वापर)
 
-NetworkIn (इनबाउंड नेटवर्क ट्रॅफिक)
+# 1. Create a bucket
+aws s3 mb s3://my-bucket-name --region us-east-1
 
-NetworkOut (आउटबाउंड नेटवर्क ट्रॅफिक)
+# 2. List buckets
+aws s3 ls
 
-DiskReadBytes, DiskWriteBytes (डिस्क I/O)
+# 3. Upload an object
+aws s3 cp myfile.txt s3://my-bucket/
 
-DiskReadOps, DiskWriteOps (डिस्क ऑपरेशन्स)
+# 4. Download an object
+aws s3 cp s3://my-bucket/myfile.txt .
 
-सेटअप करावे लागणारे मेट्रिक्स (Metrics needing setup - DevOps साठी आवश्यक):
+# 5. Delete an object
+aws s3 rm s3://my-bucket/myfile.txt
 
-MemoryUtilization (मेमरी वापर)
-
-DiskUtilization (फाइलसिस्टम डिस्क वापर)
-
-SwapUtilization (स्वॅप वापर)
-
-ProcessCount (चालू प्रोसेसची संख्या)
-
-Application-specific metrics (तुमच्या ॲप्लिकेशनचे कस्टम मेट्रिक्स, उदा. रिक्वेस्ट पर सेकंड, क्यू लेन्थ)
+# 6. Delete a bucket (WARNING: This deletes all contents permanently)
+aws s3 rb s3://my-bucket-name --force
