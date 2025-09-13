@@ -1,8 +1,4 @@
-101. troubleshoot Jenkins “Out of Memory” errors? 
-Answer: 
-Increase JVM heap size (-Xmx), 
-clean old builds, 
-archive artifacts to external storage
+
 
 
 110. How do you implement immutable infrastructure with Terraform? 
@@ -11,14 +7,6 @@ Replace resources instead of modifying
 → Use create_before_destroy lifecycle rule 
 → Store infra definitions in Git.
 
-
-111 jenkins agent error solutins? ==Agent disconnected  / Authentication failed
--Agent disconnected —firewall blocking port (master 8080 & slave 22)      +     Relaunch agent
-- Authentication failed — Wrong or missing credentials
--Mark this node temporarily offline and again relaunch
-- agetns logs -- gives ConnectionRefusedException + OutOfMemoryError + ....
-
-REMEMBER SARANSH --- LOGS  + RELANUCH AGENT + PORT 22 + JAVA INSTALLED + RAM(OOM)
 
 
 107. How do you debug failed persistent volume (PV) mounts in Kubernetes? 
