@@ -51,6 +51,14 @@ provider "helm" {
   }
 }
 
+#LIFECYCLE RULES USECASES--
+create_before_destroy: ASGs, Load Balancers, stateful resources
+prevent_destroy: Database instances, critical infrastructure
+ignore_changes: Auto-scaling properties, tags, computed attributes
+replace_triggered_by: Resources with complex dependencies
+
+
+
 prevent_destroy =
 
 -जर तुम्ही Terraform EC2 मध्ये prevent_destroy = true जोडले, तर ते terraform destroy कमांडपासून संरक्षित होते.
