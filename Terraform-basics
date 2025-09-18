@@ -21,7 +21,7 @@ IAC - Practice of mng infra as code
 why terra- iac   multicloud   hcl -simple
 terra ur use = ec2 eks  s3 vpc 
 terraform -v
-Terraform v1.12.0                     =======latest
+Terraform v1.13.0                     =======latest
 https://releases.hashicorp.com/terraform/
 
 Provider: Plugin to interact with cloud or service APIs (AWS, Azure, etc.).
