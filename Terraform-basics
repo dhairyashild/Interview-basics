@@ -1,7 +1,6 @@
 
 
-IAC - Practice of mng infra as code
-why terra- iac   multicloud   hcl -simple
+why terra- infra as code  +   multicloud  +  hcl -simple
 terra ur use = ec2 eks  s3 vpc 
 terraform -v
 Terraform v1.13.0                     =======latest
