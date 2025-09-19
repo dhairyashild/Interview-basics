@@ -159,6 +159,28 @@ conf dir = dir with .tf files
 
 T refresh = read current infra & update tfstate only  ( not conf file/ infra)
 
+Here are the AWS infrastructure changes that typically require terraform refresh to update the state file:
+
+Compute--
+EC2 Instance (manual start/stop/terminate), ASG (manual scaling events), ECS Services (manual task count changes),Lambda Function (manual code/config changes)
+
+Networking--
+SG (manual rule additions/removals),NACLs (manual rule changes), Route Tables (manual route additions),ELB/ALB (manual listener changes)
+
+Storage
+S3 Buckets (manual file uploads/deletes),EBS Volumes (manual snapshot creation), EFS (manual file system changes)
+
+Database
+RDS (manual backup/restore, parameter changes),DynamoDB (manual throughput changes)
+
+IAM & Security
+IAM Policies (manual policy attachments), Roles (manual trust policy changes)
+
+Other Services
+CloudWatch Alarms (manual state changes), SNS Topics (manual subscriptions), SQS Queues (manual configuration changes)
+
+
+
 T import = bring manualy created existing infra state-file
         =Rebuild state when state file is lost or corrupted, allowing for recovery of existing resources without starting from scratch.
 process - provider + conf file + init + import +plan to check must not add new ?
