@@ -12,10 +12,36 @@ provisioner = feature to execute command and scripts on resources already create
 Module: Reusable CODE of Terraform configurations.
 
 T import = bring manualy created existing infra state-file / recreate corrupted statefile
+1—-import {
+  to = "aws_instance.example_ec2"
+  id = "i-0abcd1234efgh5678"  # Replace with your EC2 instance ID
+}
 
 Variable: parameterize Input value for configuration (string, number, etc.).
 
 Output: Display Value retrieved  from resource.
+
+# T refresh = read current infra & update tfstate only  ( not conf file/ infra)
+
+terra apply -target='aws_instance.<resource_name>'
+
+terraform.lock.hcl         ## delete this file if want to update provider version
+
+terraform module registry == public  registry where provider and community share modules
+
+junior deletes statefiel
+import every resource
+create again terra aply
+When using remote state, Terraform does not maintain a local state file by default. 
+
+resource "null_resource" " {}
+trigger {id= timestamp()}           # instance id
+provisioner
+-run 1 st only then run only if trigger value changes
+- Null means resource does not exists on any cloud aws, azure gcp ....
+- execute shell , ansible playbook , local m/c commands
+
+
 
 Workspace: feature allows work with multi env with same conf files
 #LIFECYCLE RULES USECASES--
