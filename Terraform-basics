@@ -93,10 +93,19 @@ resource "aws_instance" "web" {
   instance_type = "t2.micro"
   key_name      = "my-key"
 
-  # local-exec: Runs on your local machine
+  # local-exec: Runs on your local machine below 1 command and then multiple commands
   provisioner "local-exec" {
     command = "echo ${self.public_ip} > instance_ip.txt"
   }
+
+provisioner "local-exec" {
+  command = <<-EOT
+    echo ${self.public_ip} > instance_ip.txt
+    echo 'Instance created' >> instance_ip.txt
+    date >> instance_ip.txt
+  EOT
+}
+
 
   # remote-exec: Runs on the remote EC2 instance
   provisioner "remote-exec" {
