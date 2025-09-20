@@ -11,7 +11,9 @@ most concise action plan for each major storage ------------
 1. Docker Storage (/var/lib/docker/)
 docker system prune
 2. Jenkins Artifacts (/var/lib/jenkins/)
-Jenkins Job → Configure → General → Discard Old Builds
+Jenkins Job → Configure → General → Discard Old Builds / Do not allow concurrent builds/ This project is parameterize ......
+                        → Build Triggers
+                        → pipeline
 
 Clean Up Package Cache:-- [/var/cache/apt/archives/] dir grow large, especially if you frequently install and upgrade S/W.Commands delets .deb files download with s/w downloads.
 sudo apt clean
