@@ -122,7 +122,12 @@ sudo usermod -aG docker $USER                ---permission denied error solved
 newgrp docker                                -- Force group changes to apply      
 groups                                      -------Verify user all groupnames
 
-
+# BELOW IS BEST TO GIVE MULTIPLE RUN IN SINGLE RUN WITH MULTIPLE COMMANDS
+RUN command1 && \
+    command2 
+    
+# AVOID BELOW GIVE IN 1  LINE ALL
+RUN command1 && command2 && command3
 
 
 
