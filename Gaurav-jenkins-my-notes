@@ -1,30 +1,23 @@
 http://url:8080/github-webhook/
 
 jenkins cicd seuriry?
+MASTER ECURITY
+RBAC
+SG
 sonarqube
 aws iam
 Secrets Manager
-Security Group Rules: Restrict network access to Jenkins, EKS nodes, and databases at the firewall level.
 
-Artifacts:Produced files from build pipelines 
-JARs, 
-Docker images
+NODE SECURITY==
+DIVIDE EC2 IN SUBNETS 
+pin pipelines to specific labels 
+RBAC=Only grant Configure permissions on nodes to admins 
+SG
 
-SATS and DATS:
- System Acceptance Tests (SATS) validate overall requirements; Data Acceptance Tests (DATS) verify data integrity and formats.
-
+# ERROR ==
 Finding errors in pipelines:
-Jenkins dashboards and alert integrations.
-Review pipeline logs, 
-job status, and error messages; 
-
-
-
-
-TROTTLE BUILD—minimum time for next builds
-
-Execute concurrent builds if necessary
-               same job build multiple times (max executors set kelat tevde salag build suru hotat)
+Jenkins dashboards(job status) and alert integrations.
+pipeline logsfor error messages; 
 
 1. Long Build Time--Use parallel stages
 2.. Jenkins Slaves --Check SSH keys, firewall-22, ,Jenkins master logs
@@ -42,6 +35,18 @@ cleanup
 
 8.  Pipeline Stuck at Certain Stage --Check if stage has input block
 9.  Email Notifications Not Working -- check smtp setting
+
+
+
+Artifacts:Produced files from build pipelines =JARs, Docker images
+
+SATS and DATS: System Acceptance Tests validate overall requirements; Data Acceptance Tests (DATS) verify data integrity and formats.
+
+TROTTLE BUILD— minimum time for next builds
+
+Execute concurrent builds if necessary
+               same job build multiple times (max executors set kelat tevde salag build suru hotat)
+
 
 PROJECT—-ENV—-STAGE
 4vid-build quque and build executors status -- show job running or not 
