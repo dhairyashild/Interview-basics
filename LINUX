@@ -188,6 +188,33 @@ hostname
 whoami
 =========== ubuntu                                     USER DETO
 
+####################################
+
+USERS -- ROOT  + NORMAL + SYSTEM
+useradd dd             ===/home/dd + uid + gid +/etc/password made entry + same name primary group banto
+userdel dd
+groupdel dd
+
+passwd dd   =====2 times same password dya to set hoto
+cat /etc/passwd   ======all users
+id dd  == uid + gid + groupd deto
+
+
+alternative --config java
+
+
+tcpdump -i etho port 443      =========check network traffic on port
+
+
+
+
+
+
+
+
+
+
+
 
 
 
