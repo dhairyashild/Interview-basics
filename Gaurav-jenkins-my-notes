@@ -4,15 +4,15 @@ jenkins cicd seuriry?
 MASTER SECURITY
 RBAC
 SG
-sonarqube
 aws iam
 Secrets Manager
 
 NODE SECURITY==
-DIVIDE EC2 IN SUBNETS 
-pin pipelines to specific labels 
 RBAC=Only grant Configure permissions on nodes to admins 
 SG
+DIVIDE EC2 IN SUBNETS 
+pin pipelines to specific labels 
+
 
 # ERROR ==
 Finding errors in pipelines:
