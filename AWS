@@ -1,3 +1,292 @@
+###LOST PEM KEY SOLUTION 
+1 TAKE AMI AND CREATE NEW INSTANCE FROM IT AND USE THAT INSTANCE BUT IP GET CHANGED
+2 FROM EBS--(detach--add new ebs .ssh folder)
+DETACH 1ST EC2 EBS
+ATTACH IT TO NEW 2ND EC2
+COPY .SSH FOLDER FROM NEW EC2 TO OLD EC2 EBS
+DETACH OLD EC2 EBS 
+AGAIN ATTACH TO OLD EC2
+THEN USE KEY OF NEW EC2 TO CONNECT
+
+######################################################################
+
+aws configure  ====default user if not given any user
+aws configure --profile devops   ====specific username
+then give keys
+
+AWS_DEFAULT_PROFILE= dhairyashil ====to set new default user
+keys are saved in the file           ~/.aws/credentials
+######################################################################
+VPCs) with overlapping CIDR blocks in the same region on AWS is possible, but it comes with  limitations
+
+overlapping CIDR blocks do not cause conflicts unless you attempt to route traffic between them or connect them directly.
+######################################################################
+EC2 Instance Connect 
+Purpose: Allows connections to EC2 instances that have public IP
+
+EC2 Instance Connect Endpoint: 
+connections to instances in a private subnet without requiring  public IP  or Gateway (IGW)
+##main use to remove bastion host
+
+
+######################################################################
+VOLUME  ——> ACTION
+
+1- create       /     2- delete
+
+3- modify
+
+4- attach      /     5-detach   
+
+6- create snap
+
+7- create snap lifecycle policy
+OR EBS——>LIFECYCLE MANAGER
+######################################################################
+
+SNAP — RECYCLE BIN —-EBS/AMI CHA—-10 DAY (KARAN 10D MDE CHUK KALATE)- CREATE RETENTION RULE
+#################sudo 
+snap —> action— >
+
+1-Create volume from snapshot  —> enter az
+
+u can increase size 
+but u can change az 
+but u can't change region here for this u have to use COPY SNAP
+
+
+2- Create image from snapshot —> 
+
+Architecture 86*64
+EBS —> u can change SIZE and volume type (gp2/3 ....)
+
+3- snap —> action—>  copy snap —-> enter destination region
+
+4- snap —-> action —>snap setting —>  modify permission —>  add acoount —> enter account id
+
+(copy  snap  —> change region 
+modify permission —> share with other accounts)
+
+
+5- Recycle bin for ami & snap
+Retention rules—with time upto which deleted item must keep1 to 365 days
+
+Recycle bin —-resstore any deleted snap/ami
+######################################################################
+AMI  — SNAP (AUTOMATIC)
+INSTANCE——IMAGE & TEMPLATES—— CREATE AMI
+LAUNCH INSTANCE —- MY AMI ( QUICK START JAGI )
+
+AMI—ACTION—-
+COPY —SHARE WITH REGION
+EDIT AMI PERMI—- SHARE WITH AWS ACOOUNTS
+
+DELETE AMI—DEREGISTER AMI —-THEN DELETE SNAP
+######################################################################
+## COST CUTTING
+
+create snap —> tags 
+
+
+purchase reserve instance for  1-3 years so u will get discount 
+use spot instance for non production 
+autoscale
+aws calculator
+create ebs with minimum size we can increase ebs but can't reduce it 
+release elastic ip 
+delete ami and snapsshot
+reduce instance size
+Implement CloudWatch and AWS Budgets for Cost Monitoring
+aws budget
+upgrade rds and k8 version 
+old version can cost a lot
+######################################################################
+
+Cloud DNS routing patterns 👇
+
+Each pattern enables distinct traffic routing methods.
+
+1. Simple:
+Route 100% of the traffic to a single resource
+
+2. Weighted:
+Specify the % of requests for a specific resource
+
+Fun fact: If all resources have weight=0, traffic is evenly distributed
+
+3. Failover:
+- Used for DR purposes, active-passive setup with resource health checks
+- On primary health check failure, requests auto-routed to secondary
+
+4. Latency Based:
+Redirect users to low-latency resource regions
+
+Fun fact: Not always closest region to the user
+
+5. Geolocation:
+- Route traffic by user location
+- Matched users routed to pre-configured locations; default location redirects no-match locations
+
+Use case: OTT platforms use this to restrict programs based on the user location
+
+6. Geoproximity:
+- Shifts traffic based on a bias.
+- To allow more traffic (bias range: 1 to 99)
+- To shrink traffic (bias range: -1 to -99)
+######################################################################
+
+## ROUTE 53
+domain
+human readable address used to access website or service on the internet it consist of  name and top level domain extension (like .com ,.org)
+
+dns :——> 
+act as the internet translator , converting human readable websites names into ip.
+
+route53
+Amazon Route 53 is a DNS service by AWS that routes internet traffic to resources based on domain names.
+
+Amazon rote 53:——> 
+- Amazon Route53 to register new domains, transfer existing domains,
+-route traffic request to ur servers—— > a record ,cname record
+-Check the health of your resources. 
+
+
+
+When you register a domain with Route 53:—->
+-  creates a hosted zone that has the same name as your domain.
+- assign a set of four name servers to the hosted zone unique to the account
+- name servers inform the browser where to find your resources to web server or s3 bucket
+
+AWS supports:
+1. Generic top level domains         ——>   .com , .net
+2. Geographic top level domain    ——>   .in for india , .cn for china 
+
+Registering a domain with Route 53:
+-  register a domain with Route 53 if the TLD is included in list of aws
+
+ NOTE:
+ Each Amazon Route 53 account is limited to a maximum of 500 hosted zones and
+10,000 resource record sets per hosted zone.
+
+Steps to Configure Route 53:
+- register a domain, this can be Route 53 or another DNS registrar 
+- Create hosted zone on Route 53 —-> automatically if using route 53
+
+delegating to route 53
+
+- Update your domain registrar with the correct name servers for your Route 53 hosted
+zone.
+-  when u migrate from  1 dns to another —-> 24 hours
+
+
+Route 53 Hosted Zone:
+- collection of records for a specific domain.
+- records —-> how you want traffic to be routed
+- for each public ——> ns record(same name as hosted zone) —-> authoratative ns  , SOA record
+- four name servers(delegation set)  ,Do not add, change ns
+
+Route 53 as your Authoritative DNS:
+
+- update ns to domain registrar ——> Route 53 will be responsible to respond to DNS
+queries for the hosted zone.
+
+- can create more than one hosted zone with the same name and add different records
+
+- Route 53 assigns four name servers to every hosted zone.different from each other.
+
+- Route 53 never returns values for records in other hosted zones that have the same
+name.
+
+***If you are currently using another DNS service and you want to migrate to Amazon Route
+53:
+- creating a hosted zone. , Update your registrar’s 
+
+***********Transferring a domain between accounts within AWS:
+by contacting aws support center
+
+*********Migrating a hosted zone to a different AWS account:
+
+
+
+Supported DNS record types by Route 53:
+
+- A record:  Address record- maps domain name to IP
+
+- AAAA record- IPv6 address record: maps domain name to an IPv6 address
+
+A/AAAA are called host records
+
+- CNAME Record: Canonical Name Record - maps an alias domain name to another canonical (primary) domain name
+
+- NS record- name server record used for delegating zone to a name server.
+
+-  SOA record- start of authority record.
+
+- MX record- mail exchange: defines where to deliver mail for user@
+
+
+
+Start of Authoritative (SOA) Record:
+- Every single zone ——> only one SOA
+- not an actual record, but includes owner, authoritative server , serial number (incremental with changes to the zone data ) , TTL
+
+
+CNAME Record Type:
+- can’t create a CNAME record for the root domain (or zone apex) cant for cns.com
+- can create CNAME records for www.cns.com
+-  it you create a CNAME record for a subdomain, you cannot create any other
+   records for that subdomain.
+
+
+AWS Route 53 Routing Policies:
+
+1.  Simple Routing (default)
+2.  Failover Routing
+3.  Geo Location Routing
+4.  Multi Value Routing
+5.  Latency based Routing
+6.  Weighted Routing
+7.  Geo-Proximity
+
+Weighted Based Policy:
+-  purposes — load balancing and testing new versions of software. from 1 to 255. not as percentage
+
+
+Failover Routing:
+-  resource is not healthy - route traffic to a different resource.
+-  can route traffic to S3 bucket to a complex tree of records
+-  for public hosted zone only
+
+
+Geo Location Routing:
+-  based on the geographic location of the user
+-  benefits -> your website in the language of your user’s.
+
+
+Latency Based Routing::—->
+-  serving request from ec2 region lowest latency.
+-  can create a latency based record for each load balancer.
+######################################################################
+
+
+######################################################################
+
+
+######################################################################
+
+######################################################################
+
+
+######################################################################
+
+######################################################################
+
+
+######################################################################
+
+
+
+
 Network Address Translation 
 
 Classless Inter-Domain Routing
