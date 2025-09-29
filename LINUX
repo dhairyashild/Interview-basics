@@ -205,7 +205,21 @@ alternative --config java
 
 tcpdump -i etho port 443      =========check network traffic on port
 
+##################################                    TROUBLESHOOT               #################################
 
+
+# REMOVE ANY PACKAGE== Stop service, purge package, remove files. Done.
+sudo systemctl stop docker  
+sudo apt-get purge docker-ce docker-ce-cli containerd.io -y  
+sudo apt-get autoremove -y  
+sudo rm -rf /var/lib/docker /var/lib/containerd /etc/docker  
+
+sudo systemctl stop jenkins  
+sudo apt-get remove --purge jenkins -y  
+sudo rm -rf /var/lib/jenkins  
+sudo rm /etc/apt/sources.list.d/jenkins.list  
+sudo apt-get update  
+----------------------------------------------------------------
 
 
 
