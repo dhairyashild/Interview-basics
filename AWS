@@ -1,35 +1,4 @@
-###LOST PEM KEY SOLUTION 
-1 TAKE AMI AND CREATE NEW INSTANCE FROM IT AND USE THAT INSTANCE BUT IP GET CHANGED
-2 FROM EBS--(detach--add new ebs .ssh folder)
-DETACH 1ST EC2 EBS
-ATTACH IT TO NEW 2ND EC2
-COPY .SSH FOLDER FROM NEW EC2 TO OLD EC2 EBS
-DETACH OLD EC2 EBS 
-AGAIN ATTACH TO OLD EC2
-THEN USE KEY OF NEW EC2 TO CONNECT
 
-######################################################################
-
-aws configure  ====default user if not given any user
-aws configure --profile devops   ====specific username
-then give keys
-
-AWS_DEFAULT_PROFILE= dhairyashil ====to set new default user
-keys are saved in the file           ~/.aws/credentials
-######################################################################
-VPCs) with overlapping CIDR blocks in the same region on AWS is possible, but it comes with  limitations
-
-overlapping CIDR blocks do not cause conflicts unless you attempt to route traffic between them or connect them directly.
-######################################################################
-EC2 Instance Connect 
-Purpose: Allows connections to EC2 instances that have public IP
-
-EC2 Instance Connect Endpoint: 
-connections to instances in a private subnet without requiring  public IP  or Gateway (IGW)
-##main use to remove bastion host
-
-
-######################################################################
 VOLUME  ——> ACTION
 
 1- create       /     2- delete
@@ -42,67 +11,80 @@ VOLUME  ——> ACTION
 
 7- create snap lifecycle policy
 OR EBS——>LIFECYCLE MANAGER
-######################################################################
 
-SNAP — RECYCLE BIN —-EBS/AMI CHA—-10 DAY (KARAN 10D MDE CHUK KALATE)- CREATE RETENTION RULE
-#################sudo 
-snap —> action— >
+############################################################################# 
+                                                                                                                   #  snap —> action— >
 
-1-Create volume from snapshot  —> enter az
+1-Create volume from snapshot  —> enter az                                                                         # 1-Create volume from snapshot  —> enter az 
 
 u can increase size 
 but u can change az 
 but u can't change region here for this u have to use COPY SNAP
 
 
-2- Create image from snapshot —> 
+2- Create image from snapshot —>                                                                                   # 2- Create image from snapshot —>                                  
 
 Architecture 86*64
 EBS —> u can change SIZE and volume type (gp2/3 ....)
 
-3- snap —> action—>  copy snap —-> enter destination region
+3- snap —> action—>  copy snap —-> enter destination region                                                        # 3- copy snap —-> enter destination region                                                             
 
-4- snap —-> action —>snap setting —>  modify permission —>  add acoount —> enter account id
+4- snap —-> action —>snap setting —>  modify permission —>  add acoount —> enter account id                        # 4-—>snap setting —>modify permission —>add acoount—>enter account id                                                                                                                
 
 (copy  snap  —> change region 
 modify permission —> share with other accounts)
 
 
-5- Recycle bin for ami & snap
+5- Recycle bin for ami & snap                                                                                     5- Recycle bin for ami & snap                                                 
 Retention rules—with time upto which deleted item must keep1 to 365 days
 
 Recycle bin —-resstore any deleted snap/ami
 ######################################################################
-AMI  — SNAP (AUTOMATIC)
+AMI  — SNAP (AUTOMATIC CREATED)                                                                                  ## LIKE ABOVE 2 
 INSTANCE——IMAGE & TEMPLATES—— CREATE AMI
 LAUNCH INSTANCE —- MY AMI ( QUICK START JAGI )
 
 AMI—ACTION—-
-COPY —SHARE WITH REGION
-EDIT AMI PERMI—- SHARE WITH AWS ACOOUNTS
+COPY —SHARE WITH REGION                                                                                        # COPY —SHARE WITH REGION         
+EDIT AMI PERMI—- SHARE WITH AWS ACOOUNTS                                                                       # EDIT AMI PERMI—- SHARE WITH AWS ACOOUNTS           
 
-DELETE AMI—DEREGISTER AMI —-THEN DELETE SNAP
+DELETE AMI—DEREGISTER AMI —-THEN DELETE SNAP                                                                   # DELETE AMI—DEREGISTER AMI —-THEN DELETE SNAP 
 ######################################################################
-## COST CUTTING
+SNAP — RECYCLE BIN —-EBS/AMI CHA—-10 DAY (KARAN 10D MDE CHUK KALATE)- CREATE RETENTION RULE
 
-create snap —> tags 
-
-
-purchase reserve instance for  1-3 years so u will get discount 
-use spot instance for non production 
-autoscale
-aws calculator
-create ebs with minimum size we can increase ebs but can't reduce it 
-release elastic ip 
-delete ami and snapsshot
-reduce instance size
-Implement CloudWatch and AWS Budgets for Cost Monitoring
-aws budget
-upgrade rds and k8 version 
 old version can cost a lot
 ######################################################################
+###LOST PEM KEY SOLUTION                                                                                                       
+1 TAKE AMI AND CREATE NEW INSTANCE FROM IT AND USE THAT INSTANCE BUT IP GET CHANGED
+2 FROM EBS--(detach--add new ebs .ssh folder)
+DETACH 1ST EC2 EBS
+ATTACH IT TO NEW 2ND EC2
+COPY .SSH FOLDER FROM NEW EC2 TO OLD EC2 EBS
+DETACH OLD EC2 EBS 
+AGAIN ATTACH TO OLD EC2
+THEN USE KEY OF NEW EC2 TO CONNECT
 
-Cloud DNS routing patterns 👇
+######################################################################
+
+VPCs) with overlapping CIDR blocks in the same region on AWS is possible, but it comes with  limitations
+
+overlapping CIDR blocks do not cause conflicts unless you attempt to route traffic between them or connect them directly.
+######################################################################
+EC2 Instance Connect (EIC)===                                                                                                           ## REMEMBER == 
+Purpose: Allows connections to EC2 instances that have public IP                                                                                    EIC==
+                                                                                                                                                    EIC ENDPOINT
+EC2 Instance Connect Endpoint:                                                                                                                      SESSION MANAGER
+connections to instances in a private subnet without requiring  public IP  or Gateway (IGW)                                                         
+##main use to remove bastion host
+
+ Use Session Manager:
+IAM (AmazonSSMManagedInstanceCore policy)+ SSM SESSION START WITH COMMAND
+
+######################################################################
+
+
+
+Cloud DNS routing patterns 👇                                                                                 ## SIMPLE+ WEIGHTED + FAILOVER +GEOLOCATION + GEOPROXEMITY + LATENCYBASED
 
 Each pattern enables distinct traffic routing methods.
 
@@ -287,60 +269,8 @@ Latency Based Routing::—->
 
 
 
-Network Address Translation 
 
-Classless Inter-Domain Routing
-
-listener port 80 redirect to 
-         port 443 to target group
-
-Elastic IP (EIP):
-EIP is region-specific.
-You can attach it even when the instance is running, so stopping the instance is not required.
-Requires Instance ID and Private IP from the instance.
-All machines or IPs in one VPC can communicate with each other within that VPC without internet, even if they are on different subnets.
-
-VPC:
-VPC is a private space within a cloud computing platform where you can securely run your applications and store data while having full control over the network and access permissions.
-Maximum 5 VPCs per region.
-Maximum 5 Elastic IPs per region.
-Once a VPC is created, you cannot change its CIDR block.
-Subnets within a VPC cannot overlap.
-
-Subnet:
-Short for "subnetwork," it is a smaller logical division of an IP network.
-Enhances network security by isolating different parts of a network, limiting the scope of potential security breaches, and providing better control over network access.
-Public subnet's traffic is routed to an Internet Gateway (IGW) via IP tables.
-Private subnet uses NAT for internet access (no IGW).
-Allowed block sizes are between /16 to /28.
-
-Reserved Subnet IPs:
-First four and last IP addresses of a subnet cannot be assigned:
-10.0.0.0: Network address.
-10.0.0.1: Reserved by AWS for the VPC router.
-10.0.0.2: Reserved by AWS as the IP address of the DNS server.
-10.0.0.3: Reserved for future use.
-10.0.0.255: Broadcast address.
 
 
 ######################        
-REMEMBER   === RM REMOVE FILE IN S3  , RB DELETE FULL BUCKET
 
-
-# 1. Create a bucket
-aws s3 mb s3://my-bucket-name --region us-east-1
-
-# 2. List buckets
-aws s3 ls
-
-# 3. Upload an object
-aws s3 cp myfile.txt s3://my-bucket/
-
-# 4. Download an object
-aws s3 cp s3://my-bucket/myfile.txt .
-
-# 5. Delete an object
-aws s3 rm s3://my-bucket/myfile.txt
-
-# 6. Delete a bucket (WARNING: This deletes all contents permanently)
-aws s3 rb s3://my-bucket-name --force
