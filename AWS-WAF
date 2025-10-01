@@ -1,0 +1,110 @@
+#AWS WAF PROTECTS                  (MURALI NOTES)
+1- ALB ONLY NOT NLB
+2- CLOUDFRONT
+3- API
+
+Web ACL: Costs $5.00 per month, prorated hourly.
+Rule: Costs $1.00 per month, prorated hourly.
+Request: Costs $0.60 per 1 million requests
+
+IN FREE ALSO FOR BOT CONTROL 5000 REQUESTS ARE FREE
+
+
+
+
+
+
+BLOCK rule: Instantly blocks specific IPs permanently from ALL access
+RATE LIMIT rule: Temporarily blocks IPs only after they exceed request limits on SPECIFIC paths for given time (5min) then automatically get access again
+
+
+
+#################################                             RAHUL WAGH SHORT NOTES + EXTENDED GPT NOTES FOR BLOCK + ALLOW/BLOCK PARTICULAR IP NOTES                  #############################
+REMEMBER---------
+# BLOCK PARTICULAR IP SET + GIVE PARTICULAR IP SET ACCESS TO UR WEBSITE(WHITE-LISTING)
+STEPS
+WAF---CREATE IP_SET RANGE
+WAF--WACL---ADD MY OWN RULE---ROLETYPE=IP_SET---
+------------SET rule----review rule ---save
+---------------------------------------------------------
+# BLOCK PARTICULAR IP SET
+# STEPS:
+
+# 1. Create IP Set
+WAF → IP sets → Create IP set
+Name: block-malicious-ips
+Type: IPV4
+Addresses: 192.0.2.0/24, 203.0.113.0/24
+
+# 2. Create Web ACL Rule
+WAF → Web ACLs → Your Web ACL → Rules → Add rules → Add my own rules
+Rule type: IP set
+Name: block-malicious-ips-rule
+IP set: block-malicious-ips
+Action: Block
+
+# 3. Save Rule
+Review → Add rule → Save
+------------------------------------------------------------
+# WHITELIST PARTICULAR IP SET (ALLOW ACCESS)
+# STEPS:
+
+# 1. Create IP Set  
+WAF → IP sets → Create IP set
+Name: allow-trusted-ips
+Type: IPV4
+Addresses: 10.0.0.0/8, 172.16.0.0/12
+
+# 2. Create Web ACL Rule
+WAF → Web ACLs → Your Web ACL → Rules → Add rules → Add my own rules
+Rule type: IP set
+Name: allow-trusted-ips-rule
+IP set: allow-trusted-ips
+Action: Allow
+
+# 3. Set Higher Priority than Block Rules
+Priority: 1 (Top priority - processes first)
+
+# 4. Save Rule
+Review → Add rule → Save
+####################################################################################################################################################
+####################################### RATE LIMITING JUST READ 1 ST EXAMPLE AS ALL 3 SAME WORK===# 1. RATE LIMIT FOR LOGIN ENDPOINTS (Prevent brute force) ##################################
+
+
+# RATE LIMITING: Blocks 1 user IP accessing specific URL paths exceeding limit in given time, returns 403 error
+
+# 1. RATE LIMIT FOR LOGIN ENDPOINTS (Prevent brute force)
+# Blocks: 100 requests/5min PER IP address
+# Protects: Authentication endpoints from brute force attacks
+# Sample URLs blocked:
+# - https://yourapp.com/login
+# - https://yourapp.com/api/auth/signin
+# Effect: Single user IP gets 403 after 100 login attempts in 5 minutes
+
+# 2. RATE LIMIT FOR API ENDPOINTS (Protect APIs)  
+# Blocks: 500 requests/5min PER IP address
+# Protects: All API endpoints from abuse/DoS
+# Sample URLs blocked:
+# - https://yourapp.com/api/users/*
+# - https://yourapp.com/api/orders/*
+# Effect: Single user IP gets 403 after 500 API calls in 5 minutes
+
+# 3. RATE LIMIT FOR ACTUATOR ENDPOINTS (Spring Boot protection)
+# Blocks: 50 requests/5min PER IP address
+# Protects: Spring Boot monitoring endpoints
+# Sample URLs blocked:
+# - https://yourapp.com/actuator/health
+# - https://yourapp.com/actuator/metrics  
+# Effect: Single user IP gets 403 after 50 actuator calls in 5 minutes
+
+# ALL RULES: Per-IP basis, not global limit
+# YOU DECIDE: Adjust limits based on your customer traffic patterns
+
+==========
+# If user at IP 192.168.1.100 makes:
+# - 101 login attempts in 5 minutes → 403 error on login
+# - 501 API calls in 5 minutes → 403 error on APIs  
+# - 51 actuator calls in 5 minutes → 403 error on actuator
+# All other users continue normal access
+
+####################################################################################################################################################
