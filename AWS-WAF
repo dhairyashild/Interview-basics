@@ -108,3 +108,142 @@ Review → Add rule → Save
 # All other users continue normal access
 
 ####################################################################################################################################################
+
+# DDoS PROTECTION WITH AWS WAF
+# WHAT: Blocks Distributed Denial of Service attacks that flood your application
+
+# STEPS:
+
+# 1. ENABLE ANTI-DDoS MANAGED RULE (PAID)
+WAF → Web ACLs → Your Web ACL → Rules → Add rules → Add managed rule groups
+Rule group: AntiDDoS Protection for Layer 7 attacks
+Cost: $20/month + usage fees
+Capacity: 50 WCU
+Action: Block
+
+# 2. ADD AWS MANAGED RULE GROUPS FOR BASELINE PROTECTION
+WAF → Web ACLs → Your Web ACL → Rules → Add rules → Add managed rule groups
+Rule group: AWSManagedRulesCommonRuleSet (Free)
+Rule group: AWSManagedRulesAmazonIpReputationList (Free) 
+Rule group: AWSManagedRulesAnonymousIpList (Free)
+Action: Block
+
+# 3. ADD FREE RATE-BASED RULE (CUSTOM)
+WAF → Web ACLs → Your Web ACL → Rules → Add rules → Add my own rules
+Rule type: Rate-based rule
+Name: ddos-rate-limit
+Rate limit: 2000
+Action: Block
+
+# 4. SET PRIORITY
+Priority: After IP whitelist rules
+
+# 5. Save Rules
+Review → Add rules → Save
+
+# PROTECTION LAYERS:
+# - AntiDDoS Rule: Advanced Layer 7 attack detection
+# - AWS Managed Rules: Baseline security (SQLi, XSS, bad IPs)
+# - Rate-based Rule: Basic request flooding protection
+####################################################################################################################################################
+
+# GEO-BLOCKING IN AWS WAF
+# WHAT: Blocks/Allows traffic based on country/region
+
+# STEPS:
+
+# 1. CREATE GEO-MATCH RULE
+WAF → Web ACLs → Your Web ACL → Rules → Add rules → Add my own rules
+Rule type: Geo match rule
+Name: block-countries
+Region: Country codes (CN, RU, KR, etc.)
+Action: Block
+
+# 2. SET PRIORITY (High for blocking)
+Priority: After whitelist, before other rules
+
+# 3. Save Rules
+Review → Add rule → Save
+
+# SENIOR DEVOPS MUST KNOW:
+# - Legal compliance (GDPR, data sovereignty)
+# - Business impact (blocking legitimate users)
+# - CDN edge locations may affect geo-detection
+# - Use allow lists instead of block lists when possible
+# - Monitor for false positives in logs
+# - Combine with other rules for layered security
+
+# EXAMPLE:
+# Block: China, Russia, North Korea
+# Allow: Only US, Canada, India (for compliance)
+
+####################################################################################################################################################
+# SQL INJECTION PROTECTION IN AWS WAF
+# STEPS:
+
+# 1. ADD FREE RULE GROUPS
+WAF → Web ACLs → Your Web ACL → Rules → Add rules → Add managed rule groups
+→ Free rule groups
+→ Select: Core rule set (700 WCU)
+→ Action: Block
+
+WAF → Web ACLs → Your Web ACL → Rules → Add rules → Add managed rule groups  
+→ Free rule groups
+→ Select: SQL database (200 WCU)
+→ Action: Block
+
+# 2. ADD PAID RULE GROUPS (OPTIONAL)
+WAF → Web ACLs → Your Web ACL → Rules → Add rules → Add managed rule groups
+→ AWS managed rule groups
+→ Select: F5, Imperva, or Fortinet (Paid)
+→ Action: Block
+
+# 3. SET PRIORITY
+Priority: Free rules first, then paid rules
+
+# 4. Save Rules
+Review → Add rules → Save
+
+# WCU INFO: Core (700) + SQL (200) = 900/1500 used
+# Max Web ACL capacity: 1500 WCU - Plan your rules accordingly
+####################################################################################################################################################
+
+
+
+####################################################################################################################################################
+
+
+
+####################################################################################################################################################
+
+
+####################################################################################################################################################
+
+
+
+
+####################################################################################################################################################
+
+
+
+####################################################################################################################################################
+
+
+
+####################################################################################################################################################
+
+
+####################################################################################################################################################
+
+
+
+####################################################################################################################################################
+
+
+
+
+####################################################################################################################################################
+
+
+
+####################################################################################################################################################
