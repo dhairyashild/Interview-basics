@@ -220,15 +220,34 @@ sudo rm -rf /var/lib/jenkins
 sudo rm /etc/apt/sources.list.d/jenkins.list  
 sudo apt-get update  
 ----------------------------------------------------------------
+soft link====Shortcuts to deep directory paths=
+If original deleted → broken link
+ln -s /original/file /path/to/softlink
+
+# Without softlink:
+cd /opt/company/projects/team-alpha/backend/src/main/java/com/app/controllers
+
+# With softlink - create shortcut:
+ln -s /opt/company/projects/team-alpha/backend/src/main/java/com/app/controllers ~/dev-controllers
+
+# Now access directly:
+cd ~/dev-controllers
+ls ~/dev-controllers
 
 
+HARD LINK== Hardlink = Synced files pointing to same data (copy of imp files)
 
+# Create hardlink  
+ln original.txt hardlink.txt
 
+# Delete original
+rm original.txt
 
+# Result:
+cat softlink.txt  # Error: broken link
+cat hardlink.txt  # Works: shows "hello"
 
-
-
-
+----------------------------------------------------------------
 
 
 
