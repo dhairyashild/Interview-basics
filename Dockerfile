@@ -47,8 +47,8 @@ docker run -it -v /home/buntu/app:/app nginx
 3- normally not need anything at end to run normal container
 
 ######################################################################
-EXEC     === ONLY RUN COMMAND K8S+DOCKER
-EXEC -IT ==== ENTER IN K8S+DOCKER
+EXEC     === ONLY RUN COMMAND DOCKER( command ) + K8S ( -- command)
+EXEC -IT ==== ENTER IN DOCKER(/bin/bash ) + K8S( -- bash) 
 
 # Docker: Run command from outside
 docker exec <container-name/id> <command>
@@ -57,14 +57,14 @@ docker exec e5 ls
 # Docker: Enter inside container (new process)
 docker exec -it <container-name/id> /bin/bash            (     /bin/bash         bash       donhi chalate bash la slash nahi)
 
-# Docker: Attach to main process of container
-docker attach <container-name-or-id>
-
 # Kubernetes: Run command from outside
 kubectl exec <pod-name> -- <command>
 
 # Kubernetes: Enter inside container
 kubectl exec -it <pod-name> -- bash
+
+# Docker: Attach to main process of container
+docker attach <container-name-or-id>
 ##########################################################################
 
 
