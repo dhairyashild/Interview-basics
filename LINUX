@@ -16,7 +16,7 @@ sudo apt autoremove
 2)  High CPU Usage
 
 Identify culprit process: 
-htop                                                                             lscpu
+htop                                                                             lscpu gives cores of cpu like 1 core and xen hyperviser & 1 page not need info
 
 Kill process: 
 kill -9 <PID>                      # -9  = by force
