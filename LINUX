@@ -1,4 +1,18 @@
 ##################################                    TROUBLESHOOT               #################################
+2)  High CPU Usage
+
+Identify culprit process: nproc and lscpu for getting core core info
+htop                                                    nproc=1 core         /                lscpu gives detailed cores of cpu like 1 core and xen hyperviser & 1 page not need info
+
+Kill process: 
+kill -9 <PID>                      # -9  = by force
+
+
+## CPU  (vCPU = 1 for t2.micro )
+
+nproc                   --------   give Vcpu 
+htop                    ---------   to check percentage usage of cpu
+--------------------------------------------------
 1)  DISK SPACE FULL
 
 Check disk usage: 
@@ -13,15 +27,7 @@ sudo apt clean
 Remove Unused Packages:
 sudo apt autoremove
 ----------------------------------------------------------------
-2)  High CPU Usage
 
-Identify culprit process: 
-htop                                                                             lscpu gives cores of cpu like 1 core and xen hyperviser & 1 page not need info
-
-Kill process: 
-kill -9 <PID>                      # -9  = by force
-
---------------------------------------------------
  RAM
 
 -ram = for t2.micro 1gb
@@ -117,10 +123,7 @@ du -sh /path/to/directory
 #####################################
 
 ###########################################3
-                      CPU  (vCPU = 1 for t2.micro )
 
-nproc                   --------   give Vcpu 
-htop                    ---------   to check percentage usage of cpu
 ################################################
 tar -cvzf archive.tar.gz file1 file2
 Creates a .tar.gz compressed archive containing file1 and file2.
@@ -143,8 +146,6 @@ kill  pid
 userdel devops  ——-> to delete user and delete related files
 
 groupdel devops
-
-ipconfig    /    ip a      ===give pvt ip that bind to ec2 pub ip
 
 free -h             —- ram
 lscpu               —-gives cpu 
