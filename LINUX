@@ -26,13 +26,13 @@ kill -9 <PID>                      # -9  = by force
 
 -ram = for t2.micro 1gb
 
-1) free -h            
+1) free -h         ===== quick, human-readable summary   
  -----------####  check LAST available=549 Mi is imp
                total        used        free      shared  buff/cache   available
 Mem:           957Mi       407Mi       153Mi       932Ki       571Mi       549Mi
 
 
-2) cat /proc/meminfo
+2) cat /proc/meminfo  ==== MemAvailable from /proc/meminfo is most accurate free memory estimate.
 MemTotal:         980376 kB
 MemFree:          156736 kB
 MemAvailable:     562876 kB    #### this is imp..  ---MemAvailable =MemFree + cache
