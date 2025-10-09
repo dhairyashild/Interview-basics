@@ -19,22 +19,41 @@ Finding errors in pipelines:
 Jenkins dashboards(job status) and alert integrations.
 pipeline logsfor error messages; 
 
-1. Long Build Time--Use parallel stages
-2.. Jenkins Slaves --Check SSH keys, firewall-22, ,Jenkins master logs
-3. Missing credentials or wrong ID ==="Manage Jenkins → Credentials", 
+1. workspace lock issue 
+-- delete that build pipeline-name ==== /var/lib/jenkins/workspace/pipeline-name 
+
+
+2. JENKINS BUILD STUCK IN QUEQU
+-- check executors
+-- agents are offline
+
+
+3. out of memory error ==== no heap space
+-- sudo systemctl edit jenkins
+ENV=  Java-opts= xmx 200m                 ====ram
+ps -aux| grep jenkins
+
+
+4. Long Build Time--Use parallel stages
+
+5. Jenkins Slaves --Check SSH keys, firewall-22, ,Jenkins master logs
+
+6. Missing credentials or wrong ID ==="Manage Jenkins → Credentials", 
 pass correct ID
-4. Plugin Issues (Missing, Conflicts, Errors) 
+
+7. Plugin Issues (Missing, Conflicts, Errors) 
 Check “Updates”--Update/downgrade plugin
 
-5. Environment Variable Not Recognized --
+8. Environment Variable Not Recognized --
 syntax
 Access using ${VAR_NAME} or env.VAR_NAME 
 
-7. Jenkins Workspace Full
+9. Jenkins Workspace Full
 cleanup
 
-8.  Pipeline Stuck at Certain Stage --Check if stage has input block
-9.  Email Notifications Not Working -- check smtp setting
+10.  Pipeline Stuck at Certain Stage --Check if stage has input block
+
+11.  Email Notifications Not Working -- check smtp setting
 
 
 
