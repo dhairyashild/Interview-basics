@@ -4,3 +4,8 @@
 
 require full application server (like Tomcat or Jetty)                            Smaller  docker images
 within the Docker image, leading to larger image sizes
+
+
+
+When you create a Service of type LoadBalancer, Kubernetes automatically registers the instances (usually EC2 instances) running your pods or the service endpoints 
+(depending on the type of service) with the target group associated with the load balancer.
