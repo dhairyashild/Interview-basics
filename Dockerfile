@@ -21,10 +21,10 @@ ENTRYPOINT  == sets a fixed command, treating extra args as parameters to it.
 RUN executes commands at build time to create image layers, while ENTRYPOINT and CMD define what runs in the container at runtime
 ########################################################################################################################################
 
-# COMLPETE DOCKER IN 1 COMMAND
+# COMLPETE DOCKER IN 1 COMMAND (JUST KNOW ONLY NETWORK NEED DOUBLE DASH --network )
 docker run -it -p 8080:8000 -p 80:80 -v /home/ubuntu/app:/app --network=<network> --privileged=true nginx 
 
-commit  --
+commit 
 diff
 build -t
 port 
@@ -42,9 +42,10 @@ sudo ls /var/lib/docker/volumes
 docker run -it -v /home/buntu/app:/app nginx 
 ###########################################################################
  # when use /bin/bash or bash 
-1- avoid using bash in docker but use -- bash for pod
-2-/bin/bash only with docker exec 
-3- normally not need anything at end to run normal container
+1- normally not need anything at end to run normal container
+2- avoid using bash in docker but use -- bash for k8s pod
+3-/bin/bash only with docker exec 
+
 
 ######################################################################
 EXEC     === ONLY RUN COMMAND DOCKER( command ) + K8S ( -- command)
@@ -122,9 +123,12 @@ sudo usermod -aG docker $USER                ---permission denied error solved
 newgrp docker                                -- Force group changes to apply      
 groups                                      -------Verify user all groupnames
 
-# BELOW IS BEST TO GIVE MULTIPLE RUN IN SINGLE RUN WITH MULTIPLE COMMANDS
+# BELOW IS BEST TO GIVE MULTIPLE RUN IN SINGLE RUN WITH MULTIPLE COMMANDS -- ( both are correct)
 RUN command1 && \
     command2 
+
+RUN command1 && \
+command2                            
     
 # AVOID BELOW GIVE IN 1  LINE ALL
 RUN command1 && command2 && command3
