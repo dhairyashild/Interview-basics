@@ -1,7 +1,7 @@
 Q. Difference between a Multistage Dockerfile and a Distroless Dockerfile 1 LINE
-A Multistage Dockerfile uses multiple FROM statements to separate build and runtime environments for a smaller image, 
-while a Distroless Dockerfile is a single, final runtime stage that contains only the application and its absolute runtime dependencies, 
-stripping out even the OS shell and package manager.
+A Multistage Dockerfile uses multiple FROM statements to separate BUILD and RUNTIME ENVironments for a smaller image, 
+while a Distroless = single runtime stage that contains only the app and its runtime dependencies, 
+stripping out OS , shell and package manager.
 ################################################
 
 
@@ -11,13 +11,13 @@ ENTRYPOINT  == fixed command
 
 CMD         == default command/args (e.g. CMD ["java", "-jar", "app.jar"]), overridable at runtime
 ENTRYPOINT  == sets a fixed command, treating extra args as parameters to it. 
-When would you use ENTRYPOINT over CMD== to always run java -jar app.jar ,ensuring consistency.
-What if only CMD is set with java -jar app.jar and you pass a command at runtime?	The runtime command fully replaces the CMD
-Can you set multiple ENTRYPOINT instructions for Java in 1 Dockerfile?	No, only the last ENTRYPOINT is used
-Give a Dockerfile example using both for Java.	ENTRYPOINT ["java", "-jar"]; CMD ["app.jar"]
-ONLY ENTRYPOINT-- IT WILL RUN
-ONLY CMD-- IT WILL RUN
-BOTH USED == ENTRYPOINT sets main executable (e.g., java -jar), while CMD provides OVERIDABLE arguments 
+-When would you use ENTRYPOINT over CMD== to always run java -jar app.jar ,ensuring consistency.
+-What if only CMD is set with java -jar app.jar and you pass a command at runtime?	The runtime command fully replaces the CMD
+-Can you set multiple ENTRYPOINT instructions for Java in 1 Dockerfile?	No, only the last ENTRYPOINT is used
+-Give a Dockerfile example using both for Java.	ENTRYPOINT ["java", "-jar"]; CMD ["app.jar"]
+-ONLY ENTRYPOINT-- IT WILL RUN
+-ONLY CMD-- IT WILL RUN
+-BOTH USED == ENTRYPOINT sets main executable (e.g., java -jar), while CMD provides OVERIDABLE arguments 
 RUN executes commands at build time to create image layers, while ENTRYPOINT and CMD define what runs in the container at runtime
 ########################################################################################################################################
 
