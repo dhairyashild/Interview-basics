@@ -55,7 +55,31 @@ else
 fi
 
 
-##########################        SARANSH - GAURAV SHELL         ###########################
+##########################        SARANSH - GAURAV SHELL         #################################################################################
+# VARIABLE
+
+1- var="program"                  ## no space on either side of =
+   VAR="hi"                       ## var & VAR have different
+
+2- $var and ${var}     both are correct to call var value but use ${var} because u can add(cocat) any value to it 
+var="program"
+echo${var}-ing                     ## 
+programing
+
+3- system var  
+env                                ## this command show all system var in linux
+-----------------------------------------------------------------------------------
+4 INPUT
+
+read 
+read -p " message as prompt"  varname
+
+#!/bin/bash
+read name
+read -p "give password " -s password            # -s do not show password while u type it on prompt
+echo "my name ${name}"
+echo "my pass ${password} "
+-----------------------------------------------------------------------------------------------------------------------------------------
 VID-7
 # create ON NEW LINE             -e "    \n     "
 echo -e "1st-word\n 2nd-LATER WORDS"                   ===========
@@ -70,37 +94,123 @@ echo "1st-word\
 << disclaimer
 disclaimer
 
+-----------------------------------------------------------------------------------------------------------------------------------------
+vid 10-System Defined Variable 
+
+#!/bin/bash
+env          # PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin HOME=/home/ubuntu USER=ubuntu
+echo ${HOME} # /home/ubuntu
+echo $OSTYPE # linux-gnu
+echo $PATH   # /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+echo $$      # 2541 (current shell PID)
+echo $PPID   # 2530 (parent process PID)
+echo $PWD    # /home/ubuntu/projects
+echo $HOSTNAME # ip-172-31-12-34 (EC2 internal hostname)
+echo $UID    # 1000 (ubuntu user ID)
+UID="5000"   # 
+echo $UID    # 5000 (custom override)
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+vid-11
+read -p "prompt for user" var-name-in-which--user-given-value-stored
+read -p "password" -s var         # -s used when password typed by user not show while typing , but show with echo ${var}
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+vid-12- Command Line Arguments
+#!/bin/bash
+name="ram"          # this is 1 argument mean ${1} , this can be overriden by using ./shell.sh shyam 32
+age="30"         # this is 2 argument mean ${2}
+
 -sed -i  's/old-value/new-value/g' filenav
 
 -cat>>file1
 line1
 line2
 ctrl+d
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+14-ASSIGN COMAND O/P AS VARIABLE-                      
+variable1=$(  )                          --declare by round bracket
+echo"${  }"                              -- Call by curly like how we call any other var
 
 ${var} use instaed of $var ,{} help to concat any word  ,myvar must be at left and it value on right ,no space on either side of =          (VAR NOTES)
-15 unset name        /name=      BOTH USED TO UNSET VAR ,  radonly varname    THIS FIX VALUE OF VAR PERMENENT
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+15 unset name        /name=      BOTH USED TO UNSET VAR ,  radoMly varname    THIS FIX VALUE OF VAR PERMENENT
 
 read -p "    " -s password                               (INPUT NOTES)
 command line args        ${0}=script.sh    ${1} =1st arg 
+----------------------------------------------------------------------------------------------------------------------------------------
 
-14-ASSIGN COMAND O/P AS- variable1=$(  )       echo"${  }"         --declare by round bracket and call by curly like how we call any other var
+16 
+UPPERCASE     1ST-LETTER  ^               ALL-WORDS     ^^
+LOWERCASE     1ST-LETTER   ,               ALL-WORDS    ,,
+                ${#var}   == total letters number like 17
 
-16
 echo "${string^}"  /  echo "${string,}"  # Output upper 1st word: my / My   
 echo "${string^^}" /  echo "${string,,}" # # Output full: MY NAME IS GAURAV / my name is gaurav
+-----------------------------------------------------------------------------------------------------------------------------------------
 
-17 GIVE DEFAULT VALUE TO VAR  === name=${name:-World}              VAR1=${VARNAME:-VAR-DEFAULT-VALUE}
+18 GIVE DEFAULT VALUE TO VAR  === name=${name:-World}              VAR1=${VAR1:-VAR-DEFAULT-VALUE}
+-----------------------------------------------------------------------------------------------------------------------------------------
+20 ARITHMETIC SYNTAX    
+a="$((a+b))"
+b="$((5+6))" 
+echo "${a} ,${b}"
+============
+11,11
+-----------------------------------------------------------------------------------------------------------------------------------------
 
-18 ARITHMETIC SYNTAX     "$((a+b))"
+21 BASIC FUNCTION SYNTAX
 
-21 function function-nav(){
+function function-nav(){
 command in fuction
 }
+function-nav  ARG1 ARG2 ARG3 
+
+
+22  shell basic syntax
+#!/bin/bash
+variable declare then
+function declare then
+call function ( if u call function above and write function code below it wont work, function must define before calling)
+
+ 23 - How to Pass Arguments to a Functions 
+function function-nav(){
+
+echo "${0}"                       ===========shell.sh
+echo "${1}"                       ===========ARG1 WITH FUNCTION CALLING CODE
+echo "${FUNCNAME} HAS STARTED======CALLING FUNCTION NAME IN FUNCTION CODE TO SEE THAT THIS FUNCTION STARTED FOR CODER RUNNING GET THAT THIS STARTED
+}
+
+function-nav   ARG1 ARG2 ARG3            ======================
+shell.sh
+ARG1
 function-nav
+-----------------------------------------------------------------------------------------------------------------------------------------
+24-How to Create Local Variable in Functions 
+#!/bin/bash
+# FUNCTION DEFINITION
+deploy_app() {
+    local app_name=$1                         ### local- used as No side effects on global variables
+    local environment=$2                       ### local- used as No side effects on global variables
+    
+    echo "Deploying $app_name to $environment"            ===== 1 OF BELOW O/P ==== (Deploying payment-service to production)
+}
+deploy_app "payment-service" "production"
+deploy_app "auth-api" "staging"
+
+=======================     O/P  ============================
+Deploying payment-service to production
+Deploying auth-api to staging
+
+
+-----------------------------------------------------------------------------------------------------------------------------------------
 
 25 SUCCESS/FAILED
 echo $? 
 0    / 127    / 1        #PREVIOUS COMMAND SUCCESS=0 OR FAILED=127 OR NOT GET WORD IN FILE=1
+-----------------------------------------------------------------------------------------------------------------------------------------
 
 26   
 - after if []  means its condition , after if without [] means its command 
@@ -111,6 +221,7 @@ command 2
 else                                      #command 3 after ELSE run when above if o/p is non-zero (3/4/5 any1 value) 
 command 3
 fi
+-----------------------------------------------------------------------------------------------------------------------------------------
 
 27  if[] then     elif[] then      else fi
 number=5
@@ -125,30 +236,8 @@ else                          # If neither of the above conditions are true
 fi
 
 
----------------------------------------------------------------------------------------------------
-# VARIABLE
+-----------------------------------------------------------------------------------------------------------------------------------------
 
-1- var="program"                  ## no space on either side of =
-   VAR="hi"                       ## var & VAR have different
-
-2- $var and ${var}     both are correct to call var value but use ${var} because u can add(cocat) any value to it 
-var="program"
-echo${var}-ing                     ## 
-programing
-
-3- system var  
-env                                ## this command show all system var in linux
------------------------------------------------------------------------------------
-# INPUT
-
-read 
-read -p " message as prompt"  varname
-
-#!/bin/bash
-read name
-read -p "give password " -s password            # -s do not show password while u type it on prompt
-echo "my name ${name}"
-echo "my pass ${password} "
 --------------------------------------------------------------------------------
 
 COMMAND LINE ARGS GIVING  =
