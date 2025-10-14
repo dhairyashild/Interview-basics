@@ -55,7 +55,18 @@ else
 fi
 
 
-##########################        SARANSH         ###########################
+##########################        SARANSH - GAURAV SHELL         ###########################
+VID-7
+# create ON NEW LINE             -e "    \n     "
+echo -e "1st-word\n 2nd-LATER WORDS"                   ===========
+1st-word
+2nd-LATER WORDS"                       
+
+# Connect 1st & 2nd line      " 1ST      \    2nd "
+echo "1st-word\
+2nd-word"     ==================
+1st-word2nd-word
+
 << disclaimer
 disclaimer
 
