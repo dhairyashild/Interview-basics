@@ -27,7 +27,7 @@ Finding errors in pipelines:
 
 
 4. JENKINS BUILD STUCK IN QUEQU
--- agents are offline
+-- agents are offline ==  Jenkins Slaves --Check SSH keys, firewall-22, ,Jenkins master logs
 -- check executors
 
 
@@ -38,8 +38,6 @@ ps -aux| grep jenkins
 
 
 6. Long Build Time--Use parallel stages
-
-7. Jenkins Slaves --Check SSH keys, firewall-22, ,Jenkins master logs
 
 8. Missing credentials or wrong ID ==="Manage Jenkins → Credentials", 
 pass correct ID
