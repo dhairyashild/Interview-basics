@@ -4,8 +4,9 @@ jenkins cicd seuriry?
 MASTER SECURITY
 RBAC
 SG
-aws iam
+DIVIDE EC2 IN SUBNETS 
 Secrets Manager
+aws iam
 
 NODE SECURITY==
 RBAC=Only grant Configure permissions on nodes to admins 
