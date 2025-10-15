@@ -15,18 +15,20 @@ DIVIDE EC2 IN SUBNETS
 pin pipelines to specific labels 
 
 
+
 # ERROR ==
 Finding errors in pipelines:
-Jenkins dashboards(job status) and alert integrations.
-pipeline logsfor error messages; 
+0.  Jenkins dashboards(job status) and alert integrations.
+
+00. pipeline logsfor error messages; 
 
 1. workspace lock issue 
 -- delete that build pipeline-name ==== /var/lib/jenkins/workspace/pipeline-name 
 
 
 2. JENKINS BUILD STUCK IN QUEQU
--- check executors
 -- agents are offline
+-- check executors
 
 
 3. out of memory error ==== no heap space
