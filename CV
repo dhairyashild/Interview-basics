@@ -1,1 +1,23 @@
+**SpringBoot WebApp on AWS EKS  - DEVOPS ENGINEER**
+
+**TOOLS & TECHNOLOGIES:** AWS EKS, Terraform, Jenkins, SonarQube, Jfrog,Docker, Kubernetes, HashiCorp Vault, Prometheus, Grafana, Linux Ubuntu, GitHub
+
+**DESCRIPTION:** Designed and deployed a production-grade DevSecOps ecosystem on AWS, integrating CI/CD pipelines, security scanning, monitoring, and secret management for a cloud-native Spring Boot application.
+
+**ROLES & RESPONSIBILITIES:**
+*   Provisioned a highly available AWS EKS cluster using Terraform with custom VPC, multi-node groups, and secure networking.
+*   Deployed Jenkins on Ubuntu EC2 for orchestrating CI/CD pipelines, integrating with GitHub repositories.
+*   Installed and configured SonarQube and jfrog inside Kubernetes for code quality analysis and artifact management.
+*   Implemented Prometheus & Grafana in EKS for real-time application and infrastructure monitoring with dashboards.
+*   Designed and executed a CI pipeline in Jenkins to:
+    *   Compile the Spring Boot application with maven and build .jar executable.
+    *   Conduct unit testing, SonarQube analysis, and enforce quality gates.
+    *   Build and tag Docker images,  and push to ECR.
+    *   Update Kubernetes manifest image tags and send automated email notifications post-build.
+*   Built a CD pipeline to:
+    *   Deploy Kubernetes manifests to EKS and verify deployments.
+    *   Monitor pod with prometheus and grafana
+
+
+
 AWS , TERRAFORM , KUBERNETES , DOCKER , GRAFANA , PROMETHEUS , JENKINS, BASH
