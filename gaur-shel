@@ -61,6 +61,8 @@ fi
 1- var="program"                  ## no space on either side of =
    VAR="hi"                       ## var & VAR have different
 
+unset VAR                        ## remove var
+
 2- $var and ${var}     both are correct to call var value but use ${var} because u can add(cocat) any value to it 
 var="program"
 echo${var}-ing                     ## 
@@ -129,9 +131,9 @@ line2
 ctrl+d
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-14-ASSIGN COMAND O/P AS VARIABLE-                      
-variable1=$(  )                          --declare by round bracket
-echo"${  }"                              -- Call by curly like how we call any other var
+14-ASSIGN COMAND O/P AS VARIABLE = $ ROUND BRACKET-                      
+variable1=$(  )                          --declare it by round bracket
+echo"${  }"                              -- Call it by curly like how we call any other var
 
 ${var} use instaed of $var ,{} help to concat any word  ,myvar must be at left and it value on right ,no space on either side of =          (VAR NOTES)
 -----------------------------------------------------------------------------------------------------------------------------------------
