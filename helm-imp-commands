@@ -1,57 +1,11 @@
-install 
-
- curl -fsSL -o get_helm.sh https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3
-$ chmod 700 get_helm.sh
-$ ./get_helm.sh
-
-- helm create <chartname>  —> chrt.yaml , template , values.yaml   , say hellochart
--  delete the template files , take the companys template 
--  fill the values according t that , 
-- helm package <chart-name>    —-> here    hellochart
--  hellochart-0.1.0.tgz file will be created then
--  helm install <release-name> hellochart-0.1.0.tgz
--  helm status myrelease, helm list  , k get all
-  
--  helm install <releasename> -n <ns-name>
-   keep remember revision 
-
--  helm repo list 
-   list the helm repo
-
-- helm install <release-name> <chart-name> -f values.yaml 
-
--  update the values and helm install 
--  helm upgrade <release-name> . <chart-name> -f values.yaml
--  Verify the Updated Values —-> helm get values <release-name> -o yaml
-                                        helm upgrade my-app ./my-chart --set replicaCount=5
-
-- rollback 
-  helm rollback <release-name> <revision-number> 
-
--  uninstall
-  helm uninstall <release-name>
-
--  helm show values <release name >Displays the chart's default values.yaml
--  procedure is create helm chart , fill values.yaml , run helm install 
-- helm template <release_name> <chart_name>
-
--  Create Environment-Specific Values Files: Create separate values files for each environment:
-
-values-dev.yaml
-
-values-qa.yaml
-
-values-staging.yaml
-
-values-prod.yaml  
-
-in templates helper.tpl, & notes.txt exist 
-
-why keep values.image because these values may change in future , 
-
-deployment 
-replicas: {{ .values.replicacount}}
-image
+# MICROSERVICE REPO STRUCTURE:
+# user-service-repo/
+#   ├── src/ (application code)
+#   ├── helm/ (helm charts)
+#   │   ├── Chart.yaml
+#   │   ├── values.yaml
+#   │   └── templates/
+#   └── Jenkinsfile
 
 
-in values.yaml
+
