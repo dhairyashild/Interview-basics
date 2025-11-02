@@ -1,34 +1,18 @@
 ##################################                    TROUBLESHOOT               #################################
-2)  High CPU Usage
-
-Identify culprit process: nproc and lscpu for getting core core info
-htop                                                    nproc=1 core         /                lscpu gives detailed cores of cpu like 1 core and xen hyperviser & 1 page not need info
-
-Kill process: 
-kill -9 <PID>                      # -9  = by force
+2)  High CPU Usage             N P        
 
 
 ## CPU  (vCPU = 1 for t2.micro )
 
-nproc                   --------   give Vcpu 
-htop                    ---------   to check percentage usage of cpu
+nproc                                         --------   give 1 core/Vcpu avoid using lscpu
+ps -aux --sort=-%cpu | head -n 5               ---------   to check top 5 percentage usage of cpu
+htop                                      ----------  avoid using this , use above
+
+Kill process: 
+kill -9 <PID>                      # -9  = by force
+
 --------------------------------------------------
-1)  DISK SPACE FULL
-
-Check disk usage: 
-df -h 
-
-Find TOP 10 large files: 
-du -sh /* | sort -hr | head -10
-
-Clean Up Package Cache:-- [/var/cache/apt/archives/] dir grow large, especially if you frequently install and upgrade S/W.Commands delets .deb files download with s/w downloads.
-sudo apt clean
-
-Remove Unused Packages:
-sudo apt autoremove
-----------------------------------------------------------------
-
- RAM
+ RAM                            F P
 
 -ram = for t2.micro 1gb
 
@@ -38,21 +22,47 @@ sudo apt autoremove
 Mem:           957Mi       407Mi       153Mi       932Ki       571Mi       549Mi
 
 
-2) cat /proc/meminfo  ==== MemAvailable from /proc/meminfo is most accurate free memory estimate.
+
+3) top 5 processes by memory usage
+ 
+ps -aux --sort=-%mem | head -n 5
+ps -aux        =   lists all processes
+--sort=-%mem  =   sorts by memory usage (descending).
+head -n 5     =   top 5.
+
+sudo kill -9 pid     ---kill high usage 
+
+2) cat /proc/meminfo  ==== Avoid using it 
 MemTotal:         980376 kB
 MemFree:          156736 kB
 MemAvailable:     562876 kB    #### this is imp..  ---MemAvailable =MemFree + cache
 .....
 
-3) top 5 processes by memory usage
- 
-ps aux --sort=-%mem | head -n 5
-ps aux        =   lists all processes
---sort=-%mem  =   sorts by memory usage (descending).
-head -n 5     =   top 5.
-
-sudo kill -9 pid     ---kill high usage 
 ------------------------------------------------------------------------------
+1)  DISK SPACE FULL
+
+Check disk usage: 
+df -h 
+
+Find TOP 10 large files: df -h shows a disk is full and you need to find what to delete use du -h
+du -h --max-depth=1 /path/to/full/disk | sort -hr | head -10
+
+
+# BELOW ARE EXTRA COMMAND COPY PASTE GPT AFTER READIG ALL NOTES
+
+Clean Up Package Cache:-- [/var/cache/apt/archives/] dir grow large, especially if you frequently install and upgrade S/W.Commands delets .deb files download with s/w downloads.
+sudo apt clean
+
+Remove Unused Packages:
+sudo apt autoremove
+
+# 1. Empty log files without deleting (immediate relief)
+sudo truncate -s 0 /var/log/*.log
+
+# 2. Find and delete large files older than 7 days
+find /var/log -name "*.log" -type f -mtime +7 -delete
+----------------------------------------------------------------
+
 
 1) Service Not Starting        
 
