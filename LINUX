@@ -249,12 +249,41 @@ cat softlink.txt  # Error: broken link
 cat hardlink.txt  # Works: shows "hello"
 
 ----------------------------------------------------------------
+QQQQ  what is ways to solve  ec2  issues stepwise
 
 
+Step 1:  Console Checks -start/stop/pending/status
 
+2  sg / NACL
 
+3  3: Resource Monitoring
+CloudWatch Metrics: Check CPU/Memory/Disk
+CloudWatch Logs: Review system/application logs
+Create CloudWatch Alarms: Set up monitoring
+Solution: Auto-recover based on health checks
 
+4: Storage Investigation
+EBS Volumes: Check capacity/modify IOPS
+Instance Store: Verify ephemeral storage
 
+5  Instance Screenshot
+It gives quick visual of instance console to diagnose boot or network access issues when other monitoring methods fail Which required must connect to ec2, to check logs or other problem
+Solution: Fix user data or AMI problems
 
+8: Load Balancer Health
+Check Target Group Health: Replace unhealthy targets
+Solution: Deregister/register instances
+
+Step 9: Auto Scaling Events
+Review ASG Activities: Check scaling events
+Solution: Adjust scaling policies
+
+11: Backup & Recovery
+Create AMI/Snapshot: Backup before changes
+Solution: Launch from backup if needed
+
+Step 12: IAM & Permissions
+IAM Role Policies: Attach missing permissions
+Solution: Update role trust policies
 
 
