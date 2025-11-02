@@ -5,7 +5,7 @@
 ## CPU  (vCPU = 1 for t2.micro )
 
 nproc                                         --------   give 1 core/Vcpu avoid using lscpu
-ps -aux --sort=-%cpu | head -n 5               ---------   to check top 5 percentage usage of cpu
+ps -aux --sort=-%cpu | head -n 5               ---------   to check top 5 percentage usage of cpu                             P -A --S=-%C H -N
 htop                                      ----------  avoid using this , use above
 
 Kill process: 
@@ -25,7 +25,7 @@ Mem:           957Mi       407Mi       153Mi       932Ki       571Mi       549Mi
 
 3) top 5 processes by memory usage
  
-ps -aux --sort=-%mem | head -n 5
+ps -aux --sort=-%mem | head -n 5                                                                               P -A --S=-%M H -N
 ps -aux        =   lists all processes
 --sort=-%mem  =   sorts by memory usage (descending).
 head -n 5     =   top 5.
