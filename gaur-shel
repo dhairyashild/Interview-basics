@@ -83,34 +83,43 @@ echo "my name ${name}"
 echo "my pass ${password} "
 -----------------------------------------------------------------------------------------------------------------------------------------
 VID-7
-# create ON NEW LINE             -e "    \n     "
+# create ON NEW LINE                                                                        -e "    \n     "
 echo -e "1st-word\n 2nd-LATER WORDS"                   ===========
 1st-word
 2nd-LATER WORDS"                       
 
-# Connect 1st & 2nd line      " 1ST      \    2nd "
+# Connect 1st & 2nd line                                                                   " 1ST      \    2nd "
 echo "1st-word\
 2nd-word"     ==================
 1st-word2nd-word
 
+# COMMENT
 << disclaimer
 disclaimer
 
 -----------------------------------------------------------------------------------------------------------------------------------------
-vid 10-System Defined Variable 
+vid 10-System Defined Variable  =env command only gives all                          +  below GPT IP USERNAME NOTES
 
-#!/bin/bash
-env          # PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin HOME=/home/ubuntu USER=ubuntu
+# USERNAME ===                                                                                          whoami  +  $USER
+whoami → ubuntu (on AWS EC2)
+$USER - Environment variable with username
+echo $USER → ubuntu
+
+# MY IP                                                                                                curl ifconfig.me =FOR PUB-IP     +     hostname -I  = FOR PVT-IP
+curl ifconfig.me - Gets your public IP (correct for AWS EC2)
+hostname -I - Shows private/internal IPs only
+hostname -f → Gets FQDN for service discovery
+
+echo $? → 0 (success) or 1 (failure)                                                                      
+
+echo $$ → 1254 (current shell process ID)
+
+echo $UID → 1000 (ubuntu user ID on EC2)
+
 echo ${HOME} # /home/ubuntu
 echo $OSTYPE # linux-gnu
 echo $PATH   # /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
-echo $$      # 2541 (current shell PID)
-echo $PPID   # 2530 (parent process PID)
-echo $PWD    # /home/ubuntu/projects
-echo $HOSTNAME # ip-172-31-12-34 (EC2 internal hostname)
-echo $UID    # 1000 (ubuntu user ID)
-UID="5000"   # 
-echo $UID    # 5000 (custom override)
+
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 vid-11
