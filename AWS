@@ -1,3 +1,90 @@
+################################################################################   SARANSH   #############################################################################################
+
+AWS Transit Gateway =( SARANSH=NETWORKING SVC TO INTERREGION+INTERACCOUNT VPC)
+
+actions—-security—-
+                      1)modify  sg
+                    2)modify iam role
+
+NACL=SARANSH=FIREWALL ON SUB+DEFAULT=IN+OUT ALLOW/CUSTOM=IN&OUT BLOCKED+LOW NUM PRIORITY+STATELESS+BLOCK TTACKING IP
+
+EC2 Instance Connect (EIC)=Allows connections to EC2 instances that have public IP
+
+EIC Endpoint=connections to instances in a private subnet
+
+TG—-cross zone LB- cross zone load balancing is bydefault on 
+
+-aws configure  ====default user if not given any user
+-aws configure --profile devops   ====specific username-then give keys
+-AWS_DEFAULT_PROFILE= dhairyashil ====to set new default user
+-keys are saved in the file           ~/.aws/credentials
+
+LOST PEM KEY SOLUTION 
+1 TAKE AMI AND CREATE NEW INSTANCE FROM IT AND USE THAT INSTANCE BUT IP GET CHANGED
+2 FROM EBS
+
+images—-ami—-search root device type— instance storage
+
+IAAS= APP+DATA+OS=You manage everything (EC2 - setup OS, install app, secure)
+PAAS=APP-CODE+DATA=You gave only app code(ECS - deploy containers, AWS runs them)
+SAAS=ALL MNG BY CLOUD-U DONT NEED TO MNG ANYTHING=You manage nothing (gmail/RDS - just use database, no servers)
+
+
+
+
+snap 
+create vol
+create ami
+copy  snap  —> change region 
+modify permission —> share with other accounts
+
+SNAP — RECYCLE BIN —-EBS/AMI CHA—-10 DAY (KARAN 10D MDE CHUK KALATE)- CREATE RETENTION RULE
+
+THERE IS DELETE ON TERMINAATION OPTION WHICH USED FOR EC2 AND EBS BOTH TO SAVE BACKUP
+
+VOLUME  ——> ACTION
+
+1- create       /     2- delete
+
+3- modify
+
+4- attach      /     5-detach   
+
+6- create snap
+
+7- create snap lifecycle policy
+OR EBS——>LIFECYCLE MANAGER
+
+
+
+AMI—ACTION—-
+
+COPY —SHARE WITH REGION
+
+EDIT AMI PERMI—- SHARE WITH AWS ACOOUNTS
+
+DELETE AMI—DEREGISTER AMI —-THEN DELETE SNAP
+
+
+
+# ROUTE 53
+
+DNS= DOMAIN TO IP
+REISTER DOMAIN + TRANSFER DOMAIN + CREATE NS RECORED + CRETAAES HOSTED ZONE
+ROUTING POLICIES - SIMPLE+ FAILOVER+ WEIGHTED +GEOLOCATION + LATENCY BASED
+
+
+
+
+
+
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
 
 VOLUME  ——> ACTION
 
