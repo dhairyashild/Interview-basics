@@ -71,6 +71,14 @@ programing
 3- system var  
 env                                ## this command show all system var in linux
 -----------------------------------------------------------------------------------
+
+14-ASSIGN COMAND O/P AS VARIABLE = $ ROUND BRACKET-                      
+variable1=$(  )                          --declare it by $round bracket
+echo"${  }"                              -- Call it by curly like how we call any other var
+
+${var} use instaed of $var ,{} help to concat any word  ,myvar must be at left and it value on right ,no space on either side of =          (VAR NOTES)
+-----------------------------------------------------------------------------------------------------------------------------------------
+
 4 INPUT
 
 read 
@@ -82,6 +90,7 @@ read -p "give password " -s password            # -s do not show password while 
 echo "my name ${name}"
 echo "my pass ${password} "
 -----------------------------------------------------------------------------------------------------------------------------------------
+
 VID-7
 # create ON NEW LINE                                                                        -e "    \n     "
 echo -e "1st-word\n 2nd-LATER WORDS"                   ===========
@@ -110,7 +119,7 @@ curl ifconfig.me - Gets your public IP (correct for AWS EC2)
 hostname -I - Shows private/internal IPs only
 hostname -f → Gets FQDN for service discovery
 
-echo $? → 0 (success) or 1 (failure)                                                                      
+echo $? → 0 (success) or 1 (failure)                                                                  $? for fail/pass       +         $$   FOR PID                                                                
 
 echo $$ → 1254 (current shell process ID)
 
@@ -140,13 +149,6 @@ line2
 ctrl+d
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-14-ASSIGN COMAND O/P AS VARIABLE = $ ROUND BRACKET-                      
-variable1=$(  )                          --declare it by round bracket
-echo"${  }"                              -- Call it by curly like how we call any other var
-
-${var} use instaed of $var ,{} help to concat any word  ,myvar must be at left and it value on right ,no space on either side of =          (VAR NOTES)
------------------------------------------------------------------------------------------------------------------------------------------
-
 15 unset name        /name=      BOTH USED TO UNSET VAR ,  radoMly varname    THIS FIX VALUE OF VAR PERMENENT
 
 read -p "    " -s password                               (INPUT NOTES)
@@ -163,9 +165,10 @@ echo "${string^^}" /  echo "${string,,}" # # Output full: MY NAME IS GAURAV / my
 -----------------------------------------------------------------------------------------------------------------------------------------
 
 18 GIVE DEFAULT VALUE TO VAR  === name=${name:-World}              VAR1=${VAR1:-VAR-DEFAULT-VALUE}
------------------------------------------------------------------------------------------------------------------------------------------
-20 ARITHMETIC SYNTAX    
-a="$((a+b))"
+----------------------------------------------------------------------------------------------------------------------------------------- 
+
+20 ARITHMETIC SYNTAX                                                                             ARITHMETIC SYNTAX        echo   "   $   ((  GANIT   ))   "
+a="$((a+b))" 
 b="$((5+6))" 
 echo "${a} ,${b}"
 ============
