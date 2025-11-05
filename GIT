@@ -180,3 +180,10 @@ Disable branch protection rules --
 Transfer ownership-- to another user or to an organization
 Archive this repository
 Delete this repository
+
+# access on ur github permenently
+Generate key: ssh-keygen -t ed25519 -C "your_email@example.com"
+
+Copy public key: cat ~/.ssh/id_ed25519.pub
+
+Add to GitHub: Settings → SSH and GPG keys → New SSH key
