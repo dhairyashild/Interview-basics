@@ -226,7 +226,8 @@ echo $?
 0    / 127    / 1        #PREVIOUS COMMAND SUCCESS=0 OR FAILED=127 OR NOT GET WORD IN FILE=1
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-26   
+26    How to Use If With Command - Conditional Statement in Shellscript
+
 - after if []  means its condition , after if without [] means its command 
 if COMMAND          / if [ test ]         #THIS COMMAND/TEST SUCCESS, IT GIVE 0 AS O/P
 then                                      #commands after THEN runs only when above if command/ test give 0 means success 
