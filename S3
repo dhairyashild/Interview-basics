@@ -1,0 +1,71 @@
+SE PERMISSION USES:-- gpt
+
+
+BLOCK PUBLIC ACCESS OFF                    BLOCK PUBLIC ACCESS ON
+• CloudFront CDN for public web assets     • Internal microservices communication
+• Customer-facing app file uploads         • Private application logs & metrics
+• Public API static content                • Database backups & archives  
+• Multi-tenant data sharing                • Financial/transaction data
+• Client document portals                  • Internal tooling & admin systems
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Day 168 || AWS S3 || Hindi || S3 Public Access Part 2 || Block Public Access            NOTES
+
+1) PERMISIION USE FOR S3 
+A- U  CAN BLOCK ACCOUNT LEVEL FROM ALL TOOLS LIKE ACL/POLICY/CORS
+B- U CAN BLOCK BUCKET LEVEL
+
+A1-BUCKET LEVEL BLOCKING== { SAME FOR ACCOUNT LEVEL BLOCKING JUST IT HAS SAME OPTION LIKE BELOW}
+Edit Block public access (bucket settings)
+1-NEW ACL BLOCK
+2-ALL ACL ACCESSS BLOCK
+3-NEW POLICY BLOCK
+4-ALL POLICY BLOCK
+
+# ACCESS CONTROL LIST (ACL) NOTES===
+-OBJECT OWNWERSHIP MUST GIVE THEN ONLY CAN GIVE ACL TO BOTH BUCKET + OBJECT LEVEL PERMIAIIONS
+-OLD METHOD NOT USED
+-FOR GIVING ACL OR BUCKET POLICY ABOVE A1 SETTING NEED TO CHANGE AS PER NEED SO FOR THIS CHANGE 1ST/2ND ACL UNBLOCKING FROM ABOVE THRN ONLY U CAN CHANHE 
+1-NEW ACL BLOCK
+2-ALL ACL ACCESSS BLOCK
+
+# BUCKET POLICY USE====
+3-NEW POLICY BLOCK
+4-ALL POLICY BLOCK
+
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "PublicReadGetObject",
+            "Effect": "Allow",
+            "Principal": "*",
+            "Action": "s3:GetObject",
+            "Resource": "arn:aws:s3:::your-bucket-name/*"
+        }
+    ]
+}
+
+
+# ACCESS BY ACL
+
+1-Edit Block public access (bucket settings) -UNBLOCK ACL / POLICY MOSTLY UNBLOCK POLICY
+2- GIVE POLICY TO GET OBJECT CODE
+3-CORS - GIVE POLICY FROM AWS CORS SAMPLE 2 WHERE U JUST NEED TO GIVE SE STATIC BUCKET URL IN BUCKET WHERE OBJECT NEED TO GIVE TO STATIC BUCKET
+4-CORS GIVEN IN THAT BUCKET ONLY WHOS RESOURCES NEED TO BE SHARED
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
