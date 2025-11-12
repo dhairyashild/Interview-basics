@@ -1,0 +1,140 @@
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+## AWS WAF - SENIOR DEVOPS CHEAT SHEET
+
+# ARCHITECTURE:
+• Single Web ACL per environment
+• One Web ACL = $5/month fixed cost
+• Supports CloudFront + ALB + API Gateway
+
+# RULE PRIORITY (MUST FOLLOW):
+1. Whitelist trusted IPs first
+2. Geo-block high-risk countries  
+3. Rate limit for DDoS protection
+4. Managed rules for common threats
+
+# COST OPTIMIZATION:
+• Free rules cover 95% security needs
+• Start with COUNT mode, then BLOCK
+• Monitor WCU usage (1500 max)
+
+# OPERATIONAL:
+• "First match wins" - order critical
+• Automate with Terraform/CloudFormation
+• CloudWatch alarms for monitoring
+• WAF logs to S3 for analysis
+
+# SECURITY COVERAGE:
+• Rate limiting = DDoS protection
+• Common Rule Set = SQLi/XSS/OWASP
+• IP reputation = known bad actors
+• Geo-blocking = reduce attack surface
+
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+## AWS WAF - SENIOR DEVOPS PRODUCTION SETUP
+
+# PRIORITY 1: IP WHITELIST - Allow Trusted Networks First
+WHY: Prevent blocking legitimate traffic from known sources
+SETUP: WAF → Rules → Add my own rules and rule groups 
+-> RULE BUILDER
+-> Rule type: Regular rule
+-> Name: allow-trusted-ips
+-> Statement: IP set
+-> IP set: Your trusted IP ranges  
+-> Action: Allow
+
+# PRIORITY 2: GEO BLOCKING - Reduce Attack Surface
+WHY: Block high-risk countries where business doesn't operate  
+SETUP: WAF → Rules → Add my own rules and rule groups
+-> RULE BUILDER
+-> Rule type: Regular rule
+-> Name: block-high-risk-countries
+-> Statement: Geo match
+-> Country codes: CN, RU, KP, IR
+-> Action: Block
+
+# PRIORITY 3: RATE LIMITING - Prevent DDoS & API Abuse
+WHY: Stop brute force attacks and traffic floods
+SETUP: WAF → Rules → Add my own rules and rule groups
+-> RULE BUILDER  
+-> Rule type: Rate-based rule
+-> Name: api-rate-limit
+-> Rate limit: 2000 requests/5min
+-> IP address: Source IP address
+-> Action: Block
+
+# PRIORITY 4: CORE SECURITY - OWASP Top 10 Protection (FREE)
+WHY: Block SQLi, XSS, and common web exploits
+SETUP: WAF → Rules → Add managed rule groups
+-> Rule group: AWSManagedRulesCommonRuleSet (FREE - 700 WCU)
+-> Action: Block
+
+# PRIORITY 5: IP REPUTATION - Block Known Bad Actors (FREE)  
+WHY: Proactively block malicious IPs from threat feeds
+SETUP: WAF → Rules → Add managed rule groups
+-> Rule group: AWSManagedRulesAmazonIpReputationList (FREE - 100 WCU)
+-> Action: Block
+
+# PRIORITY 6: ANONYMOUS IP BLOCKING - Stop Proxies/VPNs (FREE)
+WHY: Block TOR, VPNs, and anonymous proxies
+SETUP: WAF → Rules → Add managed rule groups
+-> Rule group: AWSManagedRulesAnonymousIpList (FREE - 50 WCU)
+-> Action: Block
+
+## PRIORITY ORDER EXPLANATION:
+1. WHITELIST FIRST: Never block trusted IPs
+2. GEO BLOCKING: Reduce noise before processing  
+3. RATE LIMIT: Stop floods before deep inspection
+4. CORE RULES: Common attacks before advanced
+5. IP REPUTATION: Known bad actors from AWS feeds
+6. ANONYMOUS IP: Block proxies/VPNs
+
+## WHY PAID RULES REMOVED:
+✅ Rate-based rule (FREE) stops 99% of DDoS attacks
+✅ Common Rule Set (FREE) covers OWASP Top 10
+✅ Only add paid rules for enterprise compliance
+✅ Cost optimization without compromising security
+
+## THREAT PROTECTION SUMMARY:
+
+# DDoS ATTACKS - Flood your server with traffic to crash it
+• RATE LIMITING RULE (Priority 3): Stops traffic floods
+• Blocks: Thousands of requests from single IPs
+
+# SQL INJECTION - Hackers inject database commands to steal data  
+• CORE RULE SET (Priority 4): Detects SQL commands in input
+• Blocks: SELECT, UNION, DROP TABLE attacks
+
+# CROSS-SITE SCRIPTING (XSS) - Inject malicious scripts into websites
+• CORE RULE SET (Priority 4): Detects malicious scripts  
+• Blocks: <script> alerts, cookie stealing
+
+# BRUTE FORCE - Repeated login attempts to guess passwords
+• RATE LIMITING (Priority 3): Limits login attempts
+• Blocks: Credential stuffing attacks
+
+# BAD BOTS - Automated programs that scrape or attack your site
+• IP REPUTATION (Priority 5): Known malicious IPs
+• ANONYMOUS IP (Priority 6): Proxies and VPNs
+
+# GEO-BASED ATTACKS - Attacks originating from specific countries
+• GEO BLOCKING (Priority 2): High-risk countries
+• Blocks: Attacks from unauthorized regions
+
+# KNOWN MALICIOUS IPs - IP addresses with bad reputation
+• IP REPUTATION (Priority 5): Blocks previously identified bad actors
+• Blocks: IPs from threat intelligence feeds
+
+# ANONYMOUS PROXIES - Hide real location using TOR/VPNs
+• ANONYMOUS IP (Priority 6): Blocks proxy services
+• Blocks: TOR, VPNs, anonymous networks
+
+## SENIOR DEVOPS NOTES:
+✅ Start with COUNT mode for new rules
+✅ Monitor CloudWatch WAFCapacityUnits 
+✅ Keep under 1500 WCU limit
+✅ Use WAF logs for false positive analysis
+✅ Automate with Terraform/CloudFormation
+✅ Free rules cover 95% of security needs
