@@ -74,7 +74,15 @@ REISTER DOMAIN + TRANSFER DOMAIN + CREATE NS RECORED + CRETAAES HOSTED ZONE
 ROUTING POLICIES - SIMPLE+ FAILOVER+ WEIGHTED +GEOLOCATION + LATENCY BASED
 
 
+ssm notes 
 
+connect ec2 without 1) sg port 22 
+2) key not  required 
+
+process :
+1 -> install ssm agent 
+2 -> give ssminstance core role to ec2 
+3 -> wait for 5 mn
 
 
 
