@@ -94,6 +94,9 @@ Requirement: Pods must have resource requests/limits defined for the scheduler t
 # =============================================================================
 # BASIC LINUX COMMANDS - SENIOR DEVOPS CHEATSHEET
 # =============================================================================
+# =============================================================================
+# BASIC LINUX COMMANDS - SENIOR DEVOPS CHEATSHEET
+# =============================================================================
 
 # Process Management
 1. How to check running processes? → ps aux | top | htop
@@ -130,7 +133,6 @@ Requirement: Pods must have resource requests/limits defined for the scheduler t
 28. Difference between find and locate? → find=real-time search, locate=pre-built database search
 29. Difference between hard links and soft links? → hard=direct inode reference, soft=symbolic path pointer
 30. How to find processes using most CPU/memory? → ps aux --sort=-%cpu | head -10 | ps aux --sort=-%mem | head -10
-
 # =============================================================================
 # GIT & VERSION CONTROL
 # =============================================================================
