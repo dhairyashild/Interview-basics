@@ -56,7 +56,540 @@ Requirement: Pods must have resource requests/limits defined for the scheduler t
 
 
 
+# =============================================================================
+# BEHAVIORAL & SOFT SKILLS QUESTIONS
+# =============================================================================
 
+# General Behavioral
+1. Share a time production broke and how you led the fix
+2. How do you learn tools under pressure?
+3. A tech decision you regret - and why
+4. Convincing leadership to migrate infrastructure
+5. Handling on-call burnout
+6. How do you handle a situation where you're asked to work on unfamiliar technology?
+7. Describe working under tight deadlines with limited resources
+8. Tell me about a production mistake and how you handled it
+9. How do you convince stakeholders to adopt new technology?
+10. How do you onboard new DevOps hires without overwhelming them?
+11. How do you push back when PMs prioritize velocity over resiliency?
+12. Your teammate pushed infra to prod on Friday evening - what now?
+13. How do you build engineering culture where SLOs are owned?
+14. How do you prove ROI of infra modernization to non-technical execs?
+15. How do you design infrastructure that empowers devs safely?
+
+# HR & Career Questions
+16. Why are you leaving your current organization?
+17. What are your career motivations?
+18. Tell me about your project experiences
+19. Day-to-day responsibilities description
+20. Teamwork and culture fit assessment
+21. Production issue resolution examples
+22. Global client coordination experience
+23. Career motivation for specific companies
+
+# =============================================================================
+# LINUX & OPERATING SYSTEMS
+# =============================================================================
+
+# Basic Linux Commands
+1. How to check running processes? (ps aux, top, htop)
+2. Command to generate SSH key? (ssh-keygen)
+3. What if user lost SSH key?
+4. Command to show memory usage & CPU processes? (free -h, top, htop)
+5. Command to kill a process? (kill, killall, pkill)
+6. How to change user access/privileges? (chmod, chown, visudo)
+7. How to check one running process? (ps -p PID, pgrep)
+8. How to list running processes? (ps aux, top)
+9. Find and kill process in single command? (pkill name, killall name)
+10. How to check disk usage? (df -h, du -sh)
+11. How to find free memory? (free -h, cat /proc/meminfo)
+12. How to archive and compress directory? (tar -czf, zip)
+13. What does chmod 755 mean?
+14. What is chown?
+15. How to list all SSH users? (cat /etc/passwd | grep bash, getent passwd)
+16. Where to check Apache logs? (/var/log/apache2/, /var/log/httpd/)
+17. What logs are in /var/log? (syslog, auth.log, kern.log, messages)
+18. Purpose of grep command?
+19. Grep to exclude lines with keyword? (grep -v keyword)
+20. Difference between cron and at?
+21. How to schedule script every 5 minutes? (*/5 * * * * /path/script)
+22. How to check if port is open? (netstat, ss, nmap)
+23. How to configure static IP address?
+24. Mounting and unmounting filesystems
+25. How to check disk partitions? (lsblk, fdisk -l)
+26. What is sticky bit, setuid, setgid?
+27. How to set default file permissions? (umask)
+28. Difference between find and locate?
+29. Difference between hard links and soft links?
+30. How to find processes using most CPU/memory? (ps aux --sort=-%cpu)
+
+# =============================================================================
+# GIT & VERSION CONTROL
+# =============================================================================
+
+1. What is Git merge and how does it work?
+2. What is Git checkout?
+3. Difference between Git pull and Git fetch?
+4. Explain Git pull vs Git fetch
+5. How do you resolve merge conflicts?
+6. What branching strategies do you follow?
+7. How to handle merges to avoid breaking release branch?
+8. How to find merge conflicts?
+9. How to generate token in GitHub?
+10. How do you handle parallel changes in Git?
+
+# =============================================================================
+# DOCKER & CONTAINERS
+# =============================================================================
+
+# Docker Concepts
+1. What is Docker?
+2. How is Docker useful in pipelines?
+3. How to create custom Docker image?
+4. Elaborate Dockerfile structure
+5. Prerequisites for docker build command
+6. How to copy files from container to host? (docker cp)
+7. What happens with COPY . ? (copies current directory to container)
+8. Difference between CMD and ENTRYPOINT?
+9. Difference between COPY and ADD?
+10. Difference between RUN, CMD, ENTRYPOINT?
+11. How to build image and run container? (docker build, docker run)
+12. Write multi-stage Dockerfile for Node.js/Java/Python
+13. How to optimize Dockerfile size?
+14. Difference between volumes and bind mounts?
+15. When to use volumes vs bind mounts in Kubernetes?
+16. What are Cgroups and dangling objects?
+17. How to cache Docker layers in pipelines?
+18. How to delete all Docker resources? (docker system prune -a)
+19. How to clean unused images and containers?
+20. Container keeps restarting - how to debug?
+21. App works locally but not in container - what to check?
+22. How to reduce Docker image size?
+23. Techniques for secure Docker containers in CI/CD
+24. How can Docker containers be CI/CD agents?
+25. Difference between Docker bridge and custom bridge?
+
+# =============================================================================
+# AWS CLOUD SERVICES
+# =============================================================================
+
+# Core AWS Services
+1. What AWS services have you used in production?
+2. What is the purpose of NAT Gateway?
+3. Difference between Internet Gateway and NAT Gateway?
+4. What is VPC Peering and how does it work?
+5. When to use VPC Peering vs Transit Gateway?
+6. Why is Transit Gateway more costly than VPC Peering?
+7. How to implement Internet Gateway?
+8. How to configure Internet Gateway to route table?
+9. What are IAM roles and policies?
+10. Difference between IAM roles and IAM users?
+11. What is IAM root user and why avoid it?
+12. Types of IAM policies and their differences?
+13. Difference between identity-based and resource-based policies?
+14. What are IAM permission boundaries?
+15. How does IAM integrate with MFA?
+16. How do IAM roles work with EC2 and Lambda?
+17. What is IAM Access Analyzer?
+18. How to monitor IAM activities?
+19. IAM best practices for security
+
+# EC2 & Compute
+20. Command to connect to EC2 instance? (ssh -i key.pem user@ip)
+21. EC2 not reachable via SSH - troubleshooting steps?
+22. EC2 app running slow - how to check resources?
+23. EC2 suddenly unreachable - troubleshooting?
+24. How to make EC2 web app highly available?
+25. Workaround if private key lost and SSM disabled?
+26. Difference between Elastic IPs and Public IPs?
+
+# S3 & Storage
+27. How many objects can S3 bucket store? (unlimited)
+28. S3 bucket inaccessible - what to check?
+29. S3 bucket/object accidentally deleted - how to restore?
+30. Difference between S3 storage classes?
+31. Difference between S3 Standard and Glacier?
+32. S3 vs DynamoDB vs RDS differences?
+33. Cross-account S3 access configuration?
+34. Cross-region S3 replication setup?
+35. S3 bucket policies vs ACLs differences?
+
+# Networking & VPC
+36. Describe VPC structure (CIDR, subnets, NAT, IGW, routing)
+37. Public vs Private subnets
+38. Users can't access app in private subnet - how to make accessible?
+39. Difference between Security Groups and NACLs?
+40. What happens if NAT Gateway fails?
+41. How to connect EFS across accounts/regions?
+42. How to use AMI from one region in another?
+
+# Load Balancers & Routing
+43. Types of Load Balancers worked with?
+44. Difference between ALB and NLB?
+45. Rules in Load Balancers and where to define?
+46. How to setup multi-AZ ALB for latency-sensitive apps?
+47. What is Route53 and its routing policies?
+48. How to configure Route53 for domain hosting and failover?
+49. How to setup geolocation-based routing?
+
+# Database Services
+50. How to manage RDS backups and automated failover?
+51. How to protect RDS from public internet exposure?
+52. RDS failover happened but app didn't recover - troubleshooting?
+
+# Monitoring & Management
+53. How to monitor EC2 using CloudWatch?
+54. How to setup CloudWatch log groups for applications?
+55. How to monitor 50+ EC2 instances with CloudWatch?
+56. How to diagnose AWS Inspector findings?
+
+# Cross-Account & Advanced
+57. How to configure cross-account roles?
+58. App in Account A needs S3 access in Account B - setup?
+59. EC2 in private subnet needs packages without NAT Gateway - alternatives?
+60. How to transfer S3 data between accounts with zero downtime?
+
+# =============================================================================
+# TERRAFORM & INFRASTRUCTURE AS CODE
+# =============================================================================
+
+# Core Concepts
+1. What is Terraform state file?
+2. What is Terraform provider?
+3. How to handle multiple environments?
+4. How to manage dependent resources?
+5. Difference between locals and variables?
+6. What is Terraform dependency graph?
+7. Difference between terraform plan and apply?
+8. What happens if Terraform resource is manually deleted?
+9. How to import existing AWS VPC into Terraform?
+10. How to manage Terraform state in teams?
+11. How to handle state file corruption?
+12. How to handle state file conflicts?
+13. How to securely store state file?
+14. How to avoid storing secrets in Terraform?
+15. EC2 created by Terraform was deleted by another user - troubleshoot?
+16. "Resource already exists" error - how to fix?
+17. How to restrict resource deletion but allow plan/apply?
+18. Difference between count and for_each?
+19. Lifecycle blocks real-world use cases?
+20. What happens during terraform init, plan, apply?
+
+# Advanced Terraform
+21. How to detect and resolve drift?
+22. How to monitor Terraform changes in production?
+23. How to implement immutable infrastructure?
+24. How to modularize Terraform for large projects?
+25. How to handle large migrations in Terraform?
+26. Limitations of auto-generated Terraform code?
+27. How to secure secrets in Terraform? (Vault, SSM)
+28. Best practices missing in simple S3 bucket config?
+29. Multi-account Terraform setup with backend isolation?
+30. Cross-account resource provisioning setup?
+31. S3 bucket created via Terraform but manual policy added - handle drift?
+32. Terraform state corruption during backend migration - recover?
+33. Terraform remote_state backend times out - recover?
+
+# =============================================================================
+# JENKINS & CI/CD
+# =============================================================================
+
+# Jenkins Core
+1. Explain CI/CD workflow and pipeline usage
+2. How to define and invoke pipelines in Jenkins?
+3. What are shared libraries and how are they written?
+4. What are environment variables in Jenkins?
+5. Difference between declarative and scripted pipelines?
+6. How to connect Jenkins to servers using SSH without password?
+7. Jenkins credentials management
+8. How to integrate Jenkins with SonarQube?
+9. How does Jenkins authenticate with Docker registries?
+10. How to integrate security scans in Jenkins pipelines?
+
+# Jenkins Troubleshooting
+11. Pipeline fails during artifact publishing - debug?
+12. Jenkins pipeline failing randomly - debug?
+13. Jenkins job fails due to permission issues - what to check?
+14. Jenkins not triggering after Git commit - fix?
+15. Jenkins "Out of Memory" errors - troubleshoot?
+16. Pipeline runs but build doesn't happen - possible issues?
+17. Jenkins pipeline takes 40 minutes - how to optimize?
+18. Jenkins deploy pipeline gets stuck at 70% - debug?
+
+# CI/CD Concepts
+19. What is webhook purpose and usage?
+20. How to trigger pipeline on specific branch?
+21. How to enforce tests pass before deployment?
+22. Release failed in production - how to rollback?
+23. How to integrate SonarQube and security scans?
+24. How to store secrets securely in pipelines?
+25. How to implement blue/green deployment?
+26. How to implement canary deployment?
+27. Rollback strategies for mission-critical environments?
+28. Manual intervention gates purpose and enforcement?
+29. Compliance as code implementation?
+30. Pipeline security from source control to deployment?
+31. How to migrate pipelines between CI/CD tools?
+32. Why GitHub Actions gaining popularity?
+
+# =============================================================================
+# KUBERNETES
+# =============================================================================
+
+# Core Concepts
+1. Explain Kubernetes and its architecture
+2. Difference between Deployment and StatefulSet?
+3. When to use StatefulSet vs Deployment?
+4. What is a ConfigMap and difference from Secret?
+5. Types of services in Kubernetes?
+6. What is a headless service?
+7. What is Pod Disruption Budget (PDB)?
+8. How to expose Kubernetes application externally?
+9. How does Kubernetes controller manager work during Deployment?
+10. How to make K8s cluster highly available?
+11. Prerequisites to upgrade K8s cluster?
+12. How to securely manage secrets in K8s?
+13. How to manage secrets like DB passwords in K8s?
+14. Use case for ConfigMap vs Secret?
+15. What are manifest files?
+
+# Pod Management
+16. How to stop Pod in K8s? (kubectl delete pod)
+17. How to replicate a Pod? (increase replicas in Deployment)
+18. Command to get logs in K8s? (kubectl logs)
+19. What to do if Pod not responding?
+20. What to do if Pod getting heavy load?
+21. Pod in CrashLoopBackOff - troubleshoot?
+22. How to debug exited container?
+23. Pod stuck in ImagePullBackOff - troubleshoot?
+24. How to debug stuck Pod? (taints/tolerations, resources)
+25. Pod fails due to port already in use - fix?
+26. How to access Pod? (kubectl exec)
+27. How to create Kubernetes object/class?
+
+# Services & Networking
+28. How to restrict pod-to-pod communication?
+29. How DNS resolution works inside Pod?
+30. Service DNS not resolving - troubleshoot?
+31. How to handle DNS-level outages in service mesh?
+32. How to implement pod-to-pod TLS encryption?
+33. Difference between Calico and Flannel?
+34. Which component provides Pod IPs? (CNI)
+35. Pod with toleration on master node - networking?
+
+# Scaling & Resources
+36. What is HPA and when to use it?
+37. How to enable autoscaling in Kubernetes?
+38. HPA vs VPA vs Karpenter - when not to use each?
+39. How to simulate HPA without real traffic?
+40. How to optimize resource requests and limits?
+41. How to size EKS cluster for project?
+42. Resource requests vs limits - scheduling implications?
+43. How to fix OOMKilled Pods?
+
+# Deployment Strategies
+44. What deployment strategies available in K8s?
+45. How to implement blue-green deployment?
+46. How to implement canary deployment?
+47. Blue/Green vs Canary - when to choose what?
+48. How to perform zero-downtime deployments?
+49. How to handle failed rollouts?
+50. How to rollback to previous version?
+
+# Storage & State
+51. What happens when node with emptyDir volumes scales down?
+52. How to debug failed PV mounts?
+53. StatefulSet Pods connecting to same volume - issue?
+54. What is CSI? (Container Storage Interface)
+
+# Monitoring & Troubleshooting
+55. What are liveness and readiness probes?
+56. How incorrect probes cause downtime?
+57. What breaks if readinessProbe wrong?
+58. How to check Pod health? (kubectl describe, get events)
+59. How to monitor K8s cluster?
+60. How to configure monitoring for cluster?
+
+# Advanced K8s
+61. What is custom scheduler purpose?
+62. Init container failure - what happens?
+63. Pod with 3 init containers + 1 main - one init fails - what happens?
+64. How to enforce runtime security? (PSP, OPA, Kyverno)
+65. How to implement service mesh?
+66. How to use Envoy/Istio for service discovery?
+67. How to use eBPF + Cilium for network security?
+68. Operator vs Deployment differences?
+69. DaemonSet vs StatefulSet key differences?
+70. How to design multi-tenant EKS clusters?
+
+# =============================================================================
+# MONITORING & OBSERVABILITY
+# =============================================================================
+
+1. What monitoring tools are setup?
+2. How to set up alerts and common pod management errors?
+3. How to integrate Prometheus & Grafana?
+4. How to create Grafana queries for CPU, memory, error rates?
+5. Where to setup alerting - Prometheus or Grafana?
+6. How to configure disk usage alerts?
+7. How are alerts managed in Prometheus/Grafana?
+8. Grafana dashboards load slowly - troubleshooting?
+9. What are key metrics to monitor?
+10. How to monitor end-to-end SLA for services?
+11. How to implement centralized logging for microservices?
+12. What are Beats in ELK stack?
+13. Centralized logging and monitoring stack choices?
+14. How to implement distributed tracing?
+
+# =============================================================================
+# SECURITY & COMPLIANCE
+# =============================================================================
+
+1. What security tools integrated in CI/CD?
+2. How to establish trusted CI/CD communication without secret keys?
+3. How to stop hypervisor-level attacks?
+4. How to secure cross-region S3 replication?
+5. How to implement compliance as code?
+6. How to enforce pipeline security?
+7. How to manage secrets across multiple environments?
+8. How to integrate Azure Key Vault with pipelines?
+9. How to securely manage secrets in AKS using Key Vault?
+10. How to implement shift-left security?
+11. How to ensure GDPR/HIPAA compliance in pipelines?
+12. How to implement runtime security in Kubernetes?
+13. How to detect/mitigate pod-to-pod lateral movement?
+14. How to securely manage rotating secrets?
+15. How to implement email/Helm chart signing?
+
+# =============================================================================
+# SCENARIO-BASED & TROUBLESHOOTING
+# =============================================================================
+
+# General Scenarios
+1. Production server goes down at midnight - restore steps?
+2. Deployment breaks after release - safe rollback?
+3. Teams causing merge conflicts in CI/CD - handle?
+4. Kubernetes pod restarting in loop - debug?
+5. Application logs too large - logging strategy?
+6. CI pipeline takes 45 minutes - optimize speed?
+7. Database schema change with zero downtime - approach?
+8. Scale application for 10x traffic overnight - plan?
+9. Container image size very large - reduce?
+10. Security vulnerabilities in dependencies - integrate fixes?
+11. Microservices failing intermittently - implement observability?
+12. High cloud costs - optimization steps?
+13. Ensure compliance in CI/CD - design?
+14. Users report slow response times after deployment - triage?
+15. High CPU usage but clean logs - next steps?
+
+# Advanced Scenarios
+16. 30% users report slow responses, no errors/logs/CPU spikes - triage?
+17. Canary deployment: half traffic returns 502, others succeed - troubleshoot?
+18. HPA not scaling despite high CPU - diagnose?
+19. NAT Gateway bill spiked 10x - find cause and fix?
+20. VPC Flow Logs disappeared - misconfiguration cause?
+21. ALB health checks pass but customers get 502 - next steps?
+22. EKS nodes healthy but pods pending - simulate drill?
+23. Route53 failover didn't trigger during AZ outage - why?
+24. Kernel panic on GKE node - identify cause?
+25. Envoy config broke mTLS - RCA trace?
+
+# =============================================================================
+# ARCHITECTURE & DESIGN
+# =============================================================================
+
+1. Design infra from scratch for React + Java backend
+2. Design highly available logging system for 100+ microservices
+3. Design multi-tenant EKS cluster with isolation
+4. Design cost-optimized cloud architecture for internal apps
+5. Design auto-scaling for 50M+ concurrent viewers
+6. Design secure multi-account AWS organization
+7. Design hybrid cloud routing between GCP and AWS
+8. Design disaster recovery plan for stateful apps
+9. Design zero-downtime database migrations
+10. Design service mesh architecture for microservices
+11. Design chaos testing strategy for production
+12. Design multi-region failover without DNS
+13. Design immutable infrastructure strategy
+14. Design secrets management for multi-cloud
+15. Design compliance-enforced pipeline architecture
+
+# =============================================================================
+# MODERN DEVOPS TOOLS & TRENDS
+# =============================================================================
+
+# AI in DevOps
+1. How is AI reshaping DevOps?
+2. How to use GitHub Copilot for pipeline YAML?
+3. How to use AI for incident prediction?
+4. How to use AI for cost-optimized deployments?
+5. How to use ChatGPT + Terraform for IaC?
+6. How to use Kubernetes AI Operators?
+7. How far are you with AI in DevOps?
+
+# GitOps & Modern Practices
+8. What is GitOps and how does it work?
+9. Why GitOps pull beats push in production?
+10. How to use Argo CD and how it works?
+11. Difference between Helm and Argo CD?
+12. Difference between Helm and Kustomize?
+13. When to use initContainers vs lifecycle hooks?
+14. When to use nodeSelector vs affinity?
+15. When to use spot vs on-demand instances in production?
+16. Why DaemonSet not good for scaling workers?
+
+# Service Mesh & Advanced Networking
+17. How to implement service mesh for traffic optimization?
+18. How to use Envoy/Istio for fine-grained discovery?
+19. How to leverage eBPF + Cilium advantages?
+20. How to handle multi-cloud routing and IAM?
+21. How to implement cross-cloud secret syncing?
+
+# =============================================================================
+# CLOUD PROVIDER SPECIFIC
+# =============================================================================
+
+# Azure
+1. How to architect secure Azure DevOps pipelines?
+2. How to integrate Azure Key Vault with DevOps pipelines?
+3. How to implement rollback in AKS?
+4. How to troubleshoot failing Azure Functions?
+5. How to implement blue/green deployment in Azure?
+6. How to use Azure Application Gateway with WAF?
+
+# GCP
+7. What is Cloud Run in GCP?
+8. How to troubleshoot GCP Cloud Functions?
+
+# Multi-Cloud
+9. How to implement centralized secrets in multi-cloud?
+10. How to design hybrid cloud architectures?
+11. How to manage multi-cloud routing and boundaries?
+
+# =============================================================================
+# CAREER & LEARNING PATHS
+# =============================================================================
+
+# Technologies to Learn
+1. Redis
+2. Docker and Kubernetes
+3. Message queues
+4. Elasticsearch
+5. Websockets
+6. Distributed tracing
+7. Logging and monitoring
+8. Concurrency and race conditions
+9. Load balancers and circuit breakers
+
+# Interview Preparation
+10. What VPC peering can't solve
+11. When EKS Fargate makes sense
+12. When to use Helm vs Kustomize
+13. Why GitOps pull beats push in production
+14. When to use initContainers vs lifecycle hooks
+15. What nodeSelector vs affinity actually control
+16. When to use spot over on-demand in production
+17. Why DaemonSet not good fit for scaling workers
 
 
 
