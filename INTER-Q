@@ -91,37 +91,45 @@ Requirement: Pods must have resource requests/limits defined for the scheduler t
 # LINUX & OPERATING SYSTEMS
 # =============================================================================
 
-# Basic Linux Commands
-1. How to check running processes? (ps aux, top, htop)
-2. Command to generate SSH key? (ssh-keygen)
-3. What if user lost SSH key?
-4. Command to show memory usage & CPU processes? (free -h, top, htop)
-5. Command to kill a process? (kill, killall, pkill)
-6. How to change user access/privileges? (chmod, chown, visudo)
-7. How to check one running process? (ps -p PID, pgrep)
-8. How to list running processes? (ps aux, top)
-9. Find and kill process in single command? (pkill name, killall name)
-10. How to check disk usage? (df -h, du -sh)
-11. How to find free memory? (free -h, cat /proc/meminfo)
-12. How to archive and compress directory? (tar -czf, zip)
-13. What does chmod 755 mean?
-14. What is chown?
-15. How to list all SSH users? (cat /etc/passwd | grep bash, getent passwd)
-16. Where to check Apache logs? (/var/log/apache2/, /var/log/httpd/)
-17. What logs are in /var/log? (syslog, auth.log, kern.log, messages)
-18. Purpose of grep command?
-19. Grep to exclude lines with keyword? (grep -v keyword)
-20. Difference between cron and at?
-21. How to schedule script every 5 minutes? (*/5 * * * * /path/script)
-22. How to check if port is open? (netstat, ss, nmap)
-23. How to configure static IP address?
-24. Mounting and unmounting filesystems
-25. How to check disk partitions? (lsblk, fdisk -l)
-26. What is sticky bit, setuid, setgid?
-27. How to set default file permissions? (umask)
-28. Difference between find and locate?
-29. Difference between hard links and soft links?
-30. How to find processes using most CPU/memory? (ps aux --sort=-%cpu)
+# =============================================================================
+# BASIC LINUX COMMANDS - SENIOR DEVOPS CHEATSHEET
+# =============================================================================
+
+# Process Management
+1. How to check running processes? → ps aux | top | htop
+2. Command to generate SSH key? → ssh-keygen -t rsa -b 4096 -C "email@example.com"
+3. What if user lost SSH key? → Generate new keypair, update authorized_keys on all servers
+4. Command to show memory usage & CPU processes? → free -h && top -n 1 | head -10
+5. Command to kill a process? → kill -9 PID | killall name | pkill pattern
+6. How to change user access/privileges? → chmod 755 file | chown user:group file | visudo
+7. How to check one running process? → ps -p PID | pgrep process_name
+8. How to list running processes? → ps aux | top -bn1
+9. Find and kill process in single command? → pkill -f "process_name" | killall process_name
+10. How to check disk usage? → df -h | du -sh /path/*
+11. How to find free memory? → free -h | grep Mem: | awk '{print $4}'
+12. How to archive and compress directory? → tar -czf archive.tar.gz /path | zip -r archive.zip /path
+
+# File Permissions & Users
+13. What does chmod 755 mean? → Owner: rwx(7), Group: r-x(5), Others: r-x(5)
+14. What is chown? → Change file owner/group: chown user:group filename
+15. How to list all SSH users? → getent passwd | grep -E "(bash|zsh|sh)$" | cut -d: -f1
+16. Where to check Apache logs? → /var/log/apache2/ | /var/log/httpd/access_log error_log
+17. What logs are in /var/log? → syslog, auth.log, kern.log, messages, secure, boot.log
+18. Purpose of grep command? → Search text patterns in files: grep "pattern" file
+19. Grep to exclude lines with keyword? → grep -v "exclude_pattern" filename
+20. Difference between cron and at? → cron=scheduled recurring jobs, at=one-time future execution
+
+# System Administration
+21. How to schedule script every 5 minutes? → */5 * * * * /path/script.sh
+22. How to check if port is open? → netstat -tulpn | grep :port | ss -tulpn | nmap localhost
+23. How to configure static IP address? → Edit /etc/netplan/*.yaml | /etc/sysconfig/network-scripts/ifcfg-eth0
+24. Mounting and unmounting filesystems → mount /dev/sdX /mnt | umount /mnt
+25. How to check disk partitions? → lsblk | fdisk -l | parted -l
+26. What is sticky bit, setuid, setgid? → sticky bit(dir delete restriction), setuid(user exec as owner), setgid(group exec as group)
+27. How to set default file permissions? → umask 022 (files:644, dirs:755)
+28. Difference between find and locate? → find=real-time search, locate=pre-built database search
+29. Difference between hard links and soft links? → hard=direct inode reference, soft=symbolic path pointer
+30. How to find processes using most CPU/memory? → ps aux --sort=-%cpu | head -10 | ps aux --sort=-%mem | head -10
 
 # =============================================================================
 # GIT & VERSION CONTROL
