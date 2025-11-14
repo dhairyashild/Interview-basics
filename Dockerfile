@@ -51,7 +51,7 @@ docker run -it -v /home/buntu/app:/app nginx
 EXEC     === ONLY RUN COMMAND DOCKER( command ) + K8S ( -- command)
 EXEC -IT ==== ENTER IN DOCKER(/bin/bash ) + K8S( -- bash) 
 
-# Docker: Run command from outside
+# Docker: Run command from outside --SO EXEC NEVER NEED /BIN/BASH  OR /BASH ONLY EXEC -IT NEEDS 
 docker exec <container-name/id> <command>
 docker exec e5 ls
 
