@@ -168,7 +168,11 @@ host: Shares host’s network (no isolation, fast).
 none: No networking (for security/testing).
 overlay: For multi-host Swarm clusters.
 
-
+6. How to copy files from container to host? → 
+# Copy file FROM container TO host
+docker cp my-container:/app/config.json /home/ubuntu/config-backup.json
+# Copy file FROM host TO container
+docker cp /home/ubuntu/app.conf my-container:/etc/nginx/conf.d/
 
 - Dockerfile - which layer u change command after that all layers created again before that layer only cached.
 
@@ -245,3 +249,35 @@ CMD ["serve", "-s", "build", "-l", "3000"] #### Serve the built assets
 
 
 
+
+
+
+8. Difference between CMD and ENTRYPOINT? → CMD=default args, ENTRYPOINT=main exec
+
+10. Difference between RUN, CMD, ENTRYPOINT? → RUN=build-time, CMD/ENTRYPOINT=runtime
+
+11. How to build image and run container? → docker build -t app . && docker run app
+
+14. Difference between volumes and bind mounts? → Volumes=managed, Bind mounts=host path
+
+15. When to use volumes vs bind mounts in Kubernetes? → Volumes for persistence
+
+16. What are Cgroups and dangling objects? → Cgroups=resource limits, Dangling=untagged images
+
+17. How to cache Docker layers in pipelines? → Proper layer order, --cache-from
+# Build 1st time - creates cache layers for po.xml and mvn command layer and source code also
+docker build -t my-app:v1 .
+# Build 2nd time - REUSES cached layers from my-app:v1
+docker build -t my-app:v2 .
+
+18. How to delete all Docker resources? → docker system prune -a
+
+19. How to clean unused images and containers? → docker system prune
+
+20. Container keeps restarting - how to debug? → docker logs, check resources
+
+21. App works locally but not in container - what to check? → Ports, env vars, paths
+
+23. Techniques for secure Docker containers in CI/CD? → Non-root user, image scanning
+
+25. Difference between Docker bridge and custom bridge? → Default=isolated, Custom=user-defined
