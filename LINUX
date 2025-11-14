@@ -127,22 +127,21 @@ lsblk
 sudo file -s /dev/xvdbz   ----(/dev/xvdbz: data   ==mean no filesystem)   /    (/dev/xvdbz: linux .....   ==mean fs is already created)
 sudo mkfs -t ext4 /dev/xvdbz     ----create fs ot type ext4
 sudo mount /dev/xvdbz /home/ubuntu/myebs
+24. Mounting and unmounting filesystems → mount /dev/sdX /mnt | umount /mnt
+
 resize2fs /dev/xvdbz      ----for only increase ebs   ---(growpart /dev/xvdbz  ---apply this if u increase root ebs)
 df -h
 du -sh /path/to/directory
 #####################################
-
+29. Difference between hard links and soft links? 
+Hard Link: Direct clone of the file (same inode number)--# Create HARD LINK==ln original.txt hardlink.txt ==  if delete original.txt then also hardlink.txt works
+Soft Link: Shortcut to the file (different inode number)  # Create SOFT LINK =ln -s original.txt softlink.txt ==if delete original.txt then also softlink.txt deleted
 ###########################################3
 
 ################################################
-tar -cvzf archive.tar.gz file1 file2
-Creates a .tar.gz compressed archive containing file1 and file2.
-tar -cvzf archive.tar.gz directory_name
-Compresses an entire directory into a .tar.gz file.
-
- tar cvzf archive.tar.gz /path/to/directory 
+12. How to archive and compress directory? →    
+tar -cvzf archive.tar.gz file1.txt file2.txt  
 tar xvzf archive.tar.gz
-
 
 zip archive.zip file1.txt file2.txt
 unzip archive.zip
@@ -297,3 +296,40 @@ IAM Role Policies: Attach missing permissions
 Solution: Update role trust policies
 
 
+
+# =============================================================================
+# BASIC LINUX COMMANDS - SENIOR DEVOPS CHEATSHEET
+# =============================================================================
+
+# Process Management
+1. How to check running processes? → ps aux | top | htop
+2. Command to generate SSH key? → ssh-keygen -t rsa -b 4096 -C "email@example.com"
+3. What if user lost SSH key? → Generate new keypair, update authorized_keys on all servers
+5. Command to kill a process? → kill -9 PID | killall name | pkill pattern
+6. How to change user access/privileges? → chmod 755 file | chown user:group file | visudo
+7. How to check one running process? → ps -p PID | pgrep process_name
+9. Find and kill process in single command? → pkill -f "process_name" | killall process_name
+10. How to check disk usage? → df -h | du -sh /path/*
+11. How to find free memory? → free -h | grep Mem: | awk '{print $4}'
+12. How to archive and compress directory? → tar -czf archive.tar.gz file1.txt file2.txt     /      zip archive.zip file1.txt file2.txt
+
+# File Permissions & Users
+13. What does chmod 755 mean? → Owner: rwx(7), Group: r-x(5), Others: r-x(5)
+14. What is chown? → Change file owner/group: chown user:group filename
+15. How to list all SSH users? → cat /etc/passwd
+16. Where to check Apache logs? → /var/log/apache2/ | /var/log/httpd/access_log error_log
+17. What logs are in /var/log? → syslog, auth.log, kern.log, messages, secure, boot.log
+18. Purpose of grep command? → Search text patterns in files: grep "pattern" file
+19. Grep to exclude lines with keyword? → grep -v "exclude_pattern" filename
+20. Difference between cron and at? → cron=scheduled recurring jobs, at=one-time future execution
+
+# System Administration
+21. How to schedule script every 5 minutes? → 
+crontab -e
+*/5 * * * * /home/ubuntu/myscript.sh
+23. How to configure static IP address? → Edit /etc/netplan/*.yaml | /etc/sysconfig/network-scripts/ifcfg-eth0
+26. What is sticky bit, setuid, setgid? → sticky bit(dir delete restriction), setuid(user exec as owner), setgid(group exec as group)
+27. How to set default file permissions? → umask 022 (files:644, dirs:755)
+28. Difference between find and locate? → find=real-time search, locate=pre-built database search
+# Search for files named "config.yml" in current directory and subdirectories
+find . -name "config.yml"
