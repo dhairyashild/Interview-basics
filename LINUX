@@ -96,7 +96,19 @@ Solution: --Change ownership:
 sudo chown username:groupname /path/to/directory 
 
 --Set proper permissions: 
-sudo chmod 755 /path/to/directory
+sudo chmod 751 /path/to/directory               7= user, 5= group, 1= others.
+4 = Read (r)
+2 = Write (w)
+1 = Execute (x)
+
+Use chown if the user/group (e.g., root root) is wrong.
+Use chmod if the permissions (e.g., -rw-r--r--) are wrong.
+
+chmod +x shell-script.sh
+It adds 1 to the permission value for user, group, and/or others.
+Example: A file with 644 (rw-r--r--) becomes 755 (rwxr-xr-x) with chmod +x.
+
+
 --------------------------------------------
 DOCKER ISSUES
 
@@ -111,7 +123,7 @@ lsof -i :8080
 sudo netstat -tuln | grep 8080             ---  use above lsof not this
 
 
-find / -name "filename" 
+find / -name "filename"                    -name "MISSED-FILE-NAV"
 
 JOURNALCTL
 information from the system's service log files 
