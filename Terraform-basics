@@ -3,7 +3,7 @@
 why terra- infra as code  +   multicloud  +  hcl -simple
 terra ur use = ec2 eks  s3 vpc 
 terraform -v
-Terraform v1.13.0                     =======latest
+Terraform v1.14.0                     =======latest
 https://releases.hashicorp.com/terraform/
 
 provisioner = feature to execute command and scripts on resources already created
