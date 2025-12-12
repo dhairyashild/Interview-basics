@@ -19,9 +19,11 @@ TG—-cross zone LB- cross zone load balancing is bydefault on
 -AWS_DEFAULT_PROFILE= dhairyashil ====to set new default user
 -keys are saved in the file           ~/.aws/credentials
 
-LOST PEM KEY SOLUTION 
-1 TAKE AMI AND CREATE NEW INSTANCE FROM IT AND USE THAT INSTANCE BUT IP GET CHANGED
-2 FROM EBS
+LOST PEM KEY SOLUTION
+1 FROM AMI - 
+             CREATE NEW EC2 FROM IT & USE NEW INSTANCE- But it changes IP/DNS, breaks firewall rules and app configs referencing old IP.
+2 FROM EBS - 
+            DETACH VOLUME → ATTACH TO NEW INSTANCE WITH NEW PEM #Better - preserves IP/data
 
 images—-ami—-search root device type— instance storage
 
