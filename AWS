@@ -1,10 +1,11 @@
 ################################################################################   SARANSH   #############################################################################################
+############ IMP WORDS---EBS——>LIFECYCLE MANAGER/snap lifecycle policy ###### ssminstance core role to ec2 ###  CLOUDWATCH-SERVER-AGENT
 
 AWS Transit Gateway =( SARANSH=NETWORKING SVC TO INTERREGION+INTERACCOUNT VPC)
 
 actions—-security—-
                       1)modify  sg
-                    2)modify iam role
+                      2)modify iam role
 
 NACL=SARANSH=FIREWALL ON SUB+DEFAULT=IN+OUT ALLOW/CUSTOM=IN&OUT BLOCKED+LOW NUM PRIORITY+STATELESS+BLOCK TTACKING IP
 
