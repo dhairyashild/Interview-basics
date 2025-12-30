@@ -28,7 +28,7 @@ commit
 diff
 build -t
 port 
-
+stats   --->                                      cpu/mem/network
 docker run -d ubuntu sleep infinity
 
 docker run -d -p 80:80 nginx
