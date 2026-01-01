@@ -1,0 +1,40 @@
+## SSM Ubuntu EC2 Prod Summary Notes (Improved w/ Delegate Fix)
+
+### 1. SSM Define & Uses
+SSM: Manages EC2 via agent—no SSH/ports.
+Uses: Patch/Session/Command/Inventory/State.
+
+### 2. Patch Manager
+Auto Ubuntu OS patching.
+Prob: Vulns/downtime. Solve: Scheduled compliance.
+
+### 3. Pre-reqs Ubuntu
+1. sudo snap install amazon-ssm-agent --classic
+2. sudo systemctl enable --now amazon-ssm-agent
+
+### 4. Settings Actions (Exact)
+**"Register delegated admin" → Enter Acct ID 5700-4374-7352 → CONFIRM**  
+Why: Enables org Quick Setup/Explorer/Patch multi-acct.
+
+**"Enable DHMC"**  
+Why: Auto SSM role/agent ALL EC2.
+
+**"Enable Auto Update"**  
+Why: Agent auto-security 14d.
+
+### 5. Baseline
+Patch Manager > Create Custom > Ubuntu22.04 > Critical:7d auto > Create
+
+### 6. Quick Setup Policy
+Name:UbuntuPatch | Scan+Install Sun1AM | Tag:OS=Ubuntu ap-south-1 | 10%/5% | Create
+
+### 7. Verify CLI
+aws ssm send-command AWS-RunPatchBaseline Install Reboot=true --targets tag:OS=Ubuntu
+
+### 8. Prod Practices
+DHMC+Tags+Windows+Alerts. Dev test first.
+
+### 9. Console Flow
+1.Settings(DHMC) 2.Fleet(Online) 3.QuickSetup 4.Compliance
+
+Delegate Acct ID fixes "No ID specified"—now prod-ready![web:2]
