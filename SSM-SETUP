@@ -1,40 +1,52 @@
-## SSM Ubuntu EC2 Prod Summary Notes (Improved w/ Delegate Fix)
+# =============================================================================
+# SSM UBUNTU EC2 PROD MASTER GUIDE - STEP-BY-STEP (1-Click Copy)
+# =============================================================================
 
-### 1. SSM Define & Uses
-SSM: Manages EC2 via agent—no SSH/ports.
-Uses: Patch/Session/Command/Inventory/State.
+## SSM DEFINITION & PROBLEM SOLVED
+SSM: Free AWS service manages EC2 via agent (no SSH/ports needed)
+PROBLEM: Manual patching slow, SSH bastions, no fleet visibility, security holes
+SOLUTION: Auto-patch + secure remote ops at scale
 
-### 2. Patch Manager
-Auto Ubuntu OS patching.
-Prob: Vulns/downtime. Solve: Scheduled compliance.
+## STEP 1: Install Agent (Ubuntu 24.04)
+sudo snap refresh amazon-ssm-agent
+sudo systemctl daemon-reload
+sudo systemctl enable --now snap.amazon-ssm-agent.amazon-ssm-agent.service
+sudo systemctl status snap.amazon-ssm-agent.amazon-ssm-agent.service
+curl http://localhost:1697/latest/meta/instance_id
 
-### 3. Pre-reqs Ubuntu
-1. sudo snap install amazon-ssm-agent --classic
-2. sudo systemctl enable --now amazon-ssm-agent
+## STEP 2: EC2 IAM Role + Tag
+EC2 Console > Instance > Actions > Security > Modify IAM role > AmazonSSMManagedInstanceCore > Update
+TAGS: Key=OS Value=Ubuntu
 
-### 4. Settings Actions (Exact)
-**"Register delegated admin" → Enter Acct ID 5700-4374-7352 → CONFIRM**  
-Why: Enables org Quick Setup/Explorer/Patch multi-acct.
+## STEP 3: Settings Console
+Settings > "Register delegated admin" > 570043747352 > CONFIRM
+       > "Enable DHMC" > Enable
+       > "Enable Auto Update SSM Agent" > ON
 
-**"Enable DHMC"**  
-Why: Auto SSM role/agent ALL EC2.
+## STEP 4: Patch Baseline
+SSM > Patch Manager > Create patch baseline > Custom
+Name: UbuntuProdBaseline | Ubuntu 24.04 | Critical:7d auto > CREATE
 
-**"Enable Auto Update"**  
-Why: Agent auto-security 14d.
+## STEP 5: Quick Setup Patch Policy
+Quick Setup > Patch Policy > CREATE
+Name: UbuntuPatchPolicy
+Scan: Daily 1AM UTC ✓ Wait CRON
+Install: Sun 2AM UTC ✓ Reboot ON ✓ Wait CRON
+Baseline: Defaults
+S3: ssm-patch-logs-ap-south-1-[acct]
+Target: ap-south-1 + Tag:OS=Ubuntu
+Rate: 10%/5%
+Profiles: ✓ Enabling | Roles: Create new > CREATE
 
-### 5. Baseline
-Patch Manager > Create Custom > Ubuntu22.04 > Critical:7d auto > Create
-
-### 6. Quick Setup Policy
-Name:UbuntuPatch | Scan+Install Sun1AM | Tag:OS=Ubuntu ap-south-1 | 10%/5% | Create
-
-### 7. Verify CLI
+## STEP 6: Verify
+Fleet Manager: "Online" ✓
+Compliance: Policy "Succeeded" ✓
 aws ssm send-command AWS-RunPatchBaseline Install Reboot=true --targets tag:OS=Ubuntu
 
-### 8. Prod Practices
-DHMC+Tags+Windows+Alerts. Dev test first.
+## STEP 7: Prod Ops
+Compliance daily review
+CloudWatch failure alerts
+Maintenance Windows prod hours
 
-### 9. Console Flow
-1.Settings(DHMC) 2.Fleet(Online) 3.QuickSetup 4.Compliance
-
-Delegate Acct ID fixes "No ID specified"—now prod-ready![web:2]
+## TIMELINE: 15min → Ubuntu fleet auto-patched FOREVER ✓
+# =============================================================================
