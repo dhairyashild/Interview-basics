@@ -537,7 +537,248 @@ Requirement: Pods must have resource requests/limits defined for the scheduler t
 16. When to use spot over on-demand in production
 17. Why DaemonSet not good fit for scaling workers
 
+-------------------------------------------------------------------------------------------------------------------------------------------
 
+INTER-Q, [15-12-2025 19:04]
+SRE / Kubernetes / DevOps Interview Questions (Only Questions)
+1. How do you troubleshoot a production incident in Kubernetes?
+2. What log collection architecture are you using in your cluster?
+3. How do you handle high resource utilization on nodes or containers?
+4. How do you configure autoscaling (HPA, VPA, Cluster Autoscaler, Karpenter)?
+5. What preventive measures do you take to avoid node capacity exhaustion?
+6. What observability stack have you implemented in your current project?
+7. How do you onboard a new application into your observability platform?
+8. What Datadog pods get created when you deploy the Datadog agent?
+9. How do you configure logs, metrics, and traces for a new service?
+10. Have you implemented service mesh ingress? Explain how.
+11. What tools do you use for log management and why?
+12. How do you tune Fluent Bit / Datadog Agent for performance issues?
+13. What is Kubernetes resource requests and limits, and how do you set them?
+14. Describe a real production outage you handled and how you fixed it.
+15. How do you prevent OOMKilled and CPU throttling issues?
+16. How do you configure node affinity, taints, and tolerations?
+17. What is your approach for multi-AZ node group architecture?
+18. How do you manage Kubernetes cluster upgrades?
+19. What is the difference between Ingress and Gateway API?
+20. How do you configure SLOs/SLIs and error budget policies?
+21. How do you detect and resolve Terraform drift?
+22. What steps do you take to secure a Kubernetes cluster?
+23. What is your CI/CD workflow for Kubernetes deployments?
+24. How do you implement canary or blue-green deployments?
+25. How do you handle image-pull issues in Kubernetes?
+26. What are the most important dashboards for SRE monitoring?
+27. How do you configure PodDisruptionBudgets (PDBs)?
+28. How do you design a scalable cluster logging system?
+29. What node-level issues have you seen, and how did you fix them?
+30. How do you troubleshoot network issues (DNS, CNI, Ingress)?
+
+INTER-Q, [15-12-2025 19:05]
+Complete List of Questions Asked in the Interview
+AWS IAM & Security
+
+1.What is the difference between IAM User, IAM Role, and IAM Policy?
+
+2.What is a Permission Boundary?
+
+3.If role policy allows RDS but permission boundary denies RDS, can you access RDS?
+
+4. How does cross-account role work?
+
+5Scenario: EC2 in Account A needs to access S3 bucket in Account B — how do you do it?
+
+S3
+
+6.What are S3 Events?
+
+7.What does SNS do?
+
+8.Can 1 SNS topic send messages to 2 SQS queues based on message type? (SNS → SQS message filters)
+
+9.SQS / Lambda
+
+10. Write a Lambda function to fetch messages from SQS.
+
+11. If you print the event in an SQS-triggered Lambda, what will you see?
+
+12. Networking / VPC
+
+13. What is a VPC Endpoint?
+
+14. Does DynamoDB support both interface and gateway endpoints?
+
+
+15. What source control tool do you use?
+
+16. Step-by-step process: checkout code → make changes → push → PR → merge → deploy.
+
+17. How do you rollback code in Git?
+
+18. What is git revert vs git reset?
+
+19. What is git squash? What's the purpose?
+
+20. Jenkins / CI-CD
+
+21. Write a simple Jenkins pipeline: Git checkout + Terraform deploy + variables.
+
+22. Explain the Jenkinsfile step-by-step.
+
+
+23. What is a Terraform workspace?
+
+24. What is a Terraform backend?
+
+25. What is a null_resource?
+
+26. What are the types of provisioners? (local-exec, remote-exec, file)
+
+27. What Docker repository have you used?
+
+28. What things are available inside a Dockerfile?
+
+29. Difference between Dockerfile and Docker Compose.
+
+30. What is Docker Swarm?
+
+Kubernetes
+
+31. What type of Kubernetes have you worked with? (AKS, EKS, etc.)
+
+32. What is the EKS plugin? (You clarified EKS add-ons)
+
+33. What is Karpenter?
+
+INTER-Q, [28-12-2025 11:44]
+🚨 Silent DevOps Failure That Didn’t Throw Any Error 🚨
+
+❌ Problem:
+
+* CI pipeline was green ✅
+* Deployment was successful ✅
+* But the application behaved like old code 🤯
+
+📌 What made it scary?
+
+1. No errors in logs
+2. No failed pods
+3. No failed pipeline stages
+
+Users still saw outdated behavior
+
+🧠 Root Cause (Uncommon): Docker image was built using the same tag (latest), and Kubernetes reused the cached image on nodes.
+
+🛠 Solution:
+
+ 🔁 Stopped using latest
+ ✅ Used immutable image tags (commit ID / build number)
+
+image: myapp:build-1042
+imagePullPolicy: Always
+
+🚀 Result: Correct version deployed instantly across all nodes.
+
+💡 DevOps Lesson:
+
+If you don’t version your images, Kubernetes will decide your version for you.
+🔥 Green pipelines can still lie.
+
+INTER-Q, [31-12-2025 13:49]
+https://teams.microsoft.com/dl/launcher/launcher.html?url=%2F_%23%2Fl%2Fmeetup-join%2F19%3Ameeting_MGVhMjgyMDctMmM3Ni00OGQ0LTkyZmItMDA5M2EzMjI5MGZi%40thread.v2%2F0%3Fcontext%3D%257b%2522Tid%2522%253a%2522c3b29389-7689-477c-9f7a-ae999846ff8d%2522%252c%2522Oid%2522%253a%25223a3bd53e-c123-4958-8866-a6c3d88b81b2%2522%257d%26anon%3Dtrue&type=meetup-join&deeplinkId=c85096c8-5cc3-4a9c-8b13-b9e8b0da67a5&directDl=true&msLaunch=true&enableMobilePage=true&suppressPrompt=true
+
+INTER-Q, [03-01-2026 21:04]
+Interview Experience – MNC (DevOps / Cloud Role)
+
+1️⃣ How do you debug a production issue when logs show no errors?
+2️⃣ What steps do you follow when application latency suddenly increases?
+3️⃣ How do you identify the root cause when metrics look normal but users complain?
+4️⃣ What do you check first when a Kubernetes pod is running but traffic fails?
+5️⃣ How do you troubleshoot intermittent failures that can’t be reproduced?
+6️⃣ How do you verify whether a deployment actually changed runtime behavior?
+7️⃣ What do you analyze when database connections are exhausted but CPU is low?
+8️⃣ How do you approach an incident involving multiple dependent services?
+9️⃣ What signals do you trust most during a live production outage?
+🔟 How do you confirm whether autoscaling is working as expected?
+1️⃣1️⃣ How do you debug a pipeline that succeeds but produces a faulty release?
+1️⃣2️⃣ What would you investigate if a rollback doesn’t resolve the issue?
+1️⃣3️⃣ How do you detect configuration drift in production systems?
+1️⃣4️⃣ What checks do you perform before declaring an incident resolved?
+1️⃣5️⃣ How do you prioritize actions during a high-severity outage?
+
+INTER-Q, [03-01-2026 22:00]
+If you want fewer alarms and less coffee:
+• Learn how your cluster picks nodes
+• Learn CPU and memory requests and limits
+• Learn how observability reduces invisible failures
+• Learn why your CNI controls half your workload stability
+• Learn the difference between scaling apps and scaling infra
+
+INTER-Q, [03-01-2026 22:09]
+𝐀𝐖𝐒 𝐄𝐊𝐒 𝐖𝐨𝐫𝐤𝐥𝐨𝐚𝐝 𝐎𝐫𝐜𝐡𝐞𝐬𝐭𝐫𝐚𝐭𝐢𝐨𝐧 — 𝐊𝐮𝐛𝐞𝐫𝐧𝐞𝐭𝐞𝐬 𝐉𝐮𝐬𝐭 𝐆𝐨𝐭 𝐚 𝐁𝐫𝐚𝐢𝐧
+
+
+Kubernetes has always been great at running pods.
+It was never great at understanding intent.
+Amazon Web Services (AWS) just changed that.
+
+
+𝐖𝐡𝐚𝐭 𝐰𝐚𝐬 𝐛𝐫𝐨𝐤𝐞𝐧?
+• Scheduling logic scattered across node groups, taints, scripts
+• Humans deciding cost vs availability vs performance
+• Platform teams tuning infra instead of enabling teams
+• Scaling decisions reactive, not policy-driven
+Kubernetes handled mechanics.
+Humans handled judgment.
+
+
+𝐖𝐡𝐚𝐭 𝐄𝐊𝐒 𝐖𝐨𝐫𝐤𝐥𝐨𝐚𝐝 𝐎𝐫𝐜𝐡𝐞𝐬𝐭𝐫𝐚𝐭𝐢𝐨𝐧 𝐚𝐜𝐭𝐮𝐚𝐥𝐥𝐲 𝐚𝐝𝐝𝐬 • A higher-level workload intent model
+• Separation of application needs from infrastructure details
+• Policy-driven placement across compute types
+• Platform-level reasoning instead of YAML-level tuning
+You define what matters.
+The platform decides how to run it.
+
+𝐖𝐡𝐚𝐭 𝐜𝐡𝐚𝐧𝐠𝐞𝐬 𝐢𝐧 𝐫𝐞𝐚𝐥 𝐬𝐲𝐬𝐭𝐞𝐦𝐬 • Before: node-first thinking
+• After: workload-first thinking
+
+• Before: manual trade-offs
+• After: automated, repeatable decisions
+
+• Before: infra teams as operators
+• After: infra teams as platform builders
+
+
+𝐓𝐡𝐞 𝐜𝐚𝐯𝐞𝐚𝐭 
+
+This favors mature platforms.
+
+If your workloads aren’t clearly classified, orchestration won’t save you.
+
+Intent must be explicit for automation to work.
+
+This isn’t “more Kubernetes”.
+It’s Kubernetes finally moving from execution to decision-making.
+
+Do you want your platform to make these trade-offs automatically — or do you still trust humans more?
+
+Follow Abhijeet Kulkarni !
+
+INTER-Q, [03-01-2026 22:10]
+Terraform State Management – Solving Real Production Issues with Remote Backends
+Today’s focus was on Terraform state management, a critical yet often overlooked component in production-grade DevOps environments.
+
+Common Problems Identified:
+1) Terraform state files (.tfstate) cannot be pushed to GitHub due to security risks (contains sensitive infrastructure metadata)
+
+2) State conflicts occur when multiple engineers run Terraform simultaneously, leading to corruption or resource drift
+
+Solution Designed & Implemented:
+Configured Remote Backend using AWS S3 for centralized, secure Terraform state storage
+Implemented State Locking using DynamoDB, preventing concurrent modifications
+Ensured safe collaboration, auditability, and consistency across teams
+Fully validated the setup through a practical, end-to-end demo
+
+Outcome:
+Achieved secure state handling, eliminated race conditions, and aligned Terraform usage with enterprise DevOps best practices.
 
 
 
