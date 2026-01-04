@@ -7,12 +7,13 @@ SSM: Free AWS service manages EC2 via agent (no SSH/ports needed)
 PROBLEM: Manual patching slow, SSH bastions, no fleet visibility, security holes
 SOLUTION: Auto-patch + secure remote ops at scale
 
-## STEP 1: Install Agent (Ubuntu 24.04)
-sudo snap refresh amazon-ssm-agent
-sudo systemctl daemon-reload
-sudo systemctl enable --now snap.amazon-ssm-agent.amazon-ssm-agent.service
-sudo systemctl status snap.amazon-ssm-agent.amazon-ssm-agent.service
-curl http://localhost:1697/latest/meta/instance_id
+## STEP 1: Install Agent (Ubuntu all types such 16,18,22,24) ==== go on below link to get commands to install / use below command directly
+https://docs.aws.amazon.com/systems-manager/latest/userguide/agent-install-ubuntu-64-snap.html
+
+sudo snap install amazon-ssm-agent --classic        ===install
+sudo snap list amazon-ssm-agent                      === check
+sudo snap start amazon-ssm-agent                     ===if the previous command returned amazon-ssm-agent is stopped, inactive, or disabled
+
 
 ## STEP 2: EC2 IAM Role + Tag
 EC2 Console > Instance > Actions > Security > Modify IAM role > AmazonSSMManagedInstanceCore > Update
