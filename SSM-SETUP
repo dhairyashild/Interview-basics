@@ -1,3 +1,11 @@
+SSM====-manages EC2 via agent (no SSH/ports needed)  == SECURE + NO BASTION
+
+1) RUN COMMAND NOTES === https://www.youtube.com/watch?v=2i8v02xZLlM
+
+        1=Install Agent(sudo snap install amazon-ssm-agent --classic) + 2=IAM ROLE NEED(AmazonSSMManagedInstanceCore)
+       3= RUN COMMAND ---> SEARCH AWS-Runshellscripts---> GIVE COMMANDS no /bin/bash ---> GIVE INSTANCE TAG/SELECT MANUALY EC2 --> RUN
+
+
 # =============================================================================
 # SSM UBUNTU EC2 PROD MASTER GUIDE - STEP-BY-STEP (1-Click Copy)
 # =============================================================================
