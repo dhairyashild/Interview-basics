@@ -1,6 +1,22 @@
 ################################################################################   SARANSH   #############################################################################################
 ############ IMP WORDS---EBS——>LIFECYCLE MANAGER/snap lifecycle policy ###### ssminstance core role to ec2 ###  CLOUDWATCH-SERVER-AGENT
+Snowflake is a cloud-native data platform (SaaS) on AWS that separates storage/compute for scalable analytics, warehousing, and sharing.
+Definition :-
+Fully managed SQL-based platform with three layers: 
+storage (micro-partitions), 
+compute (virtual warehouses), 
+cloud services (security/metadata).
+​
+ML/AI Use
+Cortex AI/ML functions enable in-platform model training, forecasting, and vector search without data movement.
+Streamlit in Snowflake builds/deploy ML apps; supports Python (Snowpark) for feature engineering and LLMs.
+​
+DevOps Use
+IaC via Terraform/CLI for CI/CD pipelines; version control SQL/procs with Git/Jenkins integration.
+Auto-scaling warehouses, zero-copy cloning, and tasks for automated ETL reduce ops overhead
 
+
+@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@
 AWS Transit Gateway =( SARANSH=NETWORKING SVC TO INTERREGION+INTERACCOUNT VPC)
 
 actions—-security—-
