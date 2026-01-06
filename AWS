@@ -44,9 +44,9 @@ LOST PEM KEY SOLUTION
 
 images—-ami—-search root device type— instance storage
 
-IAAS= APP+DATA+OS=You manage everything (EC2 - setup OS, install app, secure)
-PAAS=APP-CODE+DATA=You gave only app code(ECS - deploy containers, AWS runs them)
-SAAS=ALL MNG BY CLOUD-U DONT NEED TO MNG ANYTHING=You manage nothing (gmail/RDS - just use database, no servers)
+IAAS= APP+DATA+OS=You manage everything (EC2 - setup OS, install app, secure  , EKS NODES U MANAGE , )
+PAAS=APP-CODE+DATA=You gave only app code(ECS - deploy containers, AWS runs them   , EKS )
+SAAS=ALL MNG BY CLOUD-U DONT NEED TO MNG ANYTHING=You manage nothing (gmail/RDS - just use database, no servers   , S3 , ATHENA )
 
 
 
