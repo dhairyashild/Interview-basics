@@ -1,6 +1,4 @@
 #########    MAVEN      ##############
-
-
 -build tool based on project object model
 -developer give source code + test cases + pom.xml(dependency required list)
 -mvn read pom.xml , validates dependecy locally/ download from web 
@@ -40,6 +38,8 @@ programming languages.
  identifies potential security risks such as SQL injection( attacker can manipulate SQL 
 queries executed by  app) and hardcoded credentials...
 
+Bug =Code flaw causing runtime failure
+
 ###SonarQube Components
 1) SonarQube Server:
 manages the UI,
@@ -72,7 +72,7 @@ stages {
  }
 
 ###Quality profiles
-          collections of rules that define coding standards and best practices for a specific programming language.
+          collections of rules that define coding standards for specific programming language.
 1. Default Profiles:
        Each language has a default Quality Profile, often named "Sonar way," which cannot be edited.
 2 Customization:
@@ -80,7 +80,7 @@ stages {
        We can make custome profile set as default
 
 ###QUALITY GATES
-                Conditions in a project to ensure specific quality criteria are met before moving to the next phase, preventing issues and ensuring standards.
+Conditions in project to ensure specific quality criteria met before moving to next phase so ensuring standards.
 There is deafult quality gate 
 create new gates 
 add condition
@@ -130,7 +130,10 @@ SYSTEM——— add sonarserverurl:9000  /  lb:9000 if on k8s
 
  2) credentials
 on sonar-server—-security—-token—-add this token
-SYSTEM——— add server-authentication-token—-as secret text(sonar-token)
+SYSTEM——— add server-authentication-token—-as secret text(sonar-token)=====
+withSonarQubeEnv('SonarQube') loads the Sonar server URL and auth token that you pre-configured in Jenkins Manage Jenkins → 
+Configure System → SonarQube servers, and injects them as env vars used by mvn ... sonar:sonar.
+
 -----------------------------------------------------------------------------
 LINKEDIN IMP
 
