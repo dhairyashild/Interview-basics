@@ -25,7 +25,7 @@ verify= verifypackage is real
 install= install on local repo
 deploy= on remote repo
 
-MVN PROFILE = Set multiple configuration for different env
+MVN PROFILE =  customizes builds for different envs (dev/prod) 
 
 ########################################################################################################################################
 
