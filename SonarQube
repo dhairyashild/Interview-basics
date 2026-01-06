@@ -9,6 +9,11 @@
 organisation id
 project name
 dependecy list = junit , sql-connector 
+myapp/
+├── pom.xml              # Maven build
+├── src/main/java/       # Controllers, services, repos
+├── src/test/java/       # Unit/integration tests
+└── Dockerfile           # Build JAR image for EKS/ECS
 
 
 #LIFECYCLE MVN = Creates following folder in target/
