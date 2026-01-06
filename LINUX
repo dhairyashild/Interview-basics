@@ -2,7 +2,7 @@
 2)  High CPU Usage             N P        
 
 
-## CPU  (vCPU = 1 for t2.micro )
+## CPU  (vCPU = 1 for t2.micro )          ======   Top  Ps  Nproc        TPN KILL
 
 nproc                                         --------   give 1 core/Vcpu avoid using lscpu
 ps -aux --sort=-%cpu | head -n 5               ---------   to check top 5 percentage usage of cpu                             P -A --S=-%C H -N
@@ -22,8 +22,7 @@ kill -9 <PID>                      # -9  = by force
 Mem:           957Mi       407Mi       153Mi       932Ki       571Mi       549Mi
 
 
-
-3) top 5 processes by memory usage
+2) top 5 processes by memory usage
  
 ps -aux --sort=-%mem | head -n 5                                                                               P -A --S=-%M H -N
 ps -aux        =   lists all processes
@@ -32,7 +31,7 @@ head -n 5     =   top 5.
 
 sudo kill -9 pid     ---kill high usage 
 
-2) cat /proc/meminfo  ==== Avoid using it 
+3) cat /proc/meminfo  ==== Avoid using it 
 MemTotal:         980376 kB
 MemFree:          156736 kB
 MemAvailable:     562876 kB    #### this is imp..  ---MemAvailable =MemFree + cache
@@ -133,7 +132,7 @@ journalctl -u docker.service
 
 
 ####################################
-                EBS =Disk Storage
+EBS =Disk Storage
 
 lsblk
 sudo file -s /dev/xvdbz   ----(/dev/xvdbz: data   ==mean no filesystem)   /    (/dev/xvdbz: linux .....   ==mean fs is already created)
@@ -160,16 +159,10 @@ unzip archive.zip
 
 cat /etc/os-release
 
-ps -aux
-top
-kill  pid
 
 userdel devops  ——-> to delete user and delete related files
-
 groupdel devops
 
-free -h             —- ram
-lscpu               —-gives cpu 
 
 nginx
 apt-get install nginx -y
@@ -190,7 +183,7 @@ sudo apt unattended-upgrade -y  ========automate security upgrades
 ifconfig / ip addr== show ip for Linux,
 ipconfig = Windows.
 
-sed 's/foo/bar/g' filename
+sed 's/oldword/newword/g' filename 
 
 find /path -name "filename"                     -name
 find /path -iname "filename"                    -iname for capital/small bagat nahi 
@@ -200,16 +193,19 @@ awk '{print $1}' filename
 
 Command	Use (1 line difference)
 cat      	----Shows entire file content at once.
-head -5	  ----Shows first 5 lines of the file.
-less	    -----Opens file for scrollable viewing page by page.
-
+head -5	/home/ubuntu/filename.txt  ----Shows first 5 lines of the file.
+less /var/log/syslog     -----Opens file for scrollable viewing page by page.    - (q=quit, /search, n=next) on Ubuntu EC2  
+head -5	/home/ubuntu/filename.txt
 --------------------
 hostname
 ===========ubuntu-ip-172-31-45-123                     LINUX TYPE DEYO
 
 whoami
 =========== ubuntu                                     USER DETO
-
+----------------------------------------------------------------------
+- Switches to devuser shell with their environment/home dir from current session.
+sudo su - devuser 
+​
 ####################################
 
 USERS -- ROOT  + NORMAL + SYSTEM
@@ -223,7 +219,6 @@ id dd  == uid + gid + groupd deto
 
 
 alternative --config java
-
 
 tcpdump -i etho port 443      =========check network traffic on port
 
@@ -331,7 +326,7 @@ Solution: Update role trust policies
 15. How to list all SSH users? → cat /etc/passwd
 16. Where to check Apache logs? → /var/log/apache2/ | /var/log/httpd/access_log error_log
 17. What logs are in /var/log? → syslog, auth.log, kern.log, messages, secure, boot.log
-18. Purpose of grep command? → Search text patterns in files: grep "pattern" file
+18. Purpose of grep command? → grep "error" /var/log/syslog - Finds all lines containing "error" in syslog.
 19. Grep to exclude lines with keyword? → grep -v "exclude_pattern" filename
 20. Difference between cron and at? → cron=scheduled recurring jobs, at=one-time future execution
 
