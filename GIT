@@ -1,4 +1,52 @@
                                ### devops pro notes
+############# common issues faced on github
+1. Non-Fast-Forward (push rejected)
+Remote ahead of local.
+git pull origin main
+Resolve conflicts if any.
+git push origin main
+​
+
+2. Auth Failed (access rights)
+No/wrong credentials.
+Generate PAT (github.com/settings/tokens).
+git remote set-url origin https://user:PAT@github.com/repo.git
+git push
+​
+
+3. Credential Prompt Always
+No caching.
+git config --global credential.helper manager-core
+Push once (enter user:PAT).
+Cached in Windows Credential Manager.
+​
+
+4. Merge Conflicts
+Pull shows conflicts.
+Edit conflicted files (remove <<<< >>>>).
+git add .
+git commit → push.
+​
+
+5. Fatal: Not a Git Repo
+Wrong dir.
+git init or cd /path/to/repo
+git status
+Proceed with add/commit/push.
+####################################################################
+## BRANCHES
+
+git branch                   → List branches (* = current)
+git branch -r                → List remote branches
+
+git branch new-branch         → Create new-branch from current
+git branch -m new-name        → Rename current to new-name (-M force)
+
+git branch -d old-branch      → Delete old-branch (safe)
+git branch -D old-branch      → Force delete old-branch
+
+
+####################################################################
 
 .git = hidden with branch, config &  history 
 git merge main              ---------if remote main branch ahead than urs then use
@@ -23,8 +71,8 @@ git pull origin main
 तिला लिंक करण्यासाठी, 
 git push --set-upstream origin main 
 
-
-
+- If remote repo ahhead of my local repo then command
+git pull origin main                                     (fetches + merges remote changes).
 
 
 
