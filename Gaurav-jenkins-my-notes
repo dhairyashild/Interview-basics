@@ -413,8 +413,15 @@ zip -r jenkinsBackup .zip jenkins
 
 sakshi daily activities of devops in jenkins 
 1)  check daily failed build or not?
+
 2)  build taking longer time why?
-3)  maintenance/script issue 
+Too many/outdated plugins: Disable unused, update others
+Disk full/old logs: Archive builds, clean workspace
+Master overload: Offload to agents, no heavy steps on master       + slave  overload also sang my words
+Network latency: Slow git pull/Docker—use SSD/cache
+Large monorepo: Full clone—enable shallow/shallow fetch
+
+3)  script issue 
 4)  jenkins agent perfroming correctly or not?
 5)  creds rotated & backups / plugins ok? , 
 6)  collaborate with developer
