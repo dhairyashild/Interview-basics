@@ -74,15 +74,31 @@ git push --set-upstream origin main
 - If remote repo ahhead of my local repo then command
 git pull origin main                                     (fetches + merges remote changes).
 
-
+####################################################################
 
 7. What is Pull requests?
 Pull Requests:
-             DEVELOPERS— IN  GitHub  feature for proposing  and merging code changes.
+-DEVELOPERS— IN  GitHub  feature for proposing  and merging code changes.
+-MANAGER / SENIOR DEVELOPER —code review, suggest changes or errors to be fix, integration of changes.
+-Workflow: Branch, make changes, create PR, review, merge.
 
-MANAGER / SENIOR DEVELOPER —code review, suggest changes or errors to be fix, integration of changes.
+DevOps PR Workflow : WITH CONSOLE USED BY 90% OF ENGINER SO U USE CONSOLE GH COMMAND METHOD IS OTHER METHOD FOR CLI PR CREATION FORGET IT.
+Start on main/master → Create feature branch:
 
-Workflow: Branch, make changes, create PR, review, merge.
+git checkout main && git pull origin main
+
+git checkout -b feature/login-fix
+
+Code → git add . && git commit -m "Add login fix"
+
+git push -u origin feature/login-fix (triggers UI prompt)
+
+UI: GitHub shows "Compare & pull request" → Click → Fill title/body → Create
+
+Review/Merge: Team approves → Merge to main → Delete branch.
+
+####################################################################
+
 
 
 git remote set -url https://<token>@<url>
