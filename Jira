@@ -1,0 +1,128 @@
+1 -- HIGH CPU SUMMERY
+---- WORDS                4 CORE = 400% CPU 
+ps aux --sort=-%cpu | head -2 # Find HOG (900%+ apache/nginx)
+kill -9 [PID]                 # Kill HOG → CPU 90%→25%
+
+
+2 -- ZOMBIE PROCESSES (High Load, Low CPU)===1          
+Load 18.5/4 + CPUUtil 16%	                      == ZOMBIE SUMMERY=== 18.5/4 cores so 14 process pending but cpuutil 16% only so low cpu but 14 load fake --use top
+SOLUTION ====
+ps -aux| grep z              === to find zombie processes.                                            
+ps aux |grep 'z'|wc -l        === Number of zombie process
+kill -9 6789 → Zombies vanish instantly
+
+3 -- DOCKER SOLUTION
+1  imagepullbackoff —> credential, wrong image name ,tag
+2  docker cant connect to docker daemon 
+—> check docker daemon is start 
+—> docker systemctl docker 
+—>   permissons isuue —> sudo usermod -aG docker jenkins add jenkins to docker group
+3  no space left on device 
+—> docker system prune -a —> to remove unused data , 
+   df -h check disk usage , Increase disk on host machine
+4  cant connect to docker daemon at unix:///var/run/docker.sock 
+—> give jenkins user to docker.sock —> chmod 666 user:group /var/run/docker.sock
+5  docker bind for 0.0.0.0:80 failed port already allocated 
+—> modify port mapping  , sudo lsof i:80 
+-  cant push to ecr —> iam policy not attched 
+-  Container unhealthy  --> docker logs container_id
+-  Mounts denied --> sudo chmod 755 /host/path
+-  Container keeps restarting --> docker logs, docker inspect
+---------------------------------------------------------------------
+
+CPU FULL NOTES
+
+**JIRA INFRA-1234** 🚨 P0 ACK NOW
+prod-web-01 | Load: 15.2/4 cores | CPUUtil: 95%
+SOLUTION ==== FIND HOG(PROCESS ITS ALL CPULIKE 4 CORES CPU=400% EATEN BY 1 PROCESS THEN IT CALEED HOG
+ps aux --sort=-%cpu | head -2 # Find HOG (900%+ apache/nginx)
+kill -9 [PID]                 # Kill HOG → CPU 90%→25%
+**systemctl restart SVC-KILLED**  
+**top**                        # CPU 25% ✓ Load dropping =CHECK
+##WHEN TO KILL1 PID / 2PID / AUTOSCLALE
+**If #1 process uses 900%+ CPU** MEANS MORE THAN DOUBLE FO 400% CPU CC = Kill ONLY that 1 process (happens 90% of time)
+**If Top 2 processes each use 400%+ CPU** FULL OF FOR 4 CORE MEANS EACH USE APRPX 200%+200 MEAN 2 CORE EACH = Kill entire apache2 service (happens 8% of time)  
+**If ALL top 3 processes use less than 200% CPU** = Add more servers (autoscale) (happens 2% of time)
+
+2 -- HIGH LOAD BY ZOMBIE
+
+
+CPU ISSUE #2: ZOMBIE PROCESSES (High Load, Low CPU)===1           ZOMBIE SUMMERY=== 18/4 cores so 14 process pending but cpuutil 18% only so low cpu but 14 load fake --use top
+1. what is Zombie = Dead child process parent forgot to clean up
+Uses: 0% CPU, 64KB RAM, 1 process table slot
+STAT column shows "Z" in top command 
+
+2. Why "Load High + CPU Low" = Zombie Clue
+Load Average 18.5/4 cores + CPU 18% = PARENT PROCESS WAITING
+NOT zombies causing load → PARENT in D state (I/O wait) trying to reap
+JIRA shows: "Load 18.5 | CPUUtil 18%" ← RUN FOR ZOMBIES
+
+3. EXACT Jira Messages (Memorize)
+✅ REAL CPU: "Load 15.2 | CPUUtil 95%"
+✅ ZOMBIES:  "Load 18.5 | CPUUtil 18%"
+✅ I/O WAIT: "Load 12.1 | Disk 95% | %wa 65%"
+
+
+CPU ISSUE #2: ZOMBIE PROCESSES (High Load, Low CPU)===1           ZOMBIE SUMMERY=== 18/4 cores so 14 process pending but cpuutil 18% only so low cpu but 14 load fake --use top
+Load 18.5/4 + CPUUtil 16%	     
+SOLUTION ====
+ps -aux| grep z              === to find zombie processes.                                            
+ps aux |grep 'z'|wc -l        === Number of zombie process
+kill -9 6789 → Zombies vanish instantly
+                                                                         top → Shift+P → kill PID   === DONT USE THIS COMMAND
+
+###################################################################################
+###################################################################################
+
+
+
+
+
+CPU ISSUE #3: I/O WAIT (Disk Thrashing)
+text
+**JIRA INFRA-1236** ⚠️ P1  
+prod-db-01 | Load: 12.1/4 cores | Disk IOPS: 95% | %wa: 65%
+CloudWatch: VolumeReadOps >5000 | MySQL slow
+1. ACK PagerDuty - Tap SMS
+2. SSH database - ssh ubuntu@prod-db-01
+3. Check I/O - iostat -x 1 5 (%util=95%, await=45ms)
+4. Find culprit - iotop -ao (mysqld 2.1GB/s reads)
+5. Lower priority - renice 10 -p $(pgrep mysqld)
+6. Clear caches - echo 3 > /proc/sys/vm/drop_caches
+7. Monitor recovery - iostat -x 1 3 (%wa dropping)
+8. Jira resolution - "✅ MySQL I/O throttling, reniced + cache cleared"
+
+CPU ISSUE #4: JAVA THREAD EXPLOSION
+text
+**JIRA INFRA-1237** 🚨 P0  
+prod-app-01 | Load: 8.5/4 cores | java: 450% CPU
+CloudWatch: HeapUsed 95% | Tomcat threads >200
+1. ACK PagerDuty - Phone call answered
+2. SSH app server - ssh ubuntu@prod-app-01
+3. Spot Java - top (java PID=9876, 450% CPU)
+4. Thread count - ps -Llp 9876 | wc -l (250 threads)
+5. Memory dump - jmap -dump:live,format=b,file=/tmp/heap.hprof 9876
+6. Restart Tomcat - systemctl restart tomcat9
+7. Verify recovery - top + CloudWatch HeapUsed dropping
+8. Prevention note - "Added thread limit to Tomcat config"
+
+SUMMARY: All Linux CPU Issues Detection Pattern
+Issue Type	Jira Clue	top Shows	Root Fix
+Real CPU	CPUUtil 95%	apache2 1200%	kill -9 PID
+Zombies	Load 18.5, CPU 18%	127 "Z" procs	kill parent PID
+I/O Wait	Disk 95%, %wa 65%	iostat %util=95%	renice + drop_caches
+Java	java 450% CPU	250 threads	jmap + restart
+UNIVERSAL 60-SECOND CPU CHECKLIST
+bash
+1. top                    # CPU% or "Z" processes?
+2. ps aux --sort=-%cpu | head -5  # Real CPU hogs
+3. ps aux | grep defunct | wc -l  # Zombie count
+4. iostat -x 1 3          # I/O wait?
+5. jps -l                  # Java processes
+JIRA CLOSING PHRASES (Copy-Paste)
+text
+✅ RESOLVED: [process] [PID] killed + service restarted
+✅ FIXED: [count] zombies → parent PID [number] terminated
+✅ MITIGATED: I/O throttling + cache cleared, monitoring
+✅ RESTARTED: Java heap dump taken + Tomcat restarted
+These 4 patterns = 90% of LotusFlare Linux CPU alerts. Your friend masters this = night shift hero. Memory issues next?
