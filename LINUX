@@ -74,8 +74,10 @@ sudo systemctl restart service-name
 sudo systemctl (status /start /stop /restart)  (svc-name)
 ------------------------------------------------
 4) Port Conflicts
+ALL Listening Ports
+sudo ss -tulnp                       → ADD p after tuln so get pid/process name 
 
---Identify the conflicting process: 
+--Port in Use: 
 sudo lsof -i :<port>                                
 
 --Kill the process / stop services.
