@@ -45,7 +45,7 @@ git branch -m new-name        → Rename current to new-name (-M force)
 git branch -d old-branch      → Delete old-branch (safe)
 git branch -D old-branch      → Force delete old-branch
 
-
+git checkout <branch-name>
 ####################################################################
 
 .git = hidden with branch, config &  history 
