@@ -1,0 +1,27 @@
+########## BACKEND SUMMARY ##################################################################################################
+LANGUAGE            == FILE TO CHECK                  = FROM dockerimage
+
+Java (Spring Boot)  == pom.xml / build.gradle         = maven:3.9-eclipse-temurin-17
+Go (Golang)         == go.mod                         = golang:1.21-alpine
+PHP (Laravel)       == composer.json                  = php:8.2-fpm-alpine
+.NET Core           == *.csproj                       = mcr.microsoft.com/dotnet/sdk:8.0
+Python (API)        == requirements.txt / main.py     = python:3.11-slim
+#############################################################################################################################
+
+# Backend Identification Guide:
+
+1) Java: 
+   - Check: pom.xml (Maven) or build.gradle (Gradle).
+   - Base: maven:3.9-eclipse-temurin-17 (Build) -> eclipse-temurin:17-jre-alpine (Run).
+
+2) Go: 
+   - Check: go.mod (shows module name and version).
+   - Base: golang:1.21-alpine (Very small footprint).
+
+3) PHP: 
+   - Check: composer.json (look for "laravel/framework").
+   - Base: php:8.2-fpm-alpine.
+
+4) .NET: 
+   - Check: *.csproj file.
+   - Base: mcr.microsoft.com/dotnet/sdk:8.0 (Build) -> mcr.microsoft.com/dotnet/aspnet:8.0 (Run).
