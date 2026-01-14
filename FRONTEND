@@ -1,20 +1,40 @@
-Short: JavaScript primary + ALL HAVE package.json
+########## SUMMERY READ ONLY BELOW 4 LINES  #####################################################################################################################################################
+LANGUAGE           ==  FILE TO CHECK                  = FROM dockerimage
+ 
+JavaScript                      ==  ALL HAVE package.json mostly   =     node:20-alpine for all js app building
+HTML/CSS/JS basics (Static Web) == index.html (script/style tags)  =     nginx:alpine
+python                          == app.py / requirements.txt       =     python:3.11-slim       
 
-DevOps engineers typically use for frontend
+##################################################################################################################################################################################################
+# DevOps engineers typically use for frontend
 
-= JavaScript types =1) Node.js, 2) React js,3) Vue,4) Angular js 5)next js
+1)  JavaScript types =1) Node.js, 2) React js,3) Vue,4) Angular js 5)next js
 Node.js:    package.json (shows "express" or "node" deps)
 React:      package.json (shows "react" + "react-dom")
 Vue:        package.json (shows "vue")                     OR src/main.js (has Vue.createApp)
 Angular:    package.json (shows "@angular/core")           OR angular.json (tells Angular) 
 Next.js:    package.json (shows "next")                    OR next.config.js 
-
-= Other options: HTML/CSS/JS basics  =
-HTML/CSS/JS basics: index.html (script/style tags)
-
-= sometimes Python (Streamlit/Dash for quick ML dashboards).
-Python Streamlit: app.py (import streamlit as st)
-Python Dash: app.py (import dash)
-
 ​
+# Docker base images (most used):
+
+Node.js: node:20-alpine
+React: node:20-alpine
+Vue: node:20-alpine
+Angular: node:20-alpine
+Next.js: node:20-alpine
+
+
+2) Other options: HTML/CSS/JS basics  =
+HTML/CSS/JS basics: index.html (script/style tags)
+:nginx:alpine
+
+3) sometimes Python (Streamlit/Dash for quick ML dashboards).
+Python Streamlit: app.py (import streamlit as st)
+: python:3.11-slim
+Python Dash: app.py (import dash)
+: python:3.11-slim
+
+--python:3.11-slim is often better than alpine for Python because 
+many Python libraries (like pandas or numpy) are difficult to compile on Alpine but work instantly on slim (Debian-based).                
+
 
