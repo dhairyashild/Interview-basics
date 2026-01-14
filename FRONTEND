@@ -11,9 +11,10 @@ python                          == app.py / requirements.txt       =     python:
 1)  JavaScript types =1) Node.js, 2) React js,3) Vue,4) Angular js 5)next js
 Node.js:    package.json (shows "express" or "node" deps)
 React:      package.json (shows "react" + "react-dom")
-Vue:        package.json (shows "vue")                     OR src/main.js (has Vue.createApp)
 Angular:    package.json (shows "@angular/core")           OR angular.json (tells Angular) 
 Next.js:    package.json (shows "next")                    OR next.config.js 
+Vue:        package.json (shows "vue")                     OR src/main.js (has Vue.createApp)
+
 ​
 # Docker base images (most used):
 
