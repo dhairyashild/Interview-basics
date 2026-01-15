@@ -25,3 +25,21 @@ Python (API)        == requirements.txt / main.py     = python:3.11-slim
 4) .NET: 
    - Check: *.csproj file.
    - Base: mcr.microsoft.com/dotnet/sdk:8.0 (Build) -> mcr.microsoft.com/dotnet/aspnet:8.0 (Run).
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+# BACKEND FAST-API CONNECTION ISSUE FOUND IN ITS main.py and check paths given
+
+# USE /api/health FIRST - Here's Why:
+Endpoint	Purpose	When to use
+/api/health	"Is backend alive?" ✅	ALWAYS FIRST - DevOps monitoring
+/api/message	Business data	Frontend display - "real app feature"
+=====
+# 1. HEALTH CHECK (DevOps verification)
+curl http://localhost:8000/api/health
+# ✅ {"status":"healthy"} = Backend LIVE
+
+# 2. BUSINESS API (Frontend feature)  
+curl http://localhost:8000/api/message
+# ✅ {"message":"Hello from FastAPI!"} = App WORKING
+
