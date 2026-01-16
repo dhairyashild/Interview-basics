@@ -1,0 +1,99 @@
+#############################################################################################################################################################################################
+# 🚀 Docker Service Discovery - Universal Multi-Language Guide
+
+**Works with ANY Frontend + ANY Backend - No docker-compose needed!**
+
+## 📋 CORE PATTERN
+# 1. Create shared network
+docker network create app-network
+
+# 2. Backend (ANY language)
+docker run -d --name backend --network app-network -p 8000:8000 my-backend-image
+
+# 3. Frontend (ANY language) 
+docker run -d --name frontend --network app-network -p 3000:3000 \
+  -e API_URL=http://backend:8000 my-frontend-image                                            ###############   HERE U NEED TO CHANGE 2 WORD BEFORE API_URL  and add as per language name
+#############################################################################################################################################################################################
+
+1. React front + Node.js/Express
+
+docker run -d --name api --network app-network -p 5000:5000 my-node-api
+docker run -d --name react-app --network app-network -p 3000:3000 \
+  -e REACT_APP_API_URL=http://api:5000 react-prod
+
+React Code: process.env.REACT_APP_API_URL
+
+
+
+2. Next.js + FastAPI/Python (Your Current ✅)
+
+docker run -d --name backend --network app-network -p 8000:8000 fastapi-app
+docker run -d --name nextjs --network app-network -p 3000:3000 \
+  -e NEXT_PUBLIC_API_URL=http://backend:8000 nextjs-standalone
+
+Next.js Code: process.env.NEXT_PUBLIC_API_URL
+
+
+2. react front & Spring Boot Backend 
+docker run -d --name spring-api --network app-network -p 8080:8080 spring-boot-app
+  
+docker run -d --name react-app --network app-network -p 3000:3000 \
+  -e REACT_APP_API_URL=http://spring-api:8080 react-prod
+
+3. Vue.js + Spring Boot/Java
+
+docker run -d --name spring-api --network app-network -p 8080:8080 spring-boot
+docker run -d --name vue-app --network app-network -p 80:80 \
+  -e VUE_APP_API_URL=http://spring-api:8080 vue-prod
+
+Vue Code: process.env.VUE_APP_API_URL
+
+4. Angular + Django/Python
+
+docker run -d --name django --network app-network -p 8000:8000 django-app
+docker run -d --name angular --network app-network -p 4200:4200 \
+  -e NG_APP_API_URL=http://django:8000 angular-prod
+
+Angular Code: environment.apiUrl
+
+5. Svelte + Go Gin
+
+docker run -d --name go-api --network app-network -p 8080:8080 gin-app
+docker run -d --name svelte --network app-network -p 3000:3000 \
+  -e PUBLIC_API_URL=http://go-api:8080 svelte-prod
+
+Svelte Code: import { PUBLIC_API_URL } from '$env/static/public'
+
+6. Nuxt.js + PHP Laravel
+
+docker run -d --name laravel --network app-network -p 8000:8000 laravel-prod
+docker run -d --name nuxt --network app-network -p 3000:3000 \
+  -e NUXT_PUBLIC_API_URL=http://laravel:8000 nuxt-prod
+
+Nuxt Code: useRuntimeConfig().public.apiUrl
+
+7. Gatsby + Flask/Python
+docker run -d --name flask --network app-network -p 5000:5000 flask-app
+docker run -d --name gatsby --network app-network -p 9000:9000 \
+  -e GATSBY_API_URL=http://flask:5000 gatsby-prod
+
+Gatsby Code: process.env.GATSBY_API_URL
+
+
+
+
+
+⚠️ Two Important Reminders
+Client-side vs. Server-side:
+
+If your Frontend (React/Vue/Angular) runs in the user's browser, it cannot resolve http://backend:8000 because the browser is outside the Docker network. In that case, you must use the Host IP or Domain.
+
+If your Frontend (Next.js/Nuxt) does Server-Side Rendering (SSR), it can use http://backend:8000 for internal API calls.
+
+Order Matters: Always ensure the network is created before running the docker run commands, or the containers will fail to attach.
+
+
+EC2: docker network create + docker run
+ECS: Same service names + ALB
+EKS: Same service names + K8s Service
+GCP: Same service names + Load Balancer
