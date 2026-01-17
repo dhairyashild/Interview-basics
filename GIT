@@ -251,3 +251,16 @@ Generate key: ssh-keygen -t ed25519 -C "your_email@example.com"
 Copy public key: cat ~/.ssh/id_ed25519.pub
 
 Add to GitHub: Settings → SSH and GPG keys → New SSH key
+------------------------------------------------------------------
+
+येथे सर्वात जास्त वापरले जाणारे कमिट प्रिफिक्स (Commit Prefixes) आहेत:
+
+feat: नवीन फीचर किंवा फंक्शनॅलिटी जोडण्यासाठी.
+
+fix: कोडमधील चुका किंवा बग सुधारण्यासाठी.
+
+chore: कॉन्फिगरेशन किंवा लायब्ररी अपडेट्ससाठी (उदा. .gitignore).
+
+docs: फक्त डॉक्युमेंटेशन किंवा README बदलण्यासाठी.
+
+refactor: कोडची रचना सुधारण्यासाठी (फीचर न बदलता).
