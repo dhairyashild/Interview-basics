@@ -105,11 +105,28 @@ Review/Merge: Team approves → Merge to main → Delete branch.
 git push -u origin main    (push + set upstream)
 OR
 git branch --set-upstream-to=origin/main
+
+
+✅ ADD ORIGIN VS SET-URL ARE BOTHALMOST SAME
+git remote       add origin URL     /      set-url origin URL             -both for set remote branch
+                 (FOR NEW REMOTE)        (FOR OLD TO REPLACE)                                 
+# NEW repo (no origin exists)
+git remote add origin https://github.com/user/repo.git
+
+# EXISTING repo (origin already exists)  
+git remote set-url origin https://github.com/user/new-repo.git
+# OR switch to SSH:
+git remote set-url origin git@github.com:user/repo.git
+
+# Summary: add=CREATE new remote | set-url=UPDATE existing remote URL
+# Check first: git remote -v
+
+**origin** = Default remote repo name
 ####################################################################
 
 
 
-git remote set -url https://<token>@<url>
+git remote set-url origin https://<token>@github.com/username/repo.git
 
 git config===name and email
 
