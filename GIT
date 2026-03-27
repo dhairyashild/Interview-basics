@@ -97,6 +97,14 @@ UI: GitHub shows "Compare & pull request" → Click → Fill title/body → Crea
 
 Review/Merge: Team approves → Merge to main → Delete branch.
 
+
+
+✅ CHECK: git branch -vv
+* main abc1234 [origin/main] last commit
+✅ SET: 
+git push -u origin main    (push + set upstream)
+OR
+git branch --set-upstream-to=origin/main
 ####################################################################
 
 
