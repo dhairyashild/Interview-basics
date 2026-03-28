@@ -186,12 +186,17 @@ creates extra commit
 # Q3: Diagram of rebase? Ans: Moves feature commits (A-B-C) to the tip of the base branch x-y-A-B-C.
 # Q4: Handling new commits on Main? Ans: Rebase inserts new Main commits FROM ANOTHER USER before your feature commits.
 
-check after git merge …where merging is correctly or not?
+# git rebase = MUST BE ON FEATURE BRANCH:     VS      # git merge  == BE ON MAIN BRANCH : 
+1= GO ON the feature branch to be moved on [target branch].
+git checkout feature && git rebase main       HERE main=[target branch]
+# git merge  == BE ON MAIN BRANCH : 
+1=Be ON the target branch to bring feature changes INTO it.
+git checkout main && git merge feature
 
 —Perform the Merge:
 git checkout main
 git merge feature-branch
-git checkout origin/master     == origin mean remote chi repo
+git checkout origin/master     =GPT= origin mean remote chi repo
 
 —Check the Merge Status:
 git status
@@ -221,14 +226,13 @@ hotfix branch
 
 
 
-git tag= 
-
-label on particular commit
+git tag= LABEL on particular commit
 2 types —1 annotated  2 simple
 
 git show <tagname>
 Example: git show v1.0
-This command displays the details of the commit that the specified tag points to, including the commit message and changes.
+This command displays the details of the commit that the specified tag points to, 
+including commit message and changes.
 
 git tag <tagname>
 Example: git tag v1.0
@@ -254,15 +258,19 @@ git stash drop stash@{1}: एक विशिष्ट स्टॅश (उद�
 git stash clear: सर्व स्टॅश कायमस्वरूपी काढून टाकते.
 
 
+git revert = Creates new commit reversing specific commit's changes (history-safe undo)
 
 git revert <commit-id>
-##sudo it creates new commit
-####it puts head on before commit to id in command
-##no direct impact on the remote repository until the changes are pushed——git push <remote> <branch>
-safe for public branches since it does not rewrite history
-If conflicts arise during the revert process, they must be resolved before pushing the changes to the remote repository 
-It is advisable to communicate with your team before reverting commits that have been pushed, especially in collaborative environments
+-safe for public branches since it does not rewrite history
+-If conflicts arise during the revert process, they must be resolved before 
+pushing the changes to the remote repository 
+-It is advisable to communicate with your team 
 
+C1 → C2 → C3 → C4(HEAD)             # 4 COMMITS ARE THERE
+       ↑     ↑     ↓
+       |     |     C3 state - C2 changes
+# C4 = C1 + C2 + C3 - C2 = C1 + C3
+# C2 commit exists, C2 changes removed
 
 chmod
 usermod -aG G U
