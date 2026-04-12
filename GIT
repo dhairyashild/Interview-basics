@@ -1,4 +1,73 @@
-                               ### devops pro notes
+------------------------------------------------
+short revision summery----
+1. Non-Fast-Forward (push rejected)
+Remote ahead of local.
+git pull origin main
+
+4. Merge Conflicts
+Pull shows conflicts.
+Edit conflicted files (remove <<<< >>>>).
+
+git branch -d Bname          ---delete
+           -m newBranchname  --- rename 
+           -r  
+
+git add .                                ----      git restore --staged <file>
+
+git push --set-upstream origin main 
+
+✅ ADD ORIGIN VS SET-URL ARE BOTHALMOST SAME
+git remote       add origin URL     /      set-url origin URL             -both for set remote branch
+                 (FOR NEW REMOTE)        (FOR OLD TO REPLACE)   
+
+git status:
+ current state of the repository, including
+ tracked and untracked
+
+git log’: 
+  history of commits in the repository
+   commit IDs  + commit messages,
+   authors, 
+
+ git merge when you want to
+1— PRESERVE COMPLETE HISTORY 
+creates extra commit
+
+
+ git rebase when you want 
+1—clean,LINEAR HISTORY without merge commits,
+
+# git rebase = MUST BE ON FEATURE BRANCH:     VS      # git merge  == BE ON MAIN BRANCH : 
+
+git tag= LABEL on particular commit
+2 types —1 annotated  2 simple
+
+git show <tagname>
+Example: git show v1.0
+
+git reset = used to undo changes in a Git repo
+git reset commit-id  ==git reset —mixed commit-id
+delete above commits after this but changes are in working dir
+git reset —soft commit-id
+delete above commits after this but changes are in staging area
+git reset —hard commit-id
+delete above commits after this but changes are removed from stage and working area both
+Use caution with --hard, as it permanently discards uncommitted changes.
+
+
+
+GIT STASH:-   temporarily saves your uncommitted work.
+
+git stash: न-कमिट केलेले बदल तात्पुरते साठवते.
+git stash list: सर्व साठवलेल्या बदलांची यादी दाखवते.
+git stash apply stash@{1}: विशिष्ट स्टॅशमधील बदल लागू करते, पण तो स्टॅश तसाच ठेवते.
+git stash pop: सर्वात नवीन स्टॅश बदल लागू करते आणि तो स्टॅश लिस्टमधून काढून टाकते. pop = apply + drop
+git stash drop stash@{1}: एक विशिष्ट स्टॅश (उदा. stash@{1}) कायमस्वरूपी काढून टाकते.
+git stash clear: सर्व स्टॅश कायमस्वरूपी काढून टाकते.
+
+git revert = Creates new commit reversing specific commit's changes (history-safe undo)
+
+------------------------------------------------
 ############# common issues faced on github
 1. Non-Fast-Forward (push rejected)
 Remote ahead of local.
