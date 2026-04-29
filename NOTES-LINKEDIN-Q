@@ -1,0 +1,21 @@
+3. If two microservices are there and A depends on B, how would you run them?
+
+
+# STANDARD SELF READINESS PROBE - Checks A's own /health endpoint only
+readinessProbe:
+  httpGet:
+    path: /health
+    port: 8080
+  initialDelaySeconds: 5
+  periodSeconds: 10
+
+# DEPENDENCY READINESS PROBE - Checks B service's /health endpoint (host: b-service)
+readinessProbe:
+  httpGet:
+    path: /health
+    port: 8080
+    host: b-service            # Points to B service so this check only pod b /health path , and so nocheck for pod a here but u can add after this .
+  initialDelaySeconds: 10
+  periodSeconds: 5
+
+# DIFFERENCE: Standard=Self-check (A ready when A healthy); Dependency=Waits for B (A unready until B responds OK)
