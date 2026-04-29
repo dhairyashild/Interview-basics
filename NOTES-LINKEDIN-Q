@@ -73,3 +73,39 @@ Best AWS Lambda use cases for DevOps (ranked most to least important):
 6. Instance Scheduling: Automatically starting/stopping EC2 and RDS instances during non-business hours.
 7. Backup Management: Automating RDS snapshots and S3 cross-region replication for disaster recovery.
 8. Infrastructure Validation: Running post-provisioning tests after Terraform or CloudFormation stack updates.
+-------------------------------------------------
+🔹 Cloud & AWS
+How will you design a highly available application on the cloud?
+Suppose an EC2 instance has a 50GB disk and 48GB is full — how can you increase volume size without downtime?
+Difference between Multi-AZ and Read Replicas in AWS RDS?
+How do you transfer data from an S3 bucket in one AWS account to another?
+🔹 Scaling & Performance
+5. Your application suddenly receives high traffic — how would you handle it?
+6. What is Auto Scaling? Explain min, max, and desired capacity.
+7. How would you design a system for high availability across multiple regions?
+🔹 Networking & Infrastructure
+8. In a VPC with two subnets, how do you identify which is public and which is private?
+9. Explain Docker networking.
+10. CMD vs ENTRYPOINT in Docker?
+🔹 Kubernetes (K8s)
+11. What are common Kubernetes security measures in EKS?
+12. What are Kubernetes Services and how are they used?
+13. What is CrashLoopBackOff? How do you troubleshoot it?
+14. Pod is stuck in Pending state — how do you debug?
+15. Difference between rolling updates and rollback?
+16. Explain Blue-Green vs Canary deployments.
+17. How do you provide read-only access to a developer in Kubernetes (RBAC)?
+🔹 DevOps Tools & Practices
+18. How do you use Grafana? How did you integrate it in your project?
+19. What tools have you used for Kubernetes (self-managed vs cloud)?
+20. What do you do in Terraform? How do you write and manage infra code?
+21. How would you build a 3-tier architecture using Infrastructure as Code?
+🔹 Linux & Troubleshooting
+22. How to check open ports in Linux?
+23. How to find large files in Linux?
+24. How to find files modified in the last 30 minutes?
+25. How do you troubleshoot disk space issues?
+🔹 Docker
+26. What is multi-stage Docker build?
+27. Why avoid Alpine images sometimes? What are alternatives?
+💡 If you're preparing for DevOps/SRE roles, these are must-know topics.
