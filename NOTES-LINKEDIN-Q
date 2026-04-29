@@ -19,3 +19,57 @@ readinessProbe:
   periodSeconds: 5
 
 # DIFFERENCE: Standard=Self-check (A ready when A healthy); Dependency=Waits for B (A unready until B responds OK)
+
+
+------------------------------------------------------------------
+6.What kind of security scans you will do on what applications?
+7.What is a vulnerability?
+8.Have you received any vulnerability scans when you are running security scans like what are the ones you have experienced in your day-to-day activities?
+9.What is cognitive complex?
+10.What  kind of pipelines you are using while setting up Jenkins like can you give an example of any pipeline you have set up?
+11.What is  TF state file in terraform?
+12.What is the  infrastructure size you are hosting  like how many supports or containers you are managing infra size?
+13. Do you manage the infrastructure based upon client or centralized infrastructure?
+14.Which deployment strategy you will use for pipelines?
+15.What is a blue green deployment?
+---------------------------------------------
+1. What are the different ways to host Docker container in AWS using AWS cloud?
+2.Have you ever deployed a Docker container on AWS Lambda?If yes briefly explain?
+3.What will be the maximum size of container we can use for Lambda?
+4.What is the maximum memory we can use for Lambda?
+5.What is a layer in Lambda?
+1. DIFFERENT WAYS TO HOST DOCKER CONTAINER IN AWS:
+   - Amazon ECS (Elastic Container Service) with Fargate (serverless) or EC2 launch type
+   - Amazon EKS (Elastic Kubernetes Service) for Kubernetes-native workloads
+   - AWS App Runner for fully managed containerized web applications
+   - AWS Lambda (custom runtime with container images) for event-driven workloads
+   - Amazon ECR (Elastic Container Registry) + EC2 with user-data or auto-scaling groups
+   - AWS Batch for batch computing jobs packaged as containers
+
+2. DEPLOYING DOCKER CONTAINER ON AWS LAMBDA:
+   Yes. Package the application as a container image following Lambda's runtime interface client (RIC) specification,
+push the image to Amazon ECR, then create Lambda function using "Container image" option. The image must 
+include Lambda runtime (provided.al2, python, node, etc.) and entry point script that invokes the handler. 
+Example workflow: docker build -t my-app . -> docker tag -> docker push to ECR -> 
+aws lambda create-function --code ImageUri=uri --package-type Image.
+
+3. MAXIMUM CONTAINER SIZE FOR LAMBDA:
+   10 GB (including uncompressed image layers and all files). This is the total available ephemeral storage limit for /tmp and the container image combined.
+
+4. MAXIMUM MEMORY FOR LAMBDA:
+   10,240 MB (10 GB). Configurable in 1 MB increments from 128 MB to 10,240 MB.
+
+5. LAMBDA LAYER:
+   A ZIP archive containing libraries, custom runtimes, dependencies, or configuration files that can be shared across multiple Lambda functions. Layers promote code reusability, reduce deployment package size, and separate core logic from common dependencies. Maximum 5 layers per function, 250 MB unzipped limit per layer.
+
+
+------------------ AWS LAMBA USES ----
+Best AWS Lambda use cases for DevOps (ranked most to least important):
+1. Automated Cleanup: Deleting unused EBS volumes, old snapshots, and orphaned ELBs to optimize costs.
+2. Resource Tagging: Enforcing governance by auto-tagging resources upon creation via CloudWatch Events.
+3. Log Processing: Real-time filtering and shipping of CloudWatch logs to S3, Elasticsearch, or Datadog.
+4. Security Remediation: Automatically revoking overly permissive IAM roles or closing open Security Group ports.
+5. CI/CD Integration: Triggering deployment health checks, cache invalidation, or custom Slack notifications.
+6. Instance Scheduling: Automatically starting/stopping EC2 and RDS instances during non-business hours.
+7. Backup Management: Automating RDS snapshots and S3 cross-region replication for disaster recovery.
+8. Infrastructure Validation: Running post-provisioning tests after Terraform or CloudFormation stack updates.
