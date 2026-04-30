@@ -1,0 +1,158 @@
+# Topic: EBS (Elastic Block Store) - Top 10 Production Scenarios
+
+## Task 1: Recover EC2 instance with corrupted root EBS volume
+**Best Prod Way:** CONSOLE ONLY
+```yaml
+CONSOLE:
+  Step 1: EC2 Dashboard → Stop instance i-12345
+  Step 2: Elastic Block Store → Volumes → Find root volume vol-abc123 → Actions → Detach
+  Step 3: Launch temporary recovery instance (same AZ)
+  Step 4: Attach corrupted volume as /dev/sdf → SSH → sudo fsck -y /dev/sdf
+  Step 5: Detach → Attach to original instance as /dev/sda1 → Start instance
+TERRAFORM: ❌ Not used (manual fsck required)
+
+
+Task 2: Increase EBS volume size with zero downtime
+Best Prod Way: CONSOLE (enterprises) OR TERRAFORM (startups)
+CONSOLE:
+  Step 1: EC2 → Volumes → Select volume → Actions → Modify Volume → Size: 200 GB
+  Step 2: Click Modify (zero downtime) → Wait 2-5 mins → SSH to EC2
+  Step 3: sudo lsblk → sudo growpart /dev/xvda 1 → sudo xfs_growfs / → df -h
+TERRAFORM:
+  resource "aws_ebs_volume" "database" { size = 200 }  # PR → merge → CI/CD apply
+
+
+Task 3: Migrate gp2 to gp3 due to high I/O latency
+Best Prod Way: CONSOLE (safe) OR TERRAFORM (risky)
+
+yaml
+CONSOLE:
+  Step 1: Volumes → Select gp2 volume → Actions → Modify Volume
+  Step 2: Volume Type: gp3, IOPS: 3000, Throughput: 125 → Click Modify
+  Step 3: Monitor CloudWatch for 30 mins → Verify performance improvement
+TERRAFORM:
+  resource "aws_ebs_volume" "main" { type = "gp3" }  # ⚠️ May replace volume, use with caution
+
+
+Task 4: Automate EBS snapshots with 30 days retention
+Best Prod Way: AWS DLM (Console) OR TERRAFORM (IaC)
+
+yaml
+CONSOLE:
+  Step 1: EC2 → Lifecycle Manager → Create Snapshot Lifecycle Policy
+  Step 2: Target: Volume tags (Backup=true) → Schedule: Daily 02:00 UTC
+  Step 3: Retention: 30 days → Enable Snapshot Lock → Create policy
+TERRAFORM:
+  resource "aws_dlm_lifecycle_policy" "ebs" {
+    policy_details { schedule { retain_rule { count = 30 } } }
+    target_tags = { Backup = "true" }
+  }
+Task 5: Same EBS volume mounted on two EC2 instances
+Best Prod Way: CONSOLE (EFS instead of EBS)
+
+yaml
+CONSOLE:
+  Step 1: Educate developer: EBS cannot be shared (except io2 Multi-Attach)
+  Step 2: VPC → EFS → Create file system → Configure VPC, subnets, security groups
+  Step 3: Instance 1 & 2: sudo mount -t efs fs-12345:/ /mnt/shared
+TERRAFORM:
+  resource "aws_efs_file_system" "shared" {}
+  resource "aws_efs_mount_target" "mount" { count = 2 }
+Task 6: Recover data from accidentally deleted EBS volume
+Best Prod Way: CONSOLE ONLY (emergency)
+
+yaml
+CONSOLE:
+  Step 1: Snapshots → Search by deleted volume ID → Find latest snapshot
+  Step 2: Select snapshot → Actions → Create volume from snapshot
+  Step 3: Same AZ as instance → Create → Attach to instance → sudo mount /dev/xvdf /mnt/recovered
+  Step 4: sudo rsync -av /mnt/recovered/ /var/lib/mysql/
+TERRAFORM: ❌ Not used (emergency recovery needs human decisions)
+Task 7: Production volume at 99% capacity emergency expansion
+Best Prod Way: CONSOLE (fastest)
+
+yaml
+CONSOLE:
+  Step 1: EC2 → Volumes → Select volume at 99% → Actions → Modify Volume
+  Step 2: Size: 300 GB → Click Modify (immediate, zero downtime)
+  Step 3: SSH → sudo lsblk → sudo growpart /dev/xvdf 1 → sudo xfs_growfs /mnt/data
+TERRAFORM: ❌ Too slow (needs PR + approval + pipeline, takes 30+ mins)
+Task 8: Unattached EBS volumes cleanup for cost optimization
+Best Prod Way: AWS Config (automated) OR Console (manual)
+
+yaml
+CONSOLE:
+  Step 1: EC2 → Volumes → Filter "Status: available" → Sort by "Created time"
+  Step 2: Select volumes older than 30 days → Actions → Delete volume
+TERRAFORM:
+  resource "aws_config_config_rule" "unattached_volume" {
+    source { owner = "AWS" source_identifier = "EC2_VOLUME_INUSE_CHECK" }
+  }
+Task 9: High IOPS requirement (50,000 IOPS) for production database
+Best Prod Way: CONSOLE (with change management)
+
+yaml
+CONSOLE:
+  Step 1: Raise Change Request → Get approvals → During maintenance window:
+  Step 2: Take final snapshot → Create io2 volume (IOPS: 50000) from snapshot
+  Step 3: Stop DB (2 mins) → Detach old volume → Attach new → Start DB
+TERRAFORM:
+  resource "aws_ebs_volume" "db" { type = "io2" iops = 50000 size = 1000 }
+Task 10: Multi-region disaster recovery with RPO less than 15 minutes
+Best Prod Way: AWS Backup (Console) OR Terraform (IaC)
+
+yaml
+CONSOLE:
+  Step 1: AWS Backup → Backup plans → Create backup plan
+  Step 2: Schedule: cron(0/15 * * * ? *) → Copy to destination region: us-west-2
+  Step 3: Assign resources: EBS volumes with tag "DR=true"
+TERRAFORM:
+  resource "aws_backup_plan" "dr" {
+    rule { schedule = "cron(0/15 * * * ? *)" copy_action { destination_vault_arn = var.dr_vault } }
+  }
+Final Decision Matrix
+yaml
+Task | Console Best For | Terraform Best For
+-----|-----------------|-------------------
+1    | ✅ ALL companies | ❌ Never
+2    | ✅ Service companies/Banks | ✅ Startups (GitOps)
+3    | ✅ ALL companies (safe) | ⚠️ Risky
+4    | ✅ Service companies | ✅ Startups (IaC)
+5    | ✅ Architecture explanation | ✅ If using EFS via IaC
+6    | ✅ ALL companies | ❌ Never (emergency)
+7    | ✅ ALL companies | ❌ Too slow
+8    | ✅ Manual audit (small env) | ✅ Automated (large env)
+9    | ✅ Change management needs | ✅ Blue/green deployments
+10   | ✅ Banks/Enterprises | ✅ Startups
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
