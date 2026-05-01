@@ -402,7 +402,22 @@ Q10: Multi-region DR with RPO < 15 minutes?
 A10: Console → AWS Backup → Create plan → Schedule cron(0/15 * * * ? *) → Copy to destination region → Assign volumes with tag DR=true.
 
 ######################################################################
+Console shows snapshot "100 GB" because it displays the original volume size (provisioned), NOT billed storage. Billed = only your 10 GB used data. You cannot create smaller volume directly from snapshot—AWS blocks it to prevent filesystem corruption.
 
+CORRECT Method - Don't Use Snapshot for Shrinking
+text
+1. Create NEW 15GB volume (NOT from snapshot)
+   Console → Volumes → Create volume → Size: 15 GB → gp3 → Same AZ
+
+2. Attach to running instance as /dev/sdf
+   Actions → Attach volume → Your EC2 → /dev/sdf
+
+3. SSH and copy data (5 mins):
+   sudo mkfs.ext4 /dev/xvdf
+   sudo mkdir /newvol
+   sudo mount /dev/xvdf /newvol
+   sudo rsync -aHAX /your-current-data/ /newvol/
+   # Example: sudo rsync -aHAX /var/lib/mysql/ /newvol/mysql/
 ######################################################################
 
 
