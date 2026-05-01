@@ -51,3 +51,39 @@ Real-Time Scenarios -
 3. What is strace and when do you use it? Give a real example.
 4. How do you recover from "Too many open files" error?
 5. How do you harden a Linux server for production? (List 5 things)
+
+
+🚀 30 LPA DevOps interviews don’t ask “What is Kubernetes?”
+They ask this. And most candidates fail in 60 seconds.
+
+Question: 
+“Users report slow API. Pods are running. CPU is normal. No errors.”
+What do you do?
+
+Weak answer (rejected instantly)
+ • restart pods
+ • scale replicas
+ • check logs
+This tells the interviewer: you react, you don’t reason
+
+Strong answer (selected candidates)
+“I’ll break the system into layers.”
+1. External vs internal latency
+2. DNS / Load Balancer
+3. Network path (CNI, conntrack, MTU)
+4. Pod/application
+5. downstream dependencies
+Then, validate signals before acting. Bonus (what impresses interviewers)
+Mention:
+ • conntrack exhaustion • MTU mismatch • DNS latency • retry storms
+Now you sound like someone who has seen production.
+🔁 Repost if you’re targeting high-paying DevOps roles.
+
+🔥 Inside InfraThrone Elite, we train exactly this:
+• real interview scenarios
+ • real outage thinking
+ • real debugging frameworks
+New Batch Starts at 01st june 2026
+🚨 Early Bird Offer Ends in 72 hours → elite.infrathrone.xyz
+
+#DevOps #Kubernetes #PlatformEngineering #InfraThrone #Tech
