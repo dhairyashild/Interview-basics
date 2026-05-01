@@ -371,7 +371,35 @@ Latency Based Routing::—->
 ######################################################################
 
 ######################################################################
+Q1: Recover EC2 with corrupted root EBS volume (Linux)?
+A1: Console → Stop instance → Detach root volume → Attach to rescue EC2 as /dev/sdf → SSH rescue → sudo fsck -y /dev/sdf → Detach → Reattach to original → Start.
 
+Q2: Increase EBS volume size zero downtime (production DB)?
+A2: Console → Volumes → Modify → New size → Modify → SSH → sudo growpart /dev/xvda 1 && sudo xfs_growfs / (or resize2fs).
+
+Q3: Migrate gp2 to gp3 due to high I/O latency?
+A3: Console → Volumes → Modify → Type: gp3 → IOPS: 3000 → Throughput: 125 → Modify (no downtime, 30 mins CloudWatch monitor).
+
+Q4: Automate EBS snapshots with 30 days retention?
+A4: Console → EC2 → Lifecycle Manager → Create policy → Target: tag Backup=true → Schedule: Daily 2 AM UTC → Retention: 30 days → Enable Snapshot Lock.
+
+Q5: Same EBS volume on two EC2 instances?
+A5: Console → EBS does NOT support multi-attach except io2. Use EFS instead → Create EFS → Mount on both: sudo mount -t efs fs-123:/ /mnt/shared.
+
+Q6: Recover data from accidentally deleted EBS volume?
+A6: Console → Snapshots → Search by volume ID → Latest snapshot → Create volume from snapshot → Attach to instance → sudo mount /dev/xvdf /mnt → rsync data back.
+
+Q7: Production volume at 99% capacity emergency expansion?
+A7: Console → Volumes → Modify → Increase size immediately → SSH → sudo growpart /dev/xvdf 1 && sudo xfs_growfs /mnt/data.
+
+Q8: Delete unattached EBS volumes for cost optimization?
+A8: Console → Volumes → Filter Status: available → Sort by Created time → Select older than 30 days → Delete.
+
+Q9: High IOPS requirement (50,000 IOPS) for production DB?
+A9: Console → Take final snapshot → Create io2 volume with 50000 IOPS from snapshot → Stop DB (2 mins) → Detach old → Attach new → Start DB.
+
+Q10: Multi-region DR with RPO < 15 minutes?
+A10: Console → AWS Backup → Create plan → Schedule cron(0/15 * * * ? *) → Copy to destination region → Assign volumes with tag DR=true.
 
 ######################################################################
 
