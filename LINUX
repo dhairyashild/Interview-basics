@@ -9,7 +9,8 @@ ps -aux --sort=-%cpu | head -n 5               ---------   to check top 5 percen
 htop                                      ----------  avoid using this , use above
 
 Kill process: 
-kill -9 <PID>                      # -9  = by force
+kill -15 <PID>                      # -15 - graceful  exit then go for -9 forceful exit if this not work 
+kill -9 <PID>                      # -9  = by force                - NEVER kill init/systemd (PID 1)
 
 --------------------------------------------------
  RAM                            F P
