@@ -12,6 +12,29 @@ Kill process:
 kill -15 <PID>                      # -15 - graceful  exit then go for -9 forceful exit if this not work 
 kill -9 <PID>                      # -9  = by force                - NEVER kill init/systemd (PID 1)
 
+
+1. ISSUE: Java CPU high
+CHECK: ps aux --sort=-%cpu | head -5
+O/P SEEN: java, jvm, tomcat, jar
+FIX: kill -SIGUSR1 <PID>
+
+2. ISSUE: Log file huge
+CHECK: ls -lh /var/log/syslog
+O/P SEEN: -rw-r--r-- 1 root root 2.3G
+FIX: > /var/log/syslog
+
+3. ISSUE: Too many PHP workers ---  PHP worker = a background process that runs PHP code to serve your website.
+CHECK: ps aux | grep -c php-fpm    
+O/P SEEN: 87
+FIX: pkill -f php-fpm
+-- how do u know they r too many
+ps aux` → if CPU is 80–100% and almost all processes are `php-fpm` → too many workers for that CPU.
+On t2.micro (1–2 vCPU) → 10–20+ workers is usually too many → each extra worker eats CPU and nothing finishes faster.
+
+4. ISSUE: Cron job runaway
+CHECK: crontab -l
+O/P SEEN: */5 * * * * /usr/bin/backup.sh
+FIX: crontab -r
 --------------------------------------------------
  RAM                            F P
 
