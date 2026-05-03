@@ -35,8 +35,9 @@ On t2.micro (1–2 vCPU) → 10–20+ workers is usually too many → each extra
 CHECK: crontab -l
 O/P SEEN: */5 * * * * /usr/bin/backup.sh
 FIX: crontab -r
---------------------------------------------------
- RAM                            F P
+------------------------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------------------------------------------------------
+RAM                            F P
 
 -ram = for t2.micro 1gb
 
@@ -60,6 +61,57 @@ MemTotal:         980376 kB
 MemFree:          156736 kB
 MemAvailable:     562876 kB    #### this is imp..  ---MemAvailable =MemFree + cache
 .....
+
+
+################################## TROUBLESHOOT #################################
+
+TASK GIVEN: RAM high – find and fix in 30 seconds.
+
+3 COMMANDS YOU NEED:
+1. free -h                          # how much RAM available?  - available < 100Mi = CRITICAL
+HOW TO READ free -h:
+                    available
+Mem: 957Mi total, 407Mi used, 549Mi available
+                              ↑
+                         available < 100Mi = CRITICAL
+2. ps aux --sort=-%mem | head -5    # top 5 RAM hogs
+3. kill -15 <PID>                   # kill it (force: kill -9 only if 15 fails)
+
+5 REAL ISSUES & SOLUTION (1 COMMAND EACH):
+
+ISSUE 1: Memory leak (app slowly eating RAM)
+CHECK: ps aux --sort=-%mem | head -5
+O/P SEEN: java, node, python at 40%+
+FIX: kill -15 <PID>
+
+ISSUE 2: Too many PHP workers eating RAM
+CHECK: ps aux | grep -c php-fpm
+O/P SEEN: 50+ workers
+FIX: pkill -f php-fpm
+
+ISSUE 3: Linux cache eating RAM (normal but looks bad)
+CHECK: free -h
+O/P SEEN: buff/cache high, available low
+FIX: echo 3 > /proc/sys/vm/drop_caches
+
+ISSUE 4: OOM Killer about to trigger
+OOM Killer triggers when:
+- OOM happens at 100% RAM + 100% swap (Swap = disk space used as "fake RAM" when real RAM is full.)
+
+CHECK:  sudo dmesg | grep -i "out of memory"
+O/P SEEN: "Out of memory: Kill process"            or  blank if no oom issue on kernel
+FIX: kill -9 <PID shown in message
+
+ISSUE 5: Swap full (no RAM left)
+CHECK: free -h
+O/P SEEN:
+               total        used        free      shared  buff/cache   available
+Mem:           951Mi       948Mi         3Mi       1.8Mi         0Mi         3Mi
+Swap:          2.0Gi       2.0Gi         0Mi
+
+FIX: sudo swapoff -a && sudo swapon -a
+
+
 
 ------------------------------------------------------------------------------
 1)  DISK SPACE FULL
