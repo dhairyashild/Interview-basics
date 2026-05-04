@@ -176,3 +176,37 @@ If you can connect all dots, node MTU mismatch → packet fragmentation → TCP 
 
 Comment your first 3 steps and the quickest mitigation you’d attempt.
 ♻️ Repost to get the full RCA timeline, packet capture, and the one-line fix from our war room.
+
+
+
+
+HCL SRE Interview – Infrastructure, Kubernetes & Reliability Focus 
+Round-2
+This round went deeper into infrastructure design, production trade-offs, and real-world failure handling. The questions were structured to test both system thinking and ownership mindset.
+Here are the questions I was asked:
+🔹 Infrastructure & Automation
+How do you handle Terraform state file locking and consistency in a large team?
+How do you detect and automatically remediate configuration drift?
+What is your process for importing 100+ manual resources into IaC without downtime?
+🔹 Kubernetes & Orchestration
+Describe the packet flow from a browser to a Pod behind an Ingress.
+How do you calculate requests and limits, and what happens when they are breached?
+How do you implement "Least Privilege" at the Pod level?
+How do you troubleshoot a Pod with exit code 137?
+🔹 SRE & Observability
+What are the "Four Golden Signals" you would monitor for a high-traffic API?
+What is Error budget? How to Calculate it?
+How do you handle a conflict between an exhausted Error Budget and a feature launch?
+How do you manage high cardinality in Prometheus metrics?
+What is your strategy for reducing alert fatigue?
+🔹 CI/CD & Security
+How do you prevent CI/CD secret leakage during a malicious Pull Request?
+Compare Blue-Green vs. Canary deployments: when does one fail while the other succeeds?
+How do you ensure artifact integrity between QA and Production environments?
+🔹 Behavioral & Scenario-Based
+How do you handle a "Blame Game" situation between Dev and Ops teams?
+What is your 30-60-90 day plan for migrating CI/CD platforms?
+Describe a major production failure you caused: what was the root cause and the permanent fix?
+This round pushed hard on one core idea:
+Owning reliability means owning failures, decisions, and trade-offs—not just systems.
+#SRE #DevOps #Kubernetes #Cloud #InterviewExperience #HCL
