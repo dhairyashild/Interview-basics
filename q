@@ -126,3 +126,53 @@ How do you manage logs in Kubernetes clusters?
 Security & Secrets Management
 Since you’ve worked with both CyberArk Conjur and AWS Secrets Manager, which would you choose for EKS and why?
 How do you securely manage application secrets in Kubernetes?
+
+
+You call yourself “Senior DevOps”?
+Then debug this 👇
+
+Time: 02:17 UTC
+Region: us-east-1
+Infra: EKS 1.28 + Cilium (eBPF) + Istio 1.20 + ALB → Ingress → Envoy → Go API → RDS + Redis
+Traffic: 22 k rps steady
+
+Symptoms
+27 % of requests slowed from 200 ms → 6 s.
+No 5xx spike, 99 % success rate - just latency.
+Only api.example.com (external) affected, internal service is fine.
+
+Timeline
+01:48 Karpenter added 6 new nodes (m6i.large).
+01:56 Istio EnvoyFilter updated (log format).
+02:05 Prometheus agent upgrade.
+02:12 Latency spike, HPA silent.
+
+Key Findings
+1. Slow pods run only on new nodes.
+2. New nodes show lower CPU but higher latency.
+3. Bimodal latency in istio_request_duration.
+4. ss -s → hundreds of TCP connections in rto: 3–6 s.
+5. tcpdump → SYN/ACK fast → DATA delayed + out-of-order.
+6. ALB targets in subnet-b-az1 = slow ones.
+7. cilium bpf metrics → CT_EVICTIONS, DROP_FRAG_NEEDED climbing.
+8. ip link → old nodes MTU 9001 vs new 1500.
+9. DNS, DB, Redis — normal.
+
+Clues
+Latency only between ALB → sidecar, never inside cluster.
+No packet loss, probes all green.
+New nodes = different AMI bootstrap.
+
+Your Challenge
+1. What’s your first hypothesis and how do you disprove it fast?
+2. Which one command per layer do you run next?
+• Network • Node • Mesh • App • ALB
+3. Why didn’t HPA scale even as users suffered?
+4. How would you rollback/contain latency in 15 minutes?
+
+Trap Answers
+Not DNS. Not DB. Not the code.
+If you can connect all dots, node MTU mismatch → packet fragmentation → TCP retransmits → tail latency → no HPA trigger (based on CPU) — you’re senior.
+
+Comment your first 3 steps and the quickest mitigation you’d attempt.
+♻️ Repost to get the full RCA timeline, packet capture, and the one-line fix from our war room.
