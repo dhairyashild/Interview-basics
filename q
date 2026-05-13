@@ -252,3 +252,28 @@ Most Kubernetes engineers don't know these kubectl tricks, and waste hours while
 𝗸𝘂𝗯𝗲𝗰𝘁𝗹 𝗱𝗲𝗯𝘂𝗴 -𝗶𝘁 <𝗽𝗼𝗱-𝗻𝗮𝗺𝗲> --𝗶𝗺𝗮𝗴𝗲=𝗯𝘂𝘀𝘆𝗯𝗼𝘅 --𝗰𝗼𝗽𝘆-𝘁𝗼=𝗱𝗲𝗯𝘂𝗴-𝗽𝗼𝗱
 --> Debug a pod without touching the original workload
 > This creates a copy of the failing pod with a debug container attached for investigation. 
+
+
+
+op Kubernetes Interview Questions Every DevOps Engineer Should Prepare For
+If you're preparing for DevOps / SRE / Cloud interviews, here are some important Kubernetes questions worth revising:
+🔹 What is Kubernetes and how does it work?
+🔹 What are Pods in Kubernetes?
+🔹 Difference between Deployment and StatefulSet?
+🔹 What are ReplicaSets in Kubernetes?
+🔹 What are Kubernetes Services and their types?
+🔹 Difference between ConfigMap and Secret?
+🔹 How does Kubernetes scheduling work?
+🔹 What are Namespaces in Kubernetes?
+🔹 What is Ingress and how does it work?
+🔹 What are taints and tolerations?
+🔹 What are liveness and readiness probes?
+🔹 How do you perform rolling updates?
+🔹 How do you handle rollbacks?
+🔹 How do you monitor Kubernetes clusters?
+🔹 How do you debug failed Pods?
+🔹 How do you manage persistent storage?
+🔹 What is Helm and how does it work?
+🔹 How do you secure Kubernetes clusters?
+🔹 Common Kubernetes production issues and fixes?
+🔹 Best practices for Kubernetes in production?
