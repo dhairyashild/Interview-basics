@@ -226,3 +226,29 @@ recently I faced an Interview at Ensono for AWS DevOps Engineer L2 Round
 9. I wanted to unmanage the resource from a Terraform, going forward, I don't want to manage any resources from the account is via the Terraform. So how do you unmanage it?
 10. after you remove the resource from Terraform state file, the order command you run that, it is been on tracked. So when you do the Terraform plan next time, if you see that the new resources, we are not trying to create it. When you run the Terraform plan, the resource will be created one. So how do you fix this drift?
 11. you have deployed the EC2 instance via the auto scaling group. so it is having the application traffic for your production workload. So suddenly, the EC2, whichever launched from auto-scaling, launched and terminated within five minutes. The cycle is repeating frequently due to the health check issue. you need to review the instance, why it is failing the health checks, and wanted to retain the log from the failed instance to know for the investigation. So how do you achieve this?
+
+
+
+
+Most Kubernetes engineers don't know these kubectl tricks, and waste hours while troubleshooting. 
+
+𝗸𝘂𝗯𝗲𝗰𝘁𝗹 𝗴𝗲𝘁 𝗲𝘃𝗲𝗻𝘁𝘀 -𝗔 -𝘄 | 𝗴𝗿𝗲𝗽 -𝘃 "𝗡𝗼𝗿𝗺𝗮𝗹"
+--> Watch only the bad stuff across the entire cluster
+> It streams warnings and failures from every namespace in real time so you can catch issues before they turn into incidents.
+
+𝗸𝘂𝗯𝗲𝗰𝘁𝗹 𝗱𝗶𝗳𝗳 -𝗳 𝗱𝗲𝗽𝗹𝗼𝘆𝗺𝗲𝗻𝘁.𝘆𝗮𝗺𝗹
+--> See exactly what will change before applying
+> It helps catch accidental changes like wrong image tags, deleted environment variables, or broken resource limits before deployment.
+
+𝗸𝘂𝗯𝗲𝗰𝘁𝗹 𝗴𝗲𝘁 𝗽𝗼𝗱𝘀 -𝗔 --𝘀𝗼𝗿𝘁-𝗯𝘆='.𝘀𝘁𝗮𝘁𝘂𝘀.𝗰𝗼𝗻𝘁𝗮𝗶𝗻𝗲𝗿𝗦𝘁𝗮𝘁𝘂𝘀𝗲𝘀[𝟬].𝗿𝗲𝘀𝘁𝗮𝗿𝘁𝗖𝗼𝘂𝗻𝘁'
+
+--> Find unstable pods instantly
+> This sorts pods by restart count so the most unstable workloads appear first. 
+
+𝗸𝘂𝗯𝗲𝗰𝘁𝗹 𝘁𝗼𝗽 𝗽𝗼𝗱𝘀 -𝗔 --𝘀𝗼𝗿𝘁-𝗯𝘆=𝗺𝗲𝗺𝗼𝗿𝘆 --𝗰𝗼𝗻𝘁𝗮𝗶𝗻𝗲𝗿𝘀
+--> Find who is actually consuming memory
+> The `--containers` flag breaks usage down per container instead of showing only pod-level metrics. 
+
+𝗸𝘂𝗯𝗲𝗰𝘁𝗹 𝗱𝗲𝗯𝘂𝗴 -𝗶𝘁 <𝗽𝗼𝗱-𝗻𝗮𝗺𝗲> --𝗶𝗺𝗮𝗴𝗲=𝗯𝘂𝘀𝘆𝗯𝗼𝘅 --𝗰𝗼𝗽𝘆-𝘁𝗼=𝗱𝗲𝗯𝘂𝗴-𝗽𝗼𝗱
+--> Debug a pod without touching the original workload
+> This creates a copy of the failing pod with a debug container attached for investigation. 
