@@ -324,3 +324,239 @@ Devops Interview questions
 4. Explain the concept of Blue-Green Deployment.
 5.What is Git stash used tor.
 6. What is Git commit used for ? Are all git commits will same if we do git rebase?
+
+
+
+ 5 Years in DevOps — Real Interview Questions I Got Asked (With My Actual Answers)
+I recently went through a DevOps interview round after 5 years of hands-on work with AKS, Terraform, Kubernetes, and the Elastic Stack.
+These aren't textbook answers. These are what I actually said — based on what I've actually done.
+Save this. It might help you land your next role. 🔖
+Q1: How do you manage Terraform state in a team?
+In my current setup, we store state in Azure Blob Storage with lease-based locking. I've built reusable Terraform modules from scratch — things like AKS node pool configs, Key Vault policies, ACR setup. We use separate workspaces for dev, QA, UAT, and prod so there's zero risk of one environment bleeding into another.
+Q2: HPA vs KEDA — when do you use what?
+HPA works great for CPU/memory-based scaling. But in our environment we needed to scale based on Kafka queue depth — that's where KEDA came in. KEDA also supports scale-to-zero, which saved us real cost on non-prod clusters.
+Q3: Pod stuck in Pending — how do you debug it?
+First thing I do is kubectl describe pod and go straight to the Events section. I've seen this caused by CPU/memory requests being too high for available nodes, taints and tolerations not matching, and PVCs not binding. Once I found a whole node pool was over-committed because resource requests weren't set properly across teams — fixed it by enforcing LimitRanges at namespace level.
+Q4: How do you handle secrets in AKS?
+We use Azure Key Vault with the Secrets Store CSI Driver. Pods mount secrets as volumes at runtime — nothing sensitive sits in etcd. Access is controlled through Managed Identity and Azure RBAC. I've worked with both the Access Policy model and the newer RBAC model during a migration.
+Q5: Walk me through a CI/CD pipeline you've built.
+We run GitHub Actions on merge to main it triggers lint, unit tests, Docker build, push to ACR, then Helm upgrade on AKS. If the post-deploy health check fails, Helm auto-rolls back. 
+Q6: Liveness vs Readiness vs Startup probes?
+Q7: How do you monitor and observe your clusters?
+We use the full Elastic Stack — Filebeat runs as a DaemonSet on every node, ships logs to Elasticsearch, Kibana for dashboards and data views.
+Q8: How do you handle node pool upgrades without downtime?
+We do rolling upgrades surge upgrade settings in Terraform so new nodes come up before old ones drain. We also use PodDisruptionBudgets
+Q9: Cross-namespace networking in Kubernetes — how does it work?
+By default pods across namespaces can talk to each other via service.namespace.svc.cluster.local.
+Q10: How do you approach onboarding a new application team onto AKS?
+
+
+
+🐧 Linux Interview Questions & Brief Answers for DevOps Engineers - Part 1
+🔥 Linux Basics
+
+❓ What is Linux?
+✔ Linux is an open-source operating system mainly used in servers, cloud, and DevOps environments.
+❓ Why is Linux preferred in DevOps?
+✔ It is stable, secure, lightweight, and supports automation very well.
+❓ Difference between Linux and Unix?
+✔ Linux is open-source, while Unix is mostly proprietary.
+❓ What is the root user?
+✔ Root is the superuser with full administrative access.
+❓ Explain Linux file system hierarchy.
+✔ /etc → Config files
+✔ /var → Logs
+✔ /home → User files
+✔ /tmp → Temporary files
+
+💻 Commands & Troubleshooting
+❓ How do you check CPU and memory usage?
+✔ top, htop, free -h
+❓ How do you check disk usage?
+✔ df -h shows filesystem usage
+✔ du -sh shows folder size
+❓ Difference between grep, awk, and sed?
+✔ grep → Search text
+✔ awk → Process structured data
+✔ sed → Edit/replace text
+❓ How do you monitor logs in real time?
+✔ tail -f logfile
+❓ Difference between find and locate?
+✔ find searches live
+✔ locate searches from database
+
+🔐 Users & Permissions
+❓ What are file permissions?
+✔ Read(r), Write(w), Execute(x)
+❓ Difference between soft link and hard link?
+✔ Soft link points to file path
+✔ Hard link points to inode
+❓ What is chmod?
+✔ Used to change permissions.
+Example:
+chmod 755 script.sh
+❓ What is chown?
+✔ Changes file ownership.
+
+
+I reviewed an AWS bill for a startup last week.
+
+They were paying $14,000/month.
+
+After 2 hours of analysis, I found:
+→ 12 EC2 instances running 24/7 that only needed to run 8 hours
+→ RDS instances sized for 100x their actual traffic
+→ S3 buckets with no lifecycle policies (storing 3 years of logs)
+→ No Reserved Instances or Savings Plans
+
+New monthly bill after optimization: $5,800.
+
+That's $98,400/year saved.
+No performance impact. No downtime. No code changes.
+
+The scary part? This is normal.
+Most companies I audit are overspending by 30-50% on AWS.
+
+The cloud isn't expensive.
+Bad architecture is expensive.
+.
+What's the most wasteful AWS setup you've ever seen?
+
+
+
+******Linux real time Interview question******
+
+1. A Linux server is not booting — how do you troubleshoot and recover it?
+2. The server is stuck at the GRUB stage — what steps will you take to fix it?
+3 .Root filesystem is full and the system is unstable — how do you resolve it?
+4. A production server shows very high CPU usage — how do you identify the root cause?
+5. Memory usage is continuously increasing — how do you troubleshoot memory leaks?
+6. Load average is very high but CPU usage is low — what could be the reason?
+7. A process is consuming high memory — how do you identify and stop it safely?
+8. A zombie process is found in the system — how do you handle it?
+Multiple users report slow server performance — how do you troubleshoot?
+9. Disk I/O utilization is very high — how do you diagnose the issue?
+
+10. A filesystem becomes read-only unexpectedly — how do you fix it?
+11. Disk space is full but files are not visible — what could be the reason?
+12. An LVM volume needs to be extended without downtime — how do you perform it?
+13. A mounted filesystem is not available after reboot — how do you troubleshoot?
+14. Filesystem corruption detected — what steps will you take to recover data?
+15. Swap usage is very high — how do you troubleshoot and optimize it?
+16. A server reports inode exhaustion — how do you resolve it?
+
+17. Server is not reachable over SSH — how do you debug the issue?
+18. SSH service is running but connection is refused — what could be wrong?
+19. DNS resolution is not working — how do you troubleshoot it?
+20. Network connectivity is intermittent — how do you diagnose it?
+21. A port is not accessible externally — what checks will you perform?
+22. Server can ping IP but cannot access domain names — what could be the cause?
+
+23. A critical service fails to start after reboot — how do you troubleshoot?
+24. System time is incorrect — how do you fix time synchronization issues?
+25. Logs are growing rapidly and filling disk — how do you manage it?
+26. Cron jobs are not running — how do you debug the issue?
+27. User cannot access a file despite correct permissions — what could be wrong?
+28. System is under heavy load during peak hours — how do you analyze performance?
+29 .How do you troubleshoot a complete production outage on a Linux server?
+
+
+
+
+🚀 DevOps Interview Questions (5 Years Experience) – Docker & Kubernetes Focus on My Experience 🚀
+Preparing for a Senior DevOps Engineer interview?
+Here are some commonly asked Docker & Kubernetes interview questions along with concise answers that can help during preparation.
+🐳 Docker Interview Questions
+1️⃣ What is the difference between Docker Image and Container?
+✅A Docker Image is a read-only template containing application code, libraries, and dependencies.
+A Container is a running instance of that image.
+2️⃣ What is the difference between CMD and ENTRYPOINT in Docker?
+✅CMD provides default arguments that can be overridden.
+ENTRYPOINT defines the main command that always runs.
+Example:
+ENTRYPOINT ["python"]
+CMD ["app.py"]
+3️⃣ How do you reduce Docker image size?
+✅Use lightweight base images like Alpine.
+Multi-stage builds.
+Remove unnecessary packages/cache.
+Combine RUN commands.
+Use .dockerignore.
+4️⃣ What is a multi-stage Docker build?
+✅It allows separating build and runtime environments, reducing final image size and improving security.
+5️⃣ Difference between Docker Compose and Kubernetes?
+✅Docker Compose is mainly for local multi-container setups.
+Kubernetes is for orchestration, scaling, self-healing, and production-grade deployments
+☸ Kubernetes Interview Questions
+6️⃣ What happens when you run kubectl apply -f deployment.yaml?
+✅Kubernetes API server receives the manifest, stores desired state in etcd, scheduler assigns pods to nodes, and kubelet ensures containers are running.
+7️⃣ Difference between Deployment and StatefulSet?
+✅Deployment → Stateless applications.
+StatefulSet → Stateful apps needing stable identity/storage (DBs, Kafka, etc.).
+8️⃣ What is a Kubernetes Service?
+✅A Service exposes pods using a stable IP/DNS and provides load balancing.
+Types:
+ClusterIP
+NodePort
+LoadBalancer
+ExternalName
+9️⃣ What is ConfigMap and Secret?
+✅ConfigMap stores non-sensitive configuration data.
+Secret stores sensitive data like passwords/tokens (base64 encoded).
+🔟 How does Kubernetes perform self-healing?
+✅If a pod crashes or node fails:
+ReplicaSet recreates pods.
+Liveness probes restart unhealthy containers.
+Scheduler reschedules workloads.
+🎯 Important Topics to Focus On
+✅ Docker Networking
+✅ Docker Volumes
+✅ Kubernetes Architecture
+✅ Ingress & Load Balancing
+✅ Helm Charts
+✅ RBAC
+✅ CI/CD Integration
+✅ Monitoring (Prometheus/Grafana)
+✅ Troubleshooting Pods
+✅ Autoscaling (HPA/VPA)
+In 5+ years DevOps interviews, companies focus heavily on:
+Real-time troubleshooting scenarios
+Kubernetes production issues
+CI/CD pipeline optimization
+Security best practices
+Cost optimization in cloud infrastructure
+
+
+
+You’re not an SRE (Site Reliability Engineer) until you understand these terms:
+
+✔️SLI (Service Level Indicator) → A specific metric, like latency or error rate, used to measure performance.
+
+✔️SLO (Service Level Objective) → The target value or range for an SLI that defines "good enough" service.
+
+✔️Error Budget → The maximum amount of time a system can be down without violating the SLO.
+
+✔️Toil → Manual, repetitive, and automatable work that provides no long-term value.
+
+✔️Incident Response → The organized process for managing and resolving unplanned service disruptions.
+
+✔️Post-Mortem / RCA → A blameless analysis of a failure to prevent it from happening again.
+
+✔️Observability (o11y) → Understanding a system's internal state based on the data it produces (logs, metrics, traces).
+
+✔️MTTR (Mean Time to Repair) → The average time taken to fix a system after a failure.
+
+✔️Chaos Engineering → Experimenting on a system to build confidence in its capability to withstand turbulent conditions.
+
+✔️Distributed Tracing → Monitoring requests as they move through a complex microservices architecture.
+
+✔️Golden Signals → The four key metrics for monitoring: Latency, Traffic, Errors, and Saturation.
+
+✔️Circuit Breaker → A design pattern used to detect failures and encapsulate the logic of preventing a failure from cascading.
+
+✔️Graceful Degradation → Ensuring a system remains functional, even if at a reduced level, during a partial failure.
+
+✔️Capacity Planning → Predicting future resource requirements to prevent saturation and outages.
+
+
+
