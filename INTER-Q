@@ -816,7 +816,44 @@ Achieved secure state handling, eliminated race conditions, and aligned Terrafor
 Additional scenarios that can lead to 503 errors:1.An unhealthy or misconfigured ingress controller may be unable to route traffic to backend services.2.Even when pods are running and ready, unavailable dependencies such as databases, Redis or external APIs can cause the application to return 503 responses.
 
 
+#######################
 
+Why does your app run on Worker Nodes and NOT on Master?
+
+One word: TAINTS.
+
+This concept trips up 80% of developers. Let me explain from scratch. 🧵 (2/3)
+
+─────────────────────────
+
+🏗️ WORKER NODE — The Unsung Hero
+
+Every Worker Node runs 3 independent components:
+
+kubelet — The "Node Agent"
+→ Registers node, starts/stops/monitors containers
+→ KEY: Keeps pods running even without API server for HOURS
+→ Caches pod specs locally — fully autonomous
+
+kube-proxy — The "Traffic Cop"
+→ Manages iptables/ipvs rules for Services
+→ KEY: Load balancing continues even if master is completely down
+→ Zero live master dependency
+
+Container Runtime (containerd / Docker / CRI-O)
+→ Actually pulls images and runs containers
+→ 100% local. Running container stays running.
+
+─────────────────────────
+
+🚫 TAINTS & TOLERATIONS
+
+Taint = "No Entry" sign on a Node
+Toleration = Pod saying "I have permission here"
+
+Why does Master have a Taint?
+To keep it dedicated to control plane. You don't want app pods fighting the API server for CPU
+  <div class="htags"
 
 
 
