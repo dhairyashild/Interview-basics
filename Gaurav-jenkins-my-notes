@@ -1,3 +1,24 @@
+10. Jenkins for Beginners - Jenkins Role Base Access Control (RBAC)
+PROJECT1 -- 4 JOBS
+PROJECT2 - 4 JOBS  -- HOW TO ASSIGN UER1 TO HAVE ACCESS ON PROJECT1 4 JOBS ONLY AND USER2 ON OTHER JOBS ACCESSJENNKINS RBAC USE STEPS SHORT
+
+
+# Jenkins RBAC – Assign User to Specific Project Jobs
+
+## Steps
+
+1. Install Role-based Authorization Strategy plugin (Manage Jenkins → Plugins).
+2. Enable it: Manage Jenkins → Configure Global Security → Authorization → Role-Based Strategy. [citation:2][citation:6]
+3. Create Project Role: Manage Jenkins → Manage and Assign Roles → Manage Roles → Item roles → Add Role. Name: `project1-user`, Pattern: `PROJECT1.*` → assign Build/Cancel/Read permissions. [citation:1][citation:7]
+4. Repeat for Project 2: Pattern: `PROJECT2.*`.
+5. Assign Users: Manage and Assign Roles → Assign Roles → Project roles → add user1 → check `project1-user`; add user2 → check `project2-user`. [citation:5][citation:8]
+
+## Result
+- user1 sees/manages only PROJECT1 jobs.
+- user2 sees/manages only PROJECT2 jobs.
+- Admin sees everything.
+
+-------------------------------------
 http://url:8080/github-webhook/
 
 jenkins cicd seuriry?
