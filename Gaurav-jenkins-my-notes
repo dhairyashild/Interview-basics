@@ -196,7 +196,10 @@ failure{}
 
 master-slave agent setup
 master var jenkins taka
-slave var java , mvn ...taka
+slave var 
+1-java -     sudo apt install openjdk-21-jdk -y    is the best and recommended way to install Java for Jenkins on Ubuntu .
+             Jenkins 2.555.1 (April 2026) and later require Java 21 or Java 25; Java 17 support has been removed 
+2-mvn ...taka
 shh-keygen kara  —- kontyahi node var
 pvt key jenkins-console var taka
 public key slavechya authorised_keys mde taka
@@ -537,6 +540,18 @@ REMEMBER ===POST { failure{ emailext(subject + body +  recipientProviders: + to 
 https://plugins.jenkins.io/email-ext/
 
 ####################################
+sudo apt-get install jenkins -y          ===========  adds user as jenkins in ec2 , chekc by         cat /etc/passswd    
+
+pwd  ---> /var/lib/jenkins/workspace/UR-JOBNAME  ====== THIS IS location where above jenkins user running ur jenkins command and code
+
+S  --status of last build
+W  -- weather avg of recent build
+Name -- of job
+Last Success
+Last Failure
+Last Duration
+
+JOBNAME 13   -- search on upper search box of jobname jobnumber, it will show that bulid op  directly
 
 
 ####################################
