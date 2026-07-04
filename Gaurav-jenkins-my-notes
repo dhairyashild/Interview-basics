@@ -175,6 +175,7 @@ DEFAULT VALUE =TICK NAHI=FALSE GHETO
 4 PASSWORD PARA
 5 MULTILINE STRING
 6 FILE PARA—ssh+kubeconfig  uses
+SELECT FILE PARA ---> GIVE FILE LOCATION AS filepath  ----  code made---> cat filepath  --- when u run it ask to bowse file path u want to choose, select that
 --------------GPT
 // Most important parameters in Java app Jenkins pipelines
 
