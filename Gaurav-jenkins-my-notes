@@ -155,6 +155,12 @@ echo "Build id is ${JOB_NAME}"       // ✅ Works with curly
 
 (SYSTEM -- env var + plugin sathi)
 
+"मी env var देऊ शकतो, तर parameters ची गरज काय?"
+
+कारण, Environment Variables ही build च्या वेळी 'निश्चित' (static) असतात आणि ती बदलायची असल्यास script बदलावी लागते.
+Parameters हे 'डायनॅमिक' (dynamic) असतात, जे तुम्ही build ला ट्रिगर करताना देतात. Parameters मुळे तुमची pipeline लवचिक (flexible) बनते आणि ती पुन्हा वापरता येते (reusable).
+-BUILD WITH PARAMETER YET BUILD JAGI -- SO  HERE U CAN CHANGE PARAMETER VALUES BEFORE RUNNING PIPELINE BUT ENV VAR NEED TO CHANGE CODE DIRECTLY
+
 PARAMETERE===
 -USED ADD ENV VAR
 -USE TO GIVE RUN TIME VALUE BY USER
@@ -169,7 +175,34 @@ DEFAULT VALUE =TICK NAHI=FALSE GHETO
 4 PASSWORD PARA
 5 MULTILINE STRING
 6 FILE PARA—ssh+kubeconfig  uses
+--------------GPT
+// Most important parameters in Java app Jenkins pipelines
 
+// 1. BRANCH_NAME – Git branch to build (test, main, feature/*)
+string(name: 'BRANCH_NAME', defaultValue: 'main', description: 'Branch to build') [citation:2][citation:4]
+
+// 2. ENVIRONMENT – Target deployment environment (dev/qa/staging/prod)
+choice(name: 'ENVIRONMENT', choices: ['dev', 'qa', 'staging', 'prod'], description: 'Deployment environment') [citation:1]
+
+// 3. APP_PORT – Application port for integration testing
+string(name: 'APP_PORT', defaultValue: '8080', description: 'Application port') [citation:2][citation:3]
+
+// 5. SKIP_TESTS – Skip unit/integration tests (for hotfixes)
+booleanParam(name: 'SKIP_TESTS', defaultValue: false, description: 'Skip running tests')
+
+// 6. VERSION / IMAGE_TAG – Release version or Docker image tag
+string(name: 'VERSION', defaultValue: '1.0.0', description: 'Release version')
+
+// 7. REGISTRY_URL – Docker registry URL
+string(name: 'REGISTRY_URL', defaultValue: 'docker.io/myorg', description: 'Docker registry URL')
+
+// 8. MAVEN_OPTS – Maven build options (memory, profiles)
+string(name: 'MAVEN_OPTS', defaultValue: '-Xmx2g', description: 'Maven JVM options') [citation:6]
+
+// 9. SKIP_DEPLOY – Skip deployment to production (for testing)
+booleanParam(name: 'SKIP_DEPLOY', defaultValue: false, description: 'Skip deployment stage')
+
+---------------
 
 TIMEOUT—
 BUILD ENV  —ABORT BUILD IF 
