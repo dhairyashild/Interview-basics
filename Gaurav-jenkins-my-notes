@@ -119,6 +119,8 @@ BUILD TRIGGER
 -Build Authorization Token Root (BATR plugin  )
 -add token in build trigger section
 -plugin.jenkins.io——here serch above plugin—on that plugin we get URL in which u change JOBNAME & TOKEN NAME
+buildByToken/build?job=RevolutionTest&token=TacoTuesday
+                       UR-JOBNAME\           UR-TOKENNAME                               #  \ IS MUST AFTER JOBNAME
 -curl url ——can be used in shell script or via command to run remotely
 
 2) Build periodically== H/15 * * * * =every 15 min
@@ -132,8 +134,25 @@ BUILD TRIGGER
 
 
 #ENV VARS
+--------------------- GPT
+###ANS IN CODE BLOCK ONLY 1 LINE EAH AND SHORT EXAPIN
+JAVA_HOME     // Path to JDK – required for all Java builds
+MAVEN_HOME    // Path to Maven – needed to run mvn commands
+PATH          // Includes tool bin directories – makes commands available
+BUILD_NUMBER  // Unique build number – used for versioning artifacts
+JOB_NAME      // Current job name – used for job-specific resources
+WORKSPACE     // Build workspace path – where code is checked out
+BRANCH_NAME   // Current branch name – used for environment-specific logic
+DEPLOY_ENV    // Custom variable (e.g., staging/prod) – defines target environment
+REGISTRY_URL  // Custom variable – Docker registry address
+CREDENTIALS   // Securely injected via credentials() – never hardcode secrets
 MNG JENKINS — SYSTEM — GLOBAL VARIABLE —ENV —-
 YACHYAT  ALL JOBS LA LAGNARE VARS DETA YETAT 
+
+echo "Build id is $BUILD_NUMBER"      // ✅ Works without curly 
+echo "Build id is ${JOB_NAME}"       // ✅ Works with curly
+------------------------
+
 (SYSTEM -- env var + plugin sathi)
 
 PARAMETERE===
