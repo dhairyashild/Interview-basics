@@ -627,13 +627,37 @@ Last Duration
 
 JOBNAME 13   -- search on upper search box of jobname jobnumber, it will show that bulid op  directly
 
+✅ Discard old builds --Automatically deletes old builds and artifacts to manage disk space and prevent Jenkins from running out of storage.
 
+✅ Do not allow concurrent builds-- Prevents multiple builds of the same job from running simultaneously. New builds wait in queue until the current build finishes.
+                 -- Abort previous builds -- When a new build is triggered, it immediately stops any currently running build instead of waiting for it to finish.
+                                          -- Saves time and resources by not testing outdated code.
+
+✅ **This project is parameterized** – Required for flexibility (branch selection, environment, skip tests, etc.) – most production pipelines use it.
 ####################################
 
+**Must-have for DevOps:**
+✅ Trigger builds remotely** – To trigger builds from scripts, GitHub, or other tools – critical for CI/CD automation.
 
+✅ Build periodically** – For scheduled builds (nightly, weekly) – essential for automated regression testing.
+
+✅ Poll SCM** – For periodic SCM polling (fallback if webhooks not supported) – often used in enterprise.
+
+✅ GitHub hook trigger for GITScm polling** – Enables automatic builds on code push – essential for CI.
+
+
+❌ **Build after other projects are built** – Optional, only for job dependencies.
+
+❌ **Build whenever a SNAPSHOT dependency is built** – Maven-specific, rarely used.
+
+❌ **Quiet period** – Optional, only for delaying builds after SCM changes.
 
 
 ####################################
+# DELETE/RENAME  PIPELINE  ---  
+GO INSIDE PIPELINE --- ON LEFT SIDE 
+---- DELETE PIPELINE
+---- RENAME
 
 
 
