@@ -330,7 +330,6 @@ cd ~/dev-controllers
 ls ~/dev-controllers
 
 
-HARD LINK== Hardlink = Synced files pointing to same data (copy of imp files)
 
 # Create hardlink  
 ln original.txt hardlink.txt
