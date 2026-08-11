@@ -419,8 +419,13 @@ text
    sudo rsync -aHAX /your-current-data/ /newvol/
    # Example: sudo rsync -aHAX /var/lib/mysql/ /newvol/mysql/
 ######################################################################
+# CLOUDWATCH
 
-
+DASHBOARD ---
+1- CUSTOM
+2- AUTOMATIC --  CREATED ALREADY FOR ALL SVC U USED ON AWS
+EC2--  NETWORK IN/OUT , CPU UTOLIZATION , DISK USAGE
+S3- BUCKET SIZE , NO. OF OBJECTS
 ######################################################################
 
 
