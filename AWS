@@ -1,3 +1,88 @@
+IaaS: Rent computing infrastructure (H/W) like virtual servers, storage, and networking (Example: AWS EC2).
+PaaS: provides application deployment platforms without managing servers (Example: AWS Elastic Beanstalk).
+SaaS: delivers ready-to-use software over the web
+
+11 
+default ap-south-1a for one person may be diffrent for other person
+
+12 
+ssh -i key.pem ubuntu@ip-address
+rw owner & group —> read only & group sathi only read
+chmod 400 key.pem 
+
+13 
+nginx -t —> to see nginx configurations 
+sudo apt install nginx
+nginx service status 
+echo "hello world " > /var/www/html/index.html 
+
+14 
+to protect  ur root ebs from deleting  click no 
+
+ 15
+in security group if u want particular ip address can ssh into ec2 —> give ip 
+u can attach multi ple sg 
+1 sg can be attached to multile ec2's 
+
+t generation
+https://aws.amazon.com/ec2/instance-types/
+instance types
+
+17 
+upto 72 % discount for rserve --> 1 ) covertible  2) non convertible 
+spot A spot instance is a type of virtual machine (VM) offered at a discounted price compared to standard on-demand instances.
+
+dedicated host: A dedicated instance is a virtual machine that runs on physical hardware dedicated to a single customer. Provides additional isolation for compliance, licensing, or security needs.
+byol bring ur own license 
+
+saving plan 
+
+18 windows instance via rdp client 
+
+20
+curl 169.254.169.254
+api versions 
+to get metadata
+curl 169.254.169.254/latest/metadata/ami-id
+curl 169.254.169.254/latest/metadata/hostname 
+
+u can use this metadata in user data wherever u want
+
+21
+elastic ip addresses --> select eip and ---> actions --> associate eip  --> instance id 
+5 eip reserve 
+unattached eip also incur charges 
+
+24
+virtual storage --> ebs --> data persistance 
+volume inuse mhanaje ec2 using 
+ec2  and ebs should be in same az
+available --> unattached 
+lsblk --> block devices  and their sizes, regardless of whether they have a filesystem or are mounted.
+df -h --> disk space usage of mounted filesystems only,  how much space is used and available to the user, 
+in lsblk u can see /dev/xvdf but in df -h u cant see 
+sudo mkfs.ext4 /dev/xvdf
+check the filesystem has generated or not?
+sudo file -s /dev/xvdf    it will display the filesystem if /data came then no filesystem has generated 
+sudo mkdir /test
+mount the disk --> sudo mount /dev/svdf /test
+mountpoint /test
+
+cd /test
+sudo touch 1 2 3 4 5 6 7 8 9 
+umount  /test if u umount the /test the data in /test will also gone
+after detach u cant see lsblk 
+25
+create another ec2 and attach /dev/xvdf and mount /dev/data 
+in data 1 2 3 4 5 6 7 8 9 files will be there 
+
+26
+increase vol u cant decrease vol 
+go to volume select specific volume --> actions --> increase from 5 gb to 8 gb 
+first do lsblk then do df -h in lsblk u can see 8 gb but in df -h there is again 5 gb not increased
+do sudo resize2fs /dev/xvdf 
+if u want to decrease ebs vol size from 100 gb to 8 gb 
+first attach 8 gb vol then unmount 100 gb ebs and mount 8 gb
 ################################################################################   SARANSH   #############################################################################################
 ############ IMP WORDS---EBS——>LIFECYCLE MANAGER/snap lifecycle policy ###### ssminstance core role to ec2 ###  CLOUDWATCH-SERVER-AGENT
 Snowflake is a cloud-native data platform (SaaS) on AWS that separates storage/compute for scalable analytics, warehousing, and sharing.
