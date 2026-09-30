@@ -13,31 +13,64 @@ chmod 400 key.pem
 13 
 nginx -t —> to see nginx configurations 
 sudo apt install nginx
-nginx service status 
+systemctl status nginx     ---> correct           /          
+nginx service status       ----> not use this
+mkdir -p  /var/www/html  ---->Creates folder if not available & -p help to avoid error if already available that folder
 echo "hello world " > /var/www/html/index.html 
 
 14 
 to protect  ur root ebs from deleting  click no 
 
  15
-in security group if u want particular ip address can ssh into ec2 —> give ip 
+in security group if u want particular ip address can ssh into ec2 —> give my_ip 
 u can attach multi ple sg 
 1 sg can be attached to multile ec2's 
 
-t generation
+16 instance types
 https://aws.amazon.com/ec2/instance-types/
-instance types
+t1= instance family
+t3.micro , t2.xlarge = instance types
 
 17 
-upto 72 % discount for rserve --> 1 ) covertible  2) non convertible 
-spot A spot instance is a type of virtual machine (VM) offered at a discounted price compared to standard on-demand instances.
+RESERVE INSTANCE-------->
+upto 72 % discount for rserve --> 1 ) Non convertible - upto 72 %      2)  convertible - aprox 65% as its convertible    
+1  YR -- LESS DISCOUNT   3 YR -- MORE DISC       
+FULL PAYMENT DIRECTLY NOW MORE DISCOUNT    LATER PAY LESS DISC
+- Information needed before selecting an RI:
+OS
+Instance type / family
+Region
+Term — 1 year or 3 years
+Payment option — All Upfront- MORE DISCOUNT/ Partial Upfront- LESS  / No Upfront - MUCH LESER
+Standard or Convertible
+################
 
-dedicated host: A dedicated instance is a virtual machine that runs on physical hardware dedicated to a single customer. Provides additional isolation for compliance, licensing, or security needs.
+spot instance ----is a type of virtual machine (VM) offered at a discounted price compared to standard on-demand instances.
+
+Q- WHERE TO USE
+CI/CD pipelines — Jenkins, GitHub Actions runners, GitLab CI runners, etc.
+Automated testing — unit, integration, regression, and load tests.
+Build servers — Docker image builds, application compilation, package builds.
+Kubernetes worker nodes — non-critical workloads can run on Spot capacity.
+Batch jobs — jobs that can be paused and resumed.
+Data processing — large parallel workloads such as logs or ETL.
+Dev/test environments — temporary environments where interruptions are acceptable.
+
+Q - WHERE NOT TO USE SPOT
+Production database primary
+Critical production application servers without redundancy
+Single-instance workloads
+
+
+dedicated host: A dedicated instance is a virtual machine that runs on physical hardware dedicated to a single customer. 
+Provides additional isolation for compliance, licensing, or security needs.
 byol bring ur own license 
+################
 
-saving plan 
 
 18 windows instance via rdp client 
+sudo apt-get update && sudo apt-get install remmina -y 
+Remmina ( RDP CLINET FOR ON LINUX TO CONNECT WINDOW M/C ) -- Remote Desktop Client for Linux. It allows you to connect to, manage, and view the screens of remote machines directly from your Linux terminal or GUI.
 
 20
 curl 169.254.169.254
@@ -45,8 +78,10 @@ api versions
 to get metadata
 curl 169.254.169.254/latest/metadata/ami-id
 curl 169.254.169.254/latest/metadata/hostname 
-
-u can use this metadata in user data wherever u want
+---USECASE== IF U WANT AMI ID IN USERDATE U CAN USE THIS LIKE BELOW
+#!/bin/bash
+instance_id=$(curl -s http://169.254.169.254/latest/meta-data/instance-id)
+echo "Instance ID: $instance_id"
 
 21
 elastic ip addresses --> select eip and ---> actions --> associate eip  --> instance id 
