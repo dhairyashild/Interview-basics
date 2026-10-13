@@ -101,19 +101,18 @@ unattached eip also incur charges
 • NAT Gateways: Static outbound IP for private subnet internet access.
 • Disaster Recovery: Fast IP remapping to standby instances during node failure.
 
-24
-virtual storage --> ebs --> data persistance 
-volume inuse mhanaje ec2 using 
-ec2  and ebs should be in same az
+24 EBS = virtual storage --> ebs --> data persistance 
+volume ---> inuse mhanaje ec2 using 
 available --> unattached 
-lsblk --> block devices  and their sizes, regardless of whether they have a filesystem or are mounted.
+ec2  and ebs should be in same az
+lsblk --> List all block storage attached only to that ec2  and their sizes, regardless of whether they have a filesystem/mounted.
 df -h --> disk space usage of mounted filesystems only,  how much space is used and available to the user, 
 in lsblk u can see /dev/xvdf but in df -h u cant see 
+sudo file -s /dev/xvdf    it will display the filesystem if /data came then no filesystem has generated 
 sudo mkfs.ext4 /dev/xvdf
 check the filesystem has generated or not?
-sudo file -s /dev/xvdf    it will display the filesystem if /data came then no filesystem has generated 
 sudo mkdir /test
-mount the disk --> sudo mount /dev/svdf /test
+sudo mount /dev/svdf /test   --> mount the disk 
 mountpoint /test
 
 cd /test
@@ -121,8 +120,8 @@ sudo touch 1 2 3 4 5 6 7 8 9
 umount  /test if u umount the /test the data in /test will also gone
 after detach u cant see lsblk 
 25
-create another ec2 and attach /dev/xvdf and mount /dev/data 
-in data 1 2 3 4 5 6 7 8 9 files will be there 
+create another ec2 and attach /dev/xvdf and mount /dev/xvdf data 
+in data folder --- 1 2 3 4 5 6 7 8 9 files will be there 
 
 26
 increase vol u cant decrease vol 
